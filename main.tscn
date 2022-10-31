@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://modules/theater/theater.gd" type="Script" id=1]
+[ext_resource path="res://modules/stage/stage.gd" type="Script" id=2]
+[ext_resource path="res://modules/stage/full-viewport.gd" type="Script" id=3]
+[ext_resource path="res://modules/stage-hand/stage-hand.gd" type="Script" id=4]
+
+[node name="Theater" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Stage" type="ViewportContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+viewport_path = NodePath("Viewport")
+
+[node name="Viewport" type="Viewport" parent="Stage"]
+size = Vector2( 256, 240 )
+handle_input_locally = false
+render_target_update_mode = 3
+script = ExtResource( 3 )
+
+[node name="StageHand" type="Node" parent="Stage"]
+unique_name_in_owner = true
+script = ExtResource( 4 )
