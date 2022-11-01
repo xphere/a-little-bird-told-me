@@ -6,13 +6,14 @@
 [ext_resource path="res://modules/stage-hand/stage-hand.gd" type="Script" id=4]
 [ext_resource path="res://modules/director/director.gd" type="Script" id=5]
 [ext_resource path="res://modules/director/script.gd" type="Script" id=6]
-[ext_resource path="res://src/cue.signal.tres" type="Resource" id=7]
+[ext_resource path="res://events/on-cue.tscn" type="PackedScene" id=7]
 
 [node name="Theater" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-on_cue = ExtResource( 7 )
+
+[node name="On Cue" parent="." instance=ExtResource( 7 )]
 
 [node name="Stage" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
