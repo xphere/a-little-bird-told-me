@@ -2,12 +2,19 @@ extends Control
 
 
 func _ready() -> void:
+	$"%Director".register($"%Script".load_scenes())
+
 	var main_scene : String = ProjectSettings.get("application/run/main_scene")
 	if main_scene != filename:
-		_load_scene(main_scene)
+		$"%Director".start_at(main_scene)
+
+	var scene_path : String = $"%Director".start()
+	if not scene_path.empty():
+		_change_scene(scene_path)
 
 
-func _load_scene(scene_path: String) -> void:
-	var scene : PackedScene = yield($"%StageHand".load_scene(scene_path), "completed")
+func _change_scene(scene_path: String) -> void:
+	var loader = $"%StageHand".load_scene(scene_path)
+	var scene : PackedScene = yield(loader, "completed")
 	var instance : Node = scene.instance()
 	$"%Stage".change_scene_to(instance)
