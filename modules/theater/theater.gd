@@ -1,5 +1,7 @@
 extends Control
 
+export(Resource) var on_cue = ResourceSignal.new()
+
 
 func _ready() -> void:
 	$"%Director".register($"%Script".load_scenes())
@@ -8,7 +10,15 @@ func _ready() -> void:
 	if main_scene != filename:
 		$"%Director".start_at(main_scene)
 
+	on_cue.connect("signaled", self, "_on_cue")
+
 	var scene_path : String = $"%Director".start()
+	if not scene_path.empty():
+		_change_scene(scene_path)
+
+
+func _on_cue(name: String = "") -> void:
+	var scene_path : String = $"%Director".on_cue(name)
 	if not scene_path.empty():
 		_change_scene(scene_path)
 

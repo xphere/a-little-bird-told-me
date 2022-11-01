@@ -1,6 +1,7 @@
 extends Node
 
 const NamedScene := preload("./named-scene.gd")
+const Next := "__next__"
 
 
 var _scenes : Dictionary
@@ -24,7 +25,26 @@ func start() -> String:
 	if _scenes.empty():
 		return ""
 
+	_setup_next()
+
 	return _set_current_scene(_get_start_scene())
+
+
+func on_cue(cue: String) -> String:
+	var current_scene := _scenes[_current_scene] as NamedScene
+	if cue.empty():
+		cue = Next
+	var next_scene := current_scene.on_cue(cue)
+	if next_scene.empty():
+		return ""
+	return _set_current_scene(next_scene)
+
+
+func _setup_next() -> void:
+	var scene_names := _scenes.keys()
+	for scene_idx in _scenes.size() - 1:
+		var scene := _scenes[scene_names[scene_idx]] as NamedScene
+		scene.register_transition(Next, scene_names[scene_idx + 1])
 
 
 func _set_current_scene(scene_name: String) -> String:

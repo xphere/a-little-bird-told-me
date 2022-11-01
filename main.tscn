@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://modules/theater/theater.gd" type="Script" id=1]
 [ext_resource path="res://modules/stage/stage.gd" type="Script" id=2]
@@ -6,11 +6,13 @@
 [ext_resource path="res://modules/stage-hand/stage-hand.gd" type="Script" id=4]
 [ext_resource path="res://modules/director/director.gd" type="Script" id=5]
 [ext_resource path="res://modules/director/script.gd" type="Script" id=6]
+[ext_resource path="res://src/cue.signal.tres" type="Resource" id=7]
 
 [node name="Theater" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+on_cue = ExtResource( 7 )
 
 [node name="Stage" type="ViewportContainer" parent="."]
 unique_name_in_owner = true
