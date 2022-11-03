@@ -22,7 +22,9 @@ func _on_cue(name: String = "") -> void:
 
 
 func _change_scene(scene_path: String) -> void:
+	yield($"%Curtain".down(), "completed")
 	var loader = $"%StageHand".load_scene(scene_path)
 	var scene : PackedScene = yield(loader, "completed")
 	var instance : Node = scene.instance()
 	$"%Stage".change_scene_to(instance)
+	yield($"%Curtain".up(), "completed")
