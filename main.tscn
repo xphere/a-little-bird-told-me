@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://modules/theater/theater.gd" type="Script" id=1]
 [ext_resource path="res://modules/stage/stage.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://modules/curtain/curtain.gd" type="Script" id=8]
 [ext_resource path="res://modules/curtain/texture-gradient-curtain.gdshader" type="Shader" id=9]
 [ext_resource path="res://src/lut-main.png" type="Texture" id=10]
+[ext_resource path="res://src/theater/loading.tscn" type="PackedScene" id=11]
 [ext_resource path="res://modules/palette/lut-mapping.gdshader" type="Shader" id=12]
 
 [sub_resource type="Gradient" id=3]
@@ -73,6 +74,10 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 8 )
 duration = 0.3
+
+[node name="Loading" parent="." instance=ExtResource( 11 )]
+unique_name_in_owner = true
+after = 0.25
 
 [node name="Proscenium" type="ColorRect" parent="."]
 material = SubResource( 6 )
