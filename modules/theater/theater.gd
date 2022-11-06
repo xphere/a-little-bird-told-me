@@ -28,5 +28,6 @@ func _change_scene(scene_path: String) -> void:
 	var scene : PackedScene = yield(loader, "completed")
 	var instance : Node = scene.instance()
 	$"%Stage".change_scene_to(instance)
+	yield(instance, "started" if instance.has_signal("started") else "ready")
 	$"%Loading".stop()
 	yield($"%Curtain".up(), "completed")
