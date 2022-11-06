@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/big-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/small-font.tres" type="DynamicFont" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.654902, 0.690196, 0.745098, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 252.0
+margin_bottom = 236.0
+custom_constants/separation = 0
+
+[node name="Credits" type="Label" parent="MarginContainer/Menu"]
+margin_right = 248.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0.278431, 0.254902, 0.407843, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "By Berny Cantos (xPheRe)"
+align = 1
+
+[node name="Title" type="Label" parent="MarginContainer/Menu"]
+margin_top = 108.0
+margin_right = 248.0
+margin_bottom = 124.0
+size_flags_vertical = 6
+custom_colors/font_color = Color( 1, 0.988235, 0.945098, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "A Litte Bird told me"
+align = 1
+autowrap = true
+
+[node name="Continue" type="Label" parent="MarginContainer/Menu"]
+margin_top = 224.0
+margin_right = 248.0
+margin_bottom = 232.0
+custom_colors/font_color = Color( 1, 0.988235, 0.945098, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Press ENTER to continue"
+align = 1

@@ -1,2 +1,6 @@
 [
+	[ "intro#studio", "res://src/intro/studio.tscn" ],
+	[ "intro#submitted", "res://src/intro/submitted.tscn" ],
+	[ "intro#engine", "res://src/intro/engine.tscn" ],
+	[ "menu", "res://src/menu/menu.tscn" ],
 ]
