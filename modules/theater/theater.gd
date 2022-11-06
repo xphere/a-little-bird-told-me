@@ -6,6 +6,7 @@ func _ready() -> void:
 
 	var main_scene : String = ProjectSettings.get("application/run/main_scene")
 	if main_scene != filename:
+		$"%Director".register_fallback(main_scene)
 		$"%Director".start_at(main_scene)
 
 	$"On Cue".listen(self, "_on_cue")

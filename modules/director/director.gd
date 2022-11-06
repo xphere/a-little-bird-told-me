@@ -11,8 +11,11 @@ var _start_scene : String
 
 func register(scenes: Array) -> void:
 	for index in scenes.size():
-		var scene := scenes[index] as NamedScene
-		_scenes[scene.get_name()] = scene
+		_register_scene(scenes[index] as NamedScene)
+
+
+func register_fallback(scene: String) -> void:
+	_register_scene(NamedScene.new("__debug_%s" % hash(scene), scene))
 
 
 func start_at(scene_path: String) -> void:
@@ -38,6 +41,10 @@ func on_cue(cue: String) -> String:
 	if next_scene.empty():
 		return ""
 	return _set_current_scene(next_scene)
+
+
+func _register_scene(scene: NamedScene) -> void:
+	_scenes[scene.get_name()] = scene
 
 
 func _setup_next() -> void:
