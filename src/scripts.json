@@ -2,5 +2,6 @@
 	[ "intro#studio", "res://src/intro/studio.tscn" ],
 	[ "intro#submitted", "res://src/intro/submitted.tscn" ],
 	[ "intro#engine", "res://src/intro/engine.tscn" ],
+	[ "intro#crunch-free", "res://src/intro/crunch-free.tscn" ],
 	[ "menu", "res://src/menu/menu.tscn" ],
 ]

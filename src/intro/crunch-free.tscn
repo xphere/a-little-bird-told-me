@@ -1,0 +1,118 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://modules/input/on-action/on-action.gd" type="Script" id=1]
+[ext_resource path="res://events/on-cue.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/intro/assets/crunch-free.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/big-font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float from : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float width = 16.0;
+
+void fragment()
+{
+	float threshold = 0.5 * (UV.x + 1.0 - UV.y);
+	float delta = length(SCREEN_PIXEL_SIZE) * width;
+	vec4 color = texture(TEXTURE, UV);
+	float value = step(0.0, from + delta - threshold) * step(0.0, threshold - from + delta);
+	COLOR = mix(color, vec4(vec3(1.0), color.a), value);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/from = 0.5
+shader_param/width = 8.0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/from")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Wink"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/from")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Submitted" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.654902, 0.690196, 0.745098, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -120.0
+margin_right = 128.0
+margin_bottom = 120.0
+
+[node name="No Crunch Logo" type="TextureRect" parent="VBoxContainer"]
+material = SubResource( 2 )
+margin_right = 256.0
+margin_bottom = 216.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/No Crunch Logo"]
+autoplay = "Wink"
+anims/RESET = SubResource( 3 )
+anims/Wink = SubResource( 4 )
+
+[node name="Free" type="Label" parent="VBoxContainer"]
+margin_top = 220.0
+margin_right = 256.0
+margin_bottom = 236.0
+custom_colors/font_color = Color( 1, 0.988235, 0.945098, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "CRUNCH-FREE"
+align = 1
+valign = 2
+
+[node name="Last" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 240.0
+margin_right = 256.0
+margin_bottom = 240.0
+
+[node name="Next" parent="." instance=ExtResource( 2 )]
+
+[node name="Timer" type="Timer" parent="Next"]
+wait_time = 2.0
+autostart = true
+
+[node name="On Action Accept" type="Node" parent="Next"]
+script = ExtResource( 1 )
+
+[connection signal="emitted" from="Next" to="Next" method="queue_free"]
+[connection signal="timeout" from="Next/Timer" to="Next" method="emit"]
+[connection signal="action" from="Next/On Action Accept" to="Next" method="emit"]
