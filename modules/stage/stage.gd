@@ -6,6 +6,10 @@ var _current_scene : Node
 
 
 func change_scene_to(scene: Node) -> void:
+	call_deferred("_change_scene_to", scene)
+
+
+func _change_scene_to(scene: Node) -> void:
 	if _current_scene:
 		_current_scene.queue_free()
 	_current_scene = scene
