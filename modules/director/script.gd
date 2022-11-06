@@ -8,9 +8,9 @@ export(String, FILE, "*.json") var script_path
 func load_scenes() -> Array:
 	var result := []
 	for script in _parse_json(script_path):
-		var scene_name := script[0] as String
-		var scene_path := script[1] as String
-		var transitions := script[2] as Dictionary
+		var scene_name : String = script[0]
+		var scene_path : String = script[1]
+		var transitions : Dictionary = script[2] if script.size() > 2 else {}
 		var scene := NamedScene.new(scene_name, scene_path)
 		for transition in transitions:
 			scene.register_transition(transition, transitions[transition])
