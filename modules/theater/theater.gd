@@ -23,6 +23,7 @@ func _on_cue(name: String = "") -> void:
 
 
 func _change_scene(scene_path: String) -> void:
+	get_tree().paused = true
 	yield($"%Curtain".down(), "completed")
 	$"%Loading".start()
 	var loader = $"%StageHand".load_scene(scene_path)
@@ -31,4 +32,5 @@ func _change_scene(scene_path: String) -> void:
 	$"%Stage".change_scene_to(instance)
 	yield(instance, "started" if instance.has_signal("started") else "ready")
 	$"%Loading".stop()
+	get_tree().paused = false
 	yield($"%Curtain".up(), "completed")
