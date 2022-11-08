@@ -39,7 +39,7 @@ func _unselect() -> void:
 	_previous_selection = 0
 	$Selection.hide()
 	$Map.unselect()
-	$DialogLayer/DialogBox.hide()
+	$DialogBox.hide()
 
 
 func _set_cursor(position: Vector2) -> void:
@@ -63,11 +63,11 @@ func _set_cursor(position: Vector2) -> void:
 			_cities[which].city_name,
 		],
 	])
-	$DialogLayer/DialogBox.info(text.join(\"\\n\"))
+	$DialogBox.info(text.join(\"\\n\"))
 
 
 func _ui_avoid_cursor(position: Vector2) -> void:
-	var dialog := $DialogLayer/DialogBox as Control
+	var dialog := $DialogBox as Control
 
 	if position.y > 208 - dialog.rect_size.y:
 		dialog.set_anchors_and_margins_preset(
@@ -373,6 +373,4 @@ texture = ExtResource( 5 )
 hframes = 3
 frame = 1
 
-[node name="DialogLayer" type="CanvasLayer" parent="."]
-
-[node name="DialogBox" parent="DialogLayer" instance=ExtResource( 2 )]
+[node name="DialogBox" parent="." instance=ExtResource( 2 )]
