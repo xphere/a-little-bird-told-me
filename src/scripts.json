@@ -4,4 +4,5 @@
 	[ "intro#engine", "res://src/intro/engine.tscn" ],
 	[ "intro#crunch-free", "res://src/intro/crunch-free.tscn" ],
 	[ "menu", "res://src/menu/menu.tscn" ],
+	[ "game", "res://src/game/game.tscn" ],
 ]
