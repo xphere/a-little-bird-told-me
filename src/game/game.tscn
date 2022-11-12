@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/letters/letter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/game/desk.gd" type="Script" id=6]
 [ext_resource path="res://src/game/cursor.gd" type="Script" id=7]
@@ -29,6 +30,8 @@ position = Vector2( 99, 125 )
 
 [node name="Letter#2" parent="CloseUp/MailTray" instance=ExtResource( 5 )]
 position = Vector2( 176, 46 )
+
+[node name="DialogBox" parent="." instance=ExtResource( 2 )]
 
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource( 7 )
