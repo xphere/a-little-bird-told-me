@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
+[ext_resource path="res://objects/letters/letter.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/desk.gd" type="Script" id=6]
 [ext_resource path="res://src/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/game/game.gd" type="Script" id=8]
 
@@ -9,6 +11,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 8 )
+
+[node name="CloseUp" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="MailTray" type="ColorRect" parent="CloseUp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0.0901961, 0.0313726, 0.0901961, 1 )
+script = ExtResource( 6 )
+
+[node name="Letter#1" parent="CloseUp/MailTray" instance=ExtResource( 5 )]
+position = Vector2( 99, 125 )
+
+[node name="Letter#2" parent="CloseUp/MailTray" instance=ExtResource( 5 )]
+position = Vector2( 176, 46 )
 
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource( 7 )
