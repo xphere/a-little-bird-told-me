@@ -1,0 +1,228 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/events/on-cue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://modules/input/on-action/on-action.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/big-font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/small-font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/from")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/to")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Background:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.654902, 0.690196, 0.745098, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../StudioName:custom_colors/font_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.988235, 0.945098, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../StudioName:custom_colors/font_outline_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Right"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/to")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.4, 0.65, 0.75 ),
+"transitions": PoolRealArray( 2, 2, 0.5, 2, 2 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.5, 1.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/from")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.65, 0.75 ),
+"transitions": PoolRealArray( 0, 2, 2, 2 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Presents:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.65, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../Background:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.180392, 0.164706, 0.258824, 1 ), Color( 0.654902, 0.690196, 0.745098, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../StudioName:custom_colors/font_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.105882, 0.0823529, 0.133333, 0 ), Color( 0.105882, 0.0823529, 0.133333, 1 ), Color( 1, 0.988235, 0.945098, 1 ) ]
+}
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float from : hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float to : hint_range(0.0, 1.0, 0.1) = 1.0;
+
+void fragment() {
+	COLOR.a = step(UV.x, to) * (1.0 - step(UV.x, from));
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/from = 0.0
+shader_param/to = 0.0
+
+[node name="Studio" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Bars/TopBar")
+autoplay = "Right"
+anims/RESET = SubResource( 4 )
+anims/Right = SubResource( 5 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.654902, 0.690196, 0.745098, 1 )
+
+[node name="Bars" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TopBar" type="ColorRect" parent="Bars"]
+material = SubResource( 3 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 6.0
+margin_bottom = 10.0
+color = Color( 1, 0.988235, 0.945098, 1 )
+
+[node name="BottomBar" type="ColorRect" parent="Bars"]
+material = SubResource( 3 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 12.0
+margin_bottom = 14.0
+color = Color( 1, 0.988235, 0.945098, 1 )
+
+[node name="BottommoerBar" type="ColorRect" parent="Bars"]
+material = SubResource( 3 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 15.0
+margin_bottom = 16.0
+color = Color( 1, 0.988235, 0.945098, 1 )
+
+[node name="StudioName" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 0.988235, 0.945098, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "xPheRe Games"
+align = 1
+valign = 1
+
+[node name="Presents" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 36.0
+custom_colors/font_color = Color( 0.278431, 0.254902, 0.407843, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Presents"
+align = 1
+valign = 1
+
+[node name="Next" parent="." instance=ExtResource( 1 )]
+
+[node name="Timer" type="Timer" parent="Next"]
+wait_time = 3.0
+autostart = true
+
+[node name="On Action Accept" type="Node" parent="Next"]
+script = ExtResource( 2 )
+
+[connection signal="emitted" from="Next" to="Next" method="queue_free"]
+[connection signal="timeout" from="Next/Timer" to="Next" method="emit"]
+[connection signal="action" from="Next/On Action Accept" to="Next" method="emit"]

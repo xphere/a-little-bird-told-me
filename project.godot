@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "ResourceSignal",
 "language": "GDScript",
 "path": "res://modules/system/resource-signal/resource-signal.gd"
+}, {
+"base": "Node",
+"class": "Selectable",
+"language": "GDScript",
+"path": "res://src/objects/selectable/selectable.gd"
 } ]
 _global_script_class_icons={
-"ResourceSignal": ""
+"ResourceSignal": "",
+"Selectable": ""
 }
 
 [application]

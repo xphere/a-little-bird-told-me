@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/objects/selectable/selectable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/screens/tower/mail-desk.png" type="Texture" id=2]
+[ext_resource path="res://src/objects/selectable/pixel-outline.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/enabled = false
+shader_param/is_v8 = false
+shader_param/border_color = Color( 1, 1, 1, 1 )
+shader_param/alpha_threshold = 0.75
+shader_param/neighbourhood_threshold = 0.75
+
+[node name="MailDesk" instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="Selection" parent="." index="1"]
+polygon = PoolVector2Array( 17, 24.5, -17, 24.5, -17, -24.5, 17, -24.5 )
+__meta__ = {
+"_editor_description_": ""
+}
