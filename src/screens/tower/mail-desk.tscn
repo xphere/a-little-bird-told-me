@@ -20,8 +20,8 @@ position = Vector2( 0, 0 )
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="Selection" parent="." index="1"]
-polygon = PoolVector2Array( 17, 24.5, -17, 24.5, -17, -24.5, 17, -24.5 )
-__meta__ = {
-"_editor_description_": ""
-}
+[node name="Selection#1" type="CollisionPolygon2D" parent="." index="1"]
+polygon = PoolVector2Array( 14, -21.5, 15, -21.5, 15, -13.5, 14, -13.5, 14, -12.5, 4, -12.5, 4, -11.5, 3, -11.5, 3, -10.5, 2, -10.5, 2, -9.5, 1, -9.5, 1, -11.5, 0, -11.5, 0, -12.5, -14, -12.5, -14, -13.5, -15, -13.5, -15, -21.5, -14, -21.5, -14, -22.5, 14, -22.5 )
+
+[node name="Selection#2" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( 15, 22.5, 12, 22.5, 12, 12.5, 11, 12.5, 11, 11.5, -11, 11.5, -11, 12.5, -12, 12.5, -12, 22.5, -15, 22.5, -15, -7.5, 15, -7.5 )

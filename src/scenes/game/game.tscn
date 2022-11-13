@@ -3,11 +3,11 @@
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/screens/tower/tower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/screens/mail-desk/mail-desk.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/screens/mail-desk/mail-desk.gd" type="Script" id=6]
+[ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
-[ext_resource path="res://src/ui/message-box/message-box.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -16,23 +16,35 @@ theme = ExtResource( 1 )
 script = ExtResource( 8 )
 
 [node name="Tower" parent="." instance=ExtResource( 3 )]
-
-[node name="MailDesk" type="ColorRect" parent="."]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-color = Color( 0.0901961, 0.0313726, 0.0901961, 1 )
-script = ExtResource( 6 )
+
+[node name="MailDesk" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="Letter#1" parent="MailDesk" instance=ExtResource( 5 )]
 position = Vector2( 99, 125 )
-letter_name = "intro"
+letter_name = "Welcome letter from Their Majesties"
+letter_content = "Congratulations!
+
+Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
+
+From the time present your presence will be required at The Watchtower to take care of the Royal Flock.
+
+Signed:
+Their Royal Majesties of Earauthain
+
+B.A.R."
 
 [node name="Letter#2" parent="MailDesk" instance=ExtResource( 5 )]
 position = Vector2( 176, 46 )
+letter_name = "Fight at the Along the Way Inn"
+letter_content = "A group of men started a brawl last night at the Along the Way Inn, near the border with the Kingdom of Southil.
 
-[node name="MessageBox" parent="." instance=ExtResource( 9 )]
+They were chanting songs mocking Their Majesties and when the inn-keeper asked them to stop, they started to fight everyone.
+
+Witnesses' opinions vary between internal rebellion or Southil infiltrators."
+
+[node name="Letter" parent="." instance=ExtResource( 6 )]
 visible = false
 
 [node name="DialogBox" parent="." instance=ExtResource( 2 )]

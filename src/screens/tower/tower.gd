@@ -6,6 +6,10 @@ onready var transitions := [
 ]
 
 
+func on_enter() -> void:
+	show()
+
+
 func on_interact(node: Node2D) -> void:
 	if transitions.has(node):
-		owner.to_state(node.name)
+		owner.push_state(node.name)

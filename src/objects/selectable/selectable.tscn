@@ -13,10 +13,7 @@ shader_param/alpha_threshold = 0.75
 shader_param/neighbourhood_threshold = 0.75
 
 [node name="Selectable" type="Area2D"]
-position = Vector2( 176, 46 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-
-[node name="Selection" type="CollisionPolygon2D" parent="."]
