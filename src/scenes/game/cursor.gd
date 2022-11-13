@@ -34,8 +34,12 @@ func _check_selected_element() -> void:
 
 	var collider : Node
 	for intersect in intersects:
-		if intersect.collider and _context.is_a_parent_of(intersect.collider):
-			collider = intersect.collider
+		var collision := intersect.collider as CanvasItem
+		if not collision or not collision.visible:
+			continue
+
+		if _context.is_a_parent_of(collision):
+			collider = collision
 			break
 
 	if collider == null:
