@@ -1,0 +1,376 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/map/map.png" type="Texture" id=3]
+[ext_resource path="res://src/map/map-regions.png" type="Texture" id=4]
+[ext_resource path="res://src/map/mark.png" type="Texture" id=5]
+[ext_resource path="res://src/map/map-texture.png" type="Texture" id=6]
+[ext_resource path="res://src/map/map.gdshader" type="Shader" id=7]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Control
+
+export var starting_node : NodePath
+
+var _selected : Node2D
+var _cities := {}
+var _states := {}
+
+
+func _ready() -> void:
+	for state in $Map.get_children():
+		for city in state.get_children():
+			var which : int = $Map.which(city.global_position)
+			_states[which] = state
+			_cities[which] = city
+
+	_unselect()
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_set_cursor(event.position)
+
+
+var _previous_selection : int
+
+func _unselect() -> void:
+	_previous_selection = 0
+	$Selection.hide()
+	$Map.unselect()
+	$DialogBox.hide()
+
+
+func _set_cursor(position: Vector2) -> void:
+	var which = $Map.which(position)
+	if which == 0:
+		_unselect()
+		return
+
+	_ui_avoid_cursor(position)
+	if which == _previous_selection:
+		return
+
+	_previous_selection = which
+	$Selection.global_position = _cities[which].global_position
+	$Selection.show()
+	$Map.select($Selection.global_position)
+	var text := PoolStringArray([
+		_states[which].state_name,
+		\"%s: %s\" % [
+			\"Capital\" if _cities[which].get_index() == 0 else \"City\",
+			_cities[which].city_name,
+		],
+	])
+	$DialogBox.info(text.join(\"\\n\"))
+
+
+func _ui_avoid_cursor(position: Vector2) -> void:
+	var dialog := $DialogBox as Control
+
+	if position.y > 208 - dialog.rect_size.y:
+		dialog.set_anchors_and_margins_preset(
+			Control.PRESET_TOP_WIDE,
+			Control.PRESET_MODE_KEEP_SIZE
+		)
+	else:
+		dialog.set_anchors_and_margins_preset(
+			Control.PRESET_BOTTOM_WIDE,
+			Control.PRESET_MODE_KEEP_SIZE
+		)
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+shader_param/selected = Vector2( 0.5, 0.5 )
+shader_param/same_country = Color( 0.388235, 0.403922, 0.560784, 1 )
+shader_param/same_province = Color( 1, 0.988235, 0.945098, 1 )
+shader_param/enabled = false
+shader_param/reveal = ExtResource( 4 )
+shader_param/bump = ExtResource( 6 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Sprite
+
+onready var _shader := material as ShaderMaterial
+
+const _size := Vector2(1.0 / 256.0, 1.0 / 240.0)
+
+var _image : Image
+
+
+func select(position: Vector2) -> void:
+	_shader.set_shader_param(\"selected\", position * _size)
+	_shader.set_shader_param(\"enabled\", true)
+
+
+func unselect() -> void:
+	_shader.set_shader_param(\"enabled\", false)
+
+
+func which(position: Vector2) -> int:
+	if not _image:
+		var texture := _shader.get_shader_param(\"reveal\") as Texture
+		_image = texture.get_data()
+		_image.lock()
+
+#	_image.lock()
+	var value := _image.get_pixelv(position)
+#	_image.unlock()
+
+	return int(256 * value.r) * 256 + int(256 * value.g)
+"
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Node2D
+
+export var state_name := \"\"
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Node2D
+
+export var city_name := \"\"
+
+func _ready() -> void:
+	add_to_group(\"selectable\")
+"
+
+[node name="Map" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+theme = ExtResource( 1 )
+script = SubResource( 4 )
+starting_node = NodePath("Map/State#1/City#1")
+
+[node name="Map" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 3 )
+centered = false
+script = SubResource( 3 )
+
+[node name="State#1" type="Node2D" parent="Map"]
+position = Vector2( 151, 132 )
+script = SubResource( 5 )
+state_name = "Kingdom of Earauthain"
+
+[node name="City#1" type="Sprite" parent="Map/State#1"]
+position = Vector2( 83, -23 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Esethrawama"
+
+[node name="City#2" type="Sprite" parent="Map/State#1"]
+position = Vector2( 17, -43 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Balaran"
+
+[node name="City#3" type="Sprite" parent="Map/State#1"]
+position = Vector2( -30, -47 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Khangor"
+
+[node name="City#4" type="Sprite" parent="Map/State#1"]
+position = Vector2( -37, 5 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Gugaurem"
+
+[node name="City#5" type="Sprite" parent="Map/State#1"]
+position = Vector2( -55, 58 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Khanhad"
+
+[node name="City#6" type="Sprite" parent="Map/State#1"]
+position = Vector2( 36, 34 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Rasand"
+
+[node name="City#7" type="Sprite" parent="Map/State#1"]
+position = Vector2( 60, 15 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Chelduin"
+
+[node name="City#8" type="Sprite" parent="Map/State#1"]
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Arnfantryx"
+
+[node name="State#2" type="Node2D" parent="Map"]
+position = Vector2( 80, 75 )
+script = SubResource( 5 )
+state_name = "Malionilar Theocracy"
+
+[node name="City#1" type="Sprite" parent="Map/State#2"]
+position = Vector2( -18, 10 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Dragos"
+
+[node name="City#2" type="Sprite" parent="Map/State#2"]
+position = Vector2( 15, -1 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Skurmul"
+
+[node name="State#3" type="Node2D" parent="Map"]
+position = Vector2( 119, 17 )
+script = SubResource( 5 )
+state_name = "Kingdom of Southil"
+
+[node name="City#1" type="Sprite" parent="Map/State#3"]
+position = Vector2( 62, 23 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Rogue"
+
+[node name="City#2" type="Sprite" parent="Map/State#3"]
+position = Vector2( -38, 19 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Crowgmeadow"
+
+[node name="City#3" type="Sprite" parent="Map/State#3"]
+position = Vector2( -56, -9 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Oasinf"
+
+[node name="City#4" type="Sprite" parent="Map/State#3"]
+position = Vector2( 25, 46 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Orestfall"
+
+[node name="City#5" type="Sprite" parent="Map/State#3"]
+position = Vector2( -13, 1 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Swanwall"
+
+[node name="State#4" type="Node2D" parent="Map"]
+position = Vector2( 21, 26 )
+script = SubResource( 5 )
+state_name = "Principality of Shure"
+
+[node name="City#1" type="Sprite" parent="Map/State#4"]
+position = Vector2( 15, -8 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Shure"
+
+[node name="City#2" type="Sprite" parent="Map/State#4"]
+position = Vector2( 17, 20 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Uzresh"
+
+[node name="City#3" type="Sprite" parent="Map/State#4"]
+position = Vector2( -6, -11 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Helash"
+
+[node name="State#5" type="Node2D" parent="Map"]
+position = Vector2( 27, 123 )
+script = SubResource( 5 )
+state_name = "Sku'kanese Empire"
+
+[node name="City#1" type="Sprite" parent="Map/State#5"]
+position = Vector2( 30, 3 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Sku'kan"
+
+[node name="City#2" type="Sprite" parent="Map/State#5"]
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Tsakher Ine"
+
+[node name="City#3" type="Sprite" parent="Map/State#5"]
+position = Vector2( 3, -42 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Chulag"
+
+[node name="State#6" type="Node2D" parent="Map"]
+position = Vector2( 83, 221 )
+script = SubResource( 5 )
+state_name = "Kingdom of Cheth"
+
+[node name="City#1" type="Sprite" parent="Map/State#6"]
+position = Vector2( 76, 10 )
+texture = ExtResource( 5 )
+hframes = 3
+frame = 2
+script = SubResource( 6 )
+city_name = "Gnararilau"
+
+[node name="City#2" type="Sprite" parent="Map/State#6"]
+position = Vector2( 1, -9 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Dobeth"
+
+[node name="City#3" type="Sprite" parent="Map/State#6"]
+position = Vector2( -41, -23 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Cergherab"
+
+[node name="City#4" type="Sprite" parent="Map/State#6"]
+position = Vector2( -61, 7 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Bellyth"
+
+[node name="City#5" type="Sprite" parent="Map/State#6"]
+position = Vector2( 142, -24 )
+texture = ExtResource( 5 )
+hframes = 3
+script = SubResource( 6 )
+city_name = "Rethent"
+
+[node name="Selection" type="Sprite" parent="."]
+z_index = 1
+texture = ExtResource( 5 )
+hframes = 3
+frame = 1
+
+[node name="DialogBox" parent="." instance=ExtResource( 2 )]
