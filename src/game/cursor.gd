@@ -3,7 +3,7 @@ extends CanvasItem
 signal exited(node)
 signal entered(node)
 
-var selected : Node
+var selected : CollisionObject2D
 
 var _screen_ratio : Vector2
 
