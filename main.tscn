@@ -72,4 +72,5 @@ duration = 0.3
 
 [node name="Loading" parent="." instance=ExtResource( 11 )]
 unique_name_in_owner = true
+visible = false
 after = 0.25
