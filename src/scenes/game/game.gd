@@ -8,6 +8,10 @@ var _context := {}
 var _current_state : CanvasItem
 var _states_stack := []
 
+var _dragging : Node2D = null
+var _drag_offset : Vector2
+var _drag_timer : SceneTreeTimer
+
 
 func _ready() -> void:
 	_trigger_story($Story.get_child(0))
@@ -152,8 +156,47 @@ func _set_current_state(next_state: Node) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and not event.is_pressed():
+	if _dragging and event is InputEventMouseMotion:
+		_on_drag(event)
+
+	elif event is InputEventMouseButton:
+		_on_button(event)
+
+
+func _on_button(event: InputEventMouseButton) -> void:
+	if event.button_index != BUTTON_LEFT:
+		return
+
+	var selected : Node = $Cursor.selected
+	var is_pressed := event.is_pressed()
+
+	if selected and is_pressed and not _dragging and _is_draggable(selected):
+		var offset : Vector2 = selected.global_position - event.position
+		_drag_timer = get_tree().create_timer(0.3)
+		_drag_timer.connect("timeout", self, "_on_drag_timeout", [selected, offset])
+
+	elif selected and not is_pressed and not _dragging:
+		if _drag_timer:
+			_drag_timer.disconnect("timeout", self, "_on_drag_timeout")
+			_drag_timer = null
 		_interact_with($Cursor.selected)
+
+	elif not is_pressed and _dragging:
+		_dragging = null
+
+
+func _is_draggable(node: Node) -> bool:
+	return node.has_method("is_draggable") and node.is_draggable()
+
+
+func _on_drag_timeout(dragging: Node2D, offset: Vector2) -> void:
+	if $Cursor.selected == dragging:
+		_dragging = dragging
+		_drag_offset = offset
+
+
+func _on_drag(motion: InputEventMouseMotion) -> void:
+	_dragging.drag_to(_drag_offset + motion.position)
 
 
 func _interact_with(node: Node) -> void:
