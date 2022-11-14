@@ -1,12 +1,12 @@
 extends CanvasItem
 
-
 signal exited(node)
 signal entered(node)
 signal interact(node)
 signal drag(node)
 signal drop(node)
 
+export(int, LAYERS_2D_PHYSICS) var layers_2d_physics
 
 var _context : Node
 var _selected : Node2D
@@ -31,30 +31,39 @@ func _process(_delta: float) -> void:
 func _check_selected_element() -> void:
 	var space := get_world_2d().direct_space_state
 	var mouse_position : Vector2 = get_tree().root.get_mouse_position()
-	var intersects := space.intersect_point(mouse_position, 64, [], 0x7FFFFFFF, true, true)
+	var intersects := space.intersect_point(
+		mouse_position, 64, [],
+		layers_2d_physics,
+		true, true
+	)
 
 	var collider : Node
 	for intersect in intersects:
-		var collision := intersect.collider as CanvasItem
-		if not collision or not collision.visible:
-			continue
-
-		if _context.is_a_parent_of(collision):
-			collider = collision
+		if _is_selectable(intersect.collider):
+			collider = intersect.collider
 			break
 
 	if collider == null:
 		if _selected:
 			emit_signal("exited", _selected)
 			_selected = null
-		return
 
-	if collider == _selected:
-		return
+	elif collider != _selected:
+		_selected = collider
+		emit_signal("entered", _selected)
 
-	_selected = collider
 
-	emit_signal("entered", _selected)
+func _is_selectable(node: CanvasItem) -> bool:
+	if not node or not node.visible:
+		return false
+
+	if not _context.is_a_parent_of(node):
+		return false
+
+	if node.has_method("is_selectable") and not node.is_selectable():
+		return false
+
+	return true
 
 
 func _input(event: InputEvent) -> void:
@@ -66,6 +75,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _is_drag_event(event: InputEvent) -> bool:
+	if event is InputEventMouseMotion:
+		return true
+
+	if event is InputEventScreenDrag:
+		return event.relative
+
 	return event is InputEventMouseMotion or event is InputEventScreenDrag
 
 
