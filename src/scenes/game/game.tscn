@@ -60,3 +60,4 @@ They were chanting songs mocking Their Majesties and when the inn-keeper asked t
 Witnesses' opinions vary between internal rebellion or Southil infiltrators."
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
+[connection signal="interact" from="Cursor" to="." method="_on_Cursor_interact"]
