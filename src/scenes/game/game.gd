@@ -1,16 +1,52 @@
 extends Control
 
+
+signal context_changed(key, value)
+
+
 var _context := {}
 var _current_state : CanvasItem
 var _states_stack := []
 
 
-func _ready() -> void:
-	to_state("Tower")
+func has_stacked_state() -> bool:
+	return not _states_stack.empty()
+
+
+func register_letter(letter: Node) -> Node:
+	return letter
+
+
+func move_letter_to_mail_desk(node: Node) -> Node:
+	var letter_scene := preload("res://src/objects/letters/letter.tscn") as PackedScene
+	var letter := letter_scene.instance() as Node2D
+	letter.letter_name = node.letter_name
+	letter.letter_content = node.letter_contents
+	letter.global_position = Vector2(rand_range(40, 256 - 40), rand_range(15, 240 - 15))
+	$MailDesk.add_child(letter)
+	return letter
 
 
 func context(name: String):
 	return _context[name] if _context.has(name) else null
+
+
+func consume_context(name: String):
+	var result = context(name)
+	_context.erase(name)
+
+	return result
+
+
+func to_next_story(story: Node) -> void:
+	var index := 1 + story.get_index()
+	var parent := story.get_parent()
+	if parent.get_child_count() > index:
+		trigger_story(parent.get_child(index))
+
+
+func trigger_story(story: Node) -> void:
+	story.trigger()
 
 
 func push_state(name: String, context: Dictionary = {}) -> void:

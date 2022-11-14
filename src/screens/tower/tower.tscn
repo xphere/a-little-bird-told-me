@@ -22,6 +22,7 @@ position = Vector2( 29, 156 )
 script = ExtResource( 5 )
 
 [node name="MapDesk" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 137, 134 )
 script = ExtResource( 6 )
 

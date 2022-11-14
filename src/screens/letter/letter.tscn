@@ -4,9 +4,10 @@
 [ext_resource path="res://src/screens/letter/letter.gd" type="Script" id=2]
 [ext_resource path="res://src/objects/back/back.tscn" type="PackedScene" id=3]
 
-[node name="Letter" type="Control"]
+[node name="Letter" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.196078 )
 script = ExtResource( 2 )
 
 [node name="Back" parent="." instance=ExtResource( 3 )]

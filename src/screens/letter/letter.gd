@@ -1,13 +1,20 @@
 extends Control
 
+const Letter := preload("res://src/objects/letters/letter.gd")
+
+var letter : Letter
+
 
 func on_enter() -> void:
-	var contents : String = owner.context("letter.contents")
-	$"%MessageBox".set_contents(contents)
+	$Back.visible = owner.has_stacked_state()
+	letter = owner.consume_context("#letter")
+	$"%MessageBox".set_contents(letter.letter_content)
+	letter.emit_signal("opened")
 	show()
 
 
 func on_leave() -> void:
+	letter.emit_signal("closed")
 	hide()
 
 

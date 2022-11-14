@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/screens/tower/tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/screens/mail-desk/mail-desk.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
+[ext_resource path="res://src/story/start.gd" type="Script" id=9]
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=10]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -21,10 +22,24 @@ visible = false
 [node name="MailDesk" parent="." instance=ExtResource( 4 )]
 visible = false
 
-[node name="Letter#1" parent="MailDesk" instance=ExtResource( 5 )]
-position = Vector2( 99, 125 )
+[node name="Letter" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="DialogBox" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="Cursor" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="Story" type="Node" parent="."]
+
+[node name="Start" type="Node" parent="Story"]
+script = ExtResource( 9 )
+
+[node name="letter#1" type="Node" parent="Story/Start"]
+script = ExtResource( 10 )
 letter_name = "Welcome letter from Their Majesties"
-letter_content = "Congratulations!
+letter_contents = "Congratulations!
 
 Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
 
@@ -35,22 +50,13 @@ Their Royal Majesties of Earauthain
 
 B.A.R."
 
-[node name="Letter#2" parent="MailDesk" instance=ExtResource( 5 )]
-position = Vector2( 176, 46 )
+[node name="letter#2" type="Node" parent="Story/Start"]
+script = ExtResource( 10 )
 letter_name = "Fight at the Along the Way Inn"
-letter_content = "A group of men started a brawl last night at the Along the Way Inn, near the border with the Kingdom of Southil.
+letter_contents = "A group of men started a brawl last night at the Along the Way Inn, near the border with the Kingdom of Southil.
 
 They were chanting songs mocking Their Majesties and when the inn-keeper asked them to stop, they started to fight everyone.
 
 Witnesses' opinions vary between internal rebellion or Southil infiltrators."
-
-[node name="Letter" parent="." instance=ExtResource( 6 )]
-visible = false
-
-[node name="DialogBox" parent="." instance=ExtResource( 2 )]
-visible = false
-
-[node name="Cursor" type="Node2D" parent="."]
-script = ExtResource( 7 )
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
