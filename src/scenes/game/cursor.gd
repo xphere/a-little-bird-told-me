@@ -5,22 +5,12 @@ signal entered(node)
 
 var selected : CollisionObject2D
 
-var _screen_ratio : Vector2
 var _context : Node
 
 
 func set_context(context: Node) -> void:
 	_context = context
 	set_process(_context != null)
-
-
-func _ready() -> void:
-	get_tree().connect("screen_resized", self, "_update_screen_ratio")
-	_update_screen_ratio()
-
-
-func _update_screen_ratio() -> void:
-	_screen_ratio = get_viewport_rect().size / OS.window_size
 
 
 func _process(_delta: float) -> void:
@@ -32,7 +22,7 @@ func _process(_delta: float) -> void:
 
 func _check_selected_element() -> void:
 	var space := get_world_2d().direct_space_state
-	var mouse_position := get_local_mouse_position() * _screen_ratio
+	var mouse_position : Vector2 = get_tree().root.get_mouse_position()
 	var intersects := space.intersect_point(mouse_position, 64, [], 0x7FFFFFFF, true, true)
 
 	var collider : Node
