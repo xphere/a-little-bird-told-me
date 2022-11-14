@@ -9,6 +9,10 @@ var _current_state : CanvasItem
 var _states_stack := []
 
 
+func _ready() -> void:
+	_trigger_story($Story.get_child(0))
+
+
 func has_stacked_state() -> bool:
 	return not _states_stack.empty()
 
@@ -42,10 +46,10 @@ func to_next_story(story: Node) -> void:
 	var index := 1 + story.get_index()
 	var parent := story.get_parent()
 	if parent.get_child_count() > index:
-		trigger_story(parent.get_child(index))
+		_trigger_story(parent.get_child(index))
 
 
-func trigger_story(story: Node) -> void:
+func _trigger_story(story: Node) -> void:
 	story.trigger()
 
 
