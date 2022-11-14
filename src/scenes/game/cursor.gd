@@ -11,10 +11,10 @@ var _context : Node
 
 func set_context(context: Node) -> void:
 	_context = context
+	set_process(_context != null)
 
 
 func _ready() -> void:
-	_context = get_parent()
 	get_tree().connect("screen_resized", self, "_update_screen_ratio")
 	_update_screen_ratio()
 
@@ -24,6 +24,9 @@ func _update_screen_ratio() -> void:
 
 
 func _process(_delta: float) -> void:
+	if _context == null:
+		set_process(false)
+
 	_check_selected_element()
 
 
