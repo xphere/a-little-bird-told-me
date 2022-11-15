@@ -13,11 +13,23 @@ var _selected : Node2D
 var _dragging : Node2D = null
 var _drag_offset : Vector2
 var _pressed : Node2D
+var _locks := 0
 
 
 func set_context(context: Node) -> void:
 	_context = context
 	set_process(_context != null)
+
+
+func lock(lock: bool) -> void:
+	_locks = max(0, _locks + 1 if lock else -1)
+	if _locks == 0:
+		set_process(true)
+	else:
+		if _dragging:
+			emit_signal("drop", _dragging)
+			_dragging = null
+		_pressed = null
 
 
 func _process(_delta: float) -> void:
@@ -29,16 +41,10 @@ func _process(_delta: float) -> void:
 
 
 func _check_selected_element() -> void:
-	var space := get_world_2d().direct_space_state
-	var mouse_position : Vector2 = get_tree().root.get_mouse_position()
-	var intersects := space.intersect_point(
-		mouse_position, 64, [],
-		layers_2d_physics,
-		true, true
-	)
+	var collided := _get_objects_intersected()
 
 	var collider : Node
-	for intersect in intersects:
+	for intersect in collided:
 		if _is_selectable(intersect.collider):
 			collider = intersect.collider
 			break
@@ -51,6 +57,21 @@ func _check_selected_element() -> void:
 	elif collider != _selected:
 		_selected = collider
 		emit_signal("entered", _selected)
+
+
+func _get_objects_intersected() -> Array:
+	if _locks > 0:
+		set_process(false)
+		return []
+
+	var space := get_world_2d().direct_space_state
+	var mouse_position : Vector2 = get_tree().root.get_mouse_position()
+
+	return space.intersect_point(
+		mouse_position, 64, [],
+		layers_2d_physics,
+		true, true
+	)
 
 
 func _is_selectable(node: CanvasItem) -> bool:
