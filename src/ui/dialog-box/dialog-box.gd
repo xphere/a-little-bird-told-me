@@ -1,8 +1,14 @@
 extends CanvasItem
 
+signal completed()
+
 
 onready var _content := $"Content/Text/Label" as Label
 onready var _speaker := $"Speaker/Text/Label" as Label
+
+
+var _characters_shown : float
+var _characters_per_sec : float
 
 
 func info(content: String) -> void:
@@ -14,19 +20,25 @@ func info(content: String) -> void:
 	$Content.theme_type_variation = "PanelContainerInformation"
 
 
-func dialog(content: String, speaker: String) -> void:
+func dialog(content: String, speaker: String, characters_per_sec: float) -> void:
 	visible = true
-	if get_tree().is_connected("idle_frame", self, "_on_idle_frame"):
-		get_tree().disconnect("idle_frame", self, "_on_idle_frame")
+	_characters_shown = 0
+	_characters_per_sec = characters_per_sec
 	_speaker.text = speaker
 	$Speaker.visible = true
 	_content.text = content
 	_content.visible_characters = 0
 	$Content.theme_type_variation = ""
-	_on_idle_frame()
+	set_process(true)
+	yield(self, "completed")
+	visible = false
 
 
-func _on_idle_frame() -> void:
+func _process(delta: float) -> void:
 	if _content.percent_visible < 1.0:
-		_content.visible_characters += 1
-		get_tree().connect("idle_frame", self, "_on_idle_frame", [], CONNECT_ONESHOT | CONNECT_DEFERRED)
+		_characters_shown += _characters_per_sec * delta
+		_content.visible_characters = round(_characters_shown)
+	else:
+		set_process(false)
+		if _characters_shown > 0:
+			emit_signal("completed")
