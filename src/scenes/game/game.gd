@@ -49,7 +49,7 @@ func to_next_story(story: Node) -> void:
 		_play_story(parent.get_child(index))
 
 
-func _play_story(story: Node) -> void:
+func _play_story(story: Action) -> void:
 	story and story.execute()
 
 

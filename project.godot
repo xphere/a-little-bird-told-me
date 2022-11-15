@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://modules/action/action.gd"
+}, {
+"base": "Object",
+"class": "RefSignal",
+"language": "GDScript",
+"path": "res://modules/signal/ref-signal.gd"
+}, {
 "base": "Resource",
 "class": "ResourceSignal",
 "language": "GDScript",
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://src/objects/selectable/selectable.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
+"RefSignal": "",
 "ResourceSignal": "",
 "Selectable": ""
 }
