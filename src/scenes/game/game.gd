@@ -72,7 +72,7 @@ func to_next_story(story: Node) -> void:
 
 
 func _play_story(story: Action) -> void:
-	story and story.execute()
+	story and story.call_deferred("execute")
 
 
 func push_screen(name: String, context: Dictionary = {}) -> void:
