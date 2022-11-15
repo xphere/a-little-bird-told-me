@@ -2,7 +2,7 @@ extends CanvasItem
 
 
 func on_enter() -> void:
-	$Back.visible = owner.has_stacked_state()
+	$Back.visible = owner.has_stacked_screen()
 	show()
 
 
@@ -14,8 +14,8 @@ func on_interact(node: Node) -> void:
 	var Letter := preload("res://src/objects/letters/letter.gd")
 
 	if node is Letter:
-		owner.push_state("Letter", { "#letter": node })
+		owner.push_screen("Letter", { "#letter": node })
 
 
 func _on_Back_pressed() -> void:
-	owner.pop_state()
+	owner.pop_screen()

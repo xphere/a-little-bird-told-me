@@ -9,4 +9,4 @@ func trigger() -> void:
 
 
 func _on_letter_closed() -> void:
-	owner.to_state("Tower")
+	owner.to_next_story(self)

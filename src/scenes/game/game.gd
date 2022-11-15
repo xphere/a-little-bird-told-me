@@ -5,16 +5,16 @@ signal context_changed(key, value)
 
 
 var _context := {}
-var _current_state : CanvasItem
-var _states_stack := []
+var _current_screen : CanvasItem
+var _screens_stack := []
 
 
 func _ready() -> void:
-	_trigger_story($Story.get_child(0))
+	_play_story($Story.get_child(0))
 
 
-func has_stacked_state() -> bool:
-	return not _states_stack.empty()
+func has_stacked_screen() -> bool:
+	return not _screens_stack.empty()
 
 
 func register_letter(letter: Node) -> Node:
@@ -46,71 +46,71 @@ func to_next_story(story: Node) -> void:
 	var index := 1 + story.get_index()
 	var parent := story.get_parent()
 	if parent.get_child_count() > index:
-		_trigger_story(parent.get_child(index))
+		_play_story(parent.get_child(index))
 
 
-func _trigger_story(story: Node) -> void:
-	story.trigger()
+func _play_story(story: Node) -> void:
+	story and story.execute()
 
 
-func push_state(name: String, context: Dictionary = {}) -> void:
+func push_screen(name: String, context: Dictionary = {}) -> void:
 	_merge_context(context)
 
 	if not has_node(name):
 		return
 
-	var next_state := get_node(name) as CanvasItem
-	if next_state == null:
+	var next_screen := get_node(name) as CanvasItem
+	if next_screen == null:
 		return
 
-	if _current_state and _current_state.has_method("on_hold"):
-		_current_state.on_hold()
+	if _current_screen and _current_screen.has_method("on_hold"):
+		_current_screen.on_hold()
 
-	if _current_state:
-		_states_stack.push_back(_current_state)
+	if _current_screen:
+		_screens_stack.push_back(_current_screen)
 
-	_set_current_state(next_state)
+	_set_current_screen(next_screen)
 
-	if _current_state.has_method("on_enter"):
-		_current_state.on_enter()
+	if _current_screen.has_method("on_enter"):
+		_current_screen.on_enter()
 
 
-func pop_state(context: Dictionary = {}) -> void:
+func pop_screen(context: Dictionary = {}) -> void:
 	_merge_context(context)
 
-	if _states_stack.empty() or not _current_state:
+	if _screens_stack.empty() or not _current_screen:
 		return
 
-	var next_state := _states_stack.pop_back() as CanvasItem
-	if next_state == null:
+	var next_screen := _screens_stack.pop_back() as CanvasItem
+	if next_screen == null:
 		return
 
-	if _current_state.has_method("on_leave"):
-		_current_state.on_leave()
+	if _current_screen.has_method("on_leave"):
+		_current_screen.on_leave()
 
-	_set_current_state(next_state)
+	_set_current_screen(next_screen)
 
-	if _current_state.has_method("on_resume"):
-		_current_state.on_resume()
+	if _current_screen.has_method("on_resume"):
+		_current_screen.on_resume()
 
 
-func to_state(name: String, context: Dictionary = {}) -> void:
+func to_screen(name: String, context: Dictionary = {}) -> void:
 	_merge_context(context)
 
 	if not has_node(name):
 		return
 
-	var next_state := get_node(name) as CanvasItem
-	if next_state == null:
+	var next_screen := get_node(name) as CanvasItem
+	if next_screen == null:
 		return
 
-	if _current_state and _current_state.has_method("on_leave"):
-		_current_state.on_leave()
+	if _current_screen and _current_screen.has_method("on_leave"):
+		_current_screen.on_leave()
 
-	_set_current_state(next_state)
+	_set_current_screen(next_screen)
 
-	if _current_state and _current_state.has_method("on_enter"):
-		_current_state.on_enter()
+	if _current_screen and _current_screen.has_method("on_enter"):
+		_current_screen.on_enter()
 
 
 func dialog(speaker: String, contents: String) -> void:
@@ -122,8 +122,8 @@ func info(contents: String) -> void:
 
 
 func _on_Cursor_interact(node: CollisionObject2D) -> void:
-	if _current_state and _current_state.has_method("on_interact"):
-		_current_state.on_interact(node)
+	if _current_screen and _current_screen.has_method("on_interact"):
+		_current_screen.on_interact(node)
 
 	if node.has_method("on_interact"):
 		node.on_interact()
@@ -136,8 +136,8 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if node.has_method("get_name_when_selected"):
 		$DialogBox.info(node.get_name_when_selected())
 
-	if _current_state and _current_state.has_method("on_select"):
-		_current_state.on_select(node)
+	if _current_screen and _current_screen.has_method("on_select"):
+		_current_screen.on_select(node)
 
 	while true:
 		var exited : CanvasItem = yield($Cursor, "exited")
@@ -147,16 +147,16 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if node.has_method("get_name_when_selected"):
 		$DialogBox.hide()
 
-	if _current_state and _current_state.has_method("on_unselect"):
-		_current_state.on_unselect(node)
+	if _current_screen and _current_screen.has_method("on_unselect"):
+		_current_screen.on_unselect(node)
 
 	if node.has_method("select"):
 		node.select(false)
 
 
-func _set_current_state(next_state: Node) -> void:
-	_current_state = next_state
-	$Cursor.set_context(_current_state)
+func _set_current_screen(next_screen: Node) -> void:
+	_current_screen = next_screen
+	$Cursor.set_context(_current_screen)
 
 
 func _merge_context(context: Dictionary) -> void:

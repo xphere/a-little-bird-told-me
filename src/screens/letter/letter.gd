@@ -6,7 +6,7 @@ var letter : Letter
 
 
 func on_enter() -> void:
-	$Back.visible = owner.has_stacked_state()
+	$Back.visible = owner.has_stacked_screen()
 	letter = owner.consume_context("#letter")
 	$"%MessageBox".set_contents(letter.letter_content)
 	letter.emit_signal("opened")
@@ -19,4 +19,4 @@ func on_leave() -> void:
 
 
 func _on_Back_pressed() -> void:
-	owner.pop_state()
+	owner.pop_screen()
