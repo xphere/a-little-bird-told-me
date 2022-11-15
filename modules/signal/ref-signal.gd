@@ -3,9 +3,9 @@ extends Object
 
 
 static func to_async() -> void:
-	var resource = Resource.new()
-	resource.call_deferred("emit_changed")
-	yield(resource, "changed")
+	var resource = ResourceSignal.new()
+	resource.call_deferred("emit_signal", "signaled", resource)
+	yield(resource, "signaled")
 
 
 static func as_async(result) -> GDScriptFunctionState:
