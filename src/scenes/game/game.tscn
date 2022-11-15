@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/actions/info.gd" type="Script" id=15]
 [ext_resource path="res://modules/action/parallel.gd" type="Script" id=16]
 [ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=17]
+[ext_resource path="res://modules/context/context.gd" type="Script" id=18]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -39,6 +40,9 @@ visible = false
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource( 7 )
 layers_2d_physics = 1
+
+[node name="Context" type="Node" parent="."]
+script = ExtResource( 18 )
 
 [node name="Story" type="Node" parent="."]
 

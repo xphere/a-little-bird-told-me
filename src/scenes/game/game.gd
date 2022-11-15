@@ -1,10 +1,6 @@
 extends Control
 
 
-signal context_changed(key, value)
-
-
-var _context := {}
 var _current_screen : CanvasItem
 var _screens_stack := []
 
@@ -61,14 +57,11 @@ func move_letter_to_mail_desk(letter_id: String) -> Node:
 
 
 func context(name: String):
-	return _context[name] if _context.has(name) else null
+	return $Context.context(name)
 
 
 func consume_context(name: String):
-	var result = context(name)
-	_context.erase(name)
-
-	return result
+	return $Context.consume_context(name)
 
 
 func to_next_story(story: Node) -> void:
@@ -83,7 +76,7 @@ func _play_story(story: Action) -> void:
 
 
 func push_screen(name: String, context: Dictionary = {}) -> void:
-	_merge_context(context)
+	$Context.merge(context)
 
 	if not has_node(name):
 		return
@@ -105,7 +98,7 @@ func push_screen(name: String, context: Dictionary = {}) -> void:
 
 
 func pop_screen(context: Dictionary = {}) -> void:
-	_merge_context(context)
+	$Context.merge(context)
 
 	if _screens_stack.empty() or not _current_screen:
 		return
@@ -124,7 +117,7 @@ func pop_screen(context: Dictionary = {}) -> void:
 
 
 func to_screen(name: String, context: Dictionary = {}) -> void:
-	_merge_context(context)
+	$Context.merge(context)
 
 	if not has_node(name):
 		return
@@ -178,12 +171,3 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 func _set_current_screen(next_screen: Node) -> void:
 	_current_screen = next_screen
 	$Cursor.set_context(_current_screen)
-
-
-func _merge_context(context: Dictionary) -> void:
-	for key in context.keys():
-		var value = context[key]
-		if value == null:
-			_context.erase(key)
-		else:
-			_context[key] = value
