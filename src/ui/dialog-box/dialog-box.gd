@@ -31,6 +31,7 @@ func dialog(content: String, speaker: String, characters_per_sec: float) -> void
 	$Content.theme_type_variation = ""
 	set_process(true)
 	yield(self, "completed")
+	yield(get_tree().create_timer(1.0), "timeout")
 	visible = false
 
 

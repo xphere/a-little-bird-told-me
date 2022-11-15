@@ -9,6 +9,29 @@ var _current_screen : CanvasItem
 var _screens_stack := []
 
 
+func introduce(name: String) -> void:
+	print([ "introduce", name ])
+
+func animation(element: String, animation: String) -> void:
+	print([ "animation", element, animation ])
+
+func wait(wait_time: float) -> void:
+	print([ "wait", wait_time ])
+	yield(get_tree().create_timer(wait_time), "timeout")
+
+func sound(name: String, pitch := 1.0) -> void:
+	print([ "sound", name, pitch ])
+
+func dialog(text: String, speaker: String, characters_per_second: int):
+	return $DialogBox.dialog(text, speaker, characters_per_second)
+
+func info(text: String) -> void:
+	$DialogBox.info(text)
+
+func cursor_lock(lock: bool) -> void:
+	$Cursor.lock(lock)
+
+
 func _ready() -> void:
 	_play_story($Story.get_child(0))
 
@@ -17,13 +40,19 @@ func has_stacked_screen() -> bool:
 	return not _screens_stack.empty()
 
 
+var _letters := {}
+
 func register_letter(letter: Node) -> Node:
+	_letters[letter.letter_id] = letter
 	return letter
 
 
-func move_letter_to_mail_desk(node: Node) -> Node:
+func move_letter_to_mail_desk(letter_id: String) -> Node:
+	var node = _letters[letter_id]
 	var letter_scene := preload("res://src/objects/letters/letter.tscn") as PackedScene
 	var letter := letter_scene.instance() as Node2D
+	letter.connect("closed", node, "emit_signal", ["closed"], CONNECT_DEFERRED)
+	letter.id = letter_id
 	letter.letter_name = node.letter_name
 	letter.letter_content = node.letter_contents
 	letter.global_position = Vector2(rand_range(40, 256 - 40), rand_range(15, 240 - 15))
@@ -111,14 +140,6 @@ func to_screen(name: String, context: Dictionary = {}) -> void:
 
 	if _current_screen and _current_screen.has_method("on_enter"):
 		_current_screen.on_enter()
-
-
-func dialog(speaker: String, contents: String) -> void:
-	$DialogBox.dialog(speaker, contents)
-
-
-func info(contents: String) -> void:
-	$DialogBox.info(contents)
 
 
 func _on_Cursor_interact(node: CollisionObject2D) -> void:

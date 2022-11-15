@@ -1,7 +1,5 @@
 extends Action
 
-export var lock := false
-
 
 func execute() -> void:
 	for child in get_children():
