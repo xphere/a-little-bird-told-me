@@ -24,6 +24,34 @@ texture = ExtResource( 7 )
 position = Vector2( 137, 163 )
 script = ExtResource( 5 )
 
+[node name="on-help-request" type="Node" parent="MailDesk"]
+script = ExtResource( 8 )
+
+[node name="dialog#1" type="Node" parent="MailDesk/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "This is the best place to read in all the WatchTower!"
+
+[node name="dialog#2" type="Node" parent="MailDesk/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "Books, letters, papers, anything written goes here!"
+
+[node name="dialog#3" type="Node" parent="MailDesk/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "The former Maester taught me here the ways of reading."
+
+[node name="dialog#4" type="Node" parent="MailDesk/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "I know most of the vowels. Even some consonants!"
+
+[node name="dialog#5" type="Node" parent="MailDesk/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "I like the drawings better, I must say."
+
 [node name="Maester" parent="." instance=ExtResource( 2 )]
 position = Vector2( 89, 185 )
 scale = Vector2( -1, 1 )
