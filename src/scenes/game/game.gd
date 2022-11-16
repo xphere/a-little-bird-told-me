@@ -5,8 +5,13 @@ var _current_screen : CanvasItem
 var _screens_stack := []
 
 
-func introduce(name: String) -> void:
-	print([ "introduce", name ])
+var _casting := {}
+
+func cast(name: String, node: Node2D) -> void:
+	_casting[name] = node
+
+func character(name: String) -> Node2D:
+	return _casting[name]
 
 func animation(element: String, animation: String) -> void:
 	print([ "animation", element, animation ])
