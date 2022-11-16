@@ -23,6 +23,8 @@ func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
 
 func info(text: String) -> void:
 	$DialogBox.info(text)
+	yield()
+	$DialogBox.hide()
 
 func cursor_lock(lock: bool) -> void:
 	$Cursor.lock(lock)

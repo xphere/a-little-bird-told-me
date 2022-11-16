@@ -14,6 +14,9 @@ func execute() -> void:
 				CONNECT_DEFERRED | CONNECT_ONESHOT
 			)
 	yield(resource, "changed")
+	for child in get_children():
+		if child is Action and child.has_method("on_finally"):
+			child.on_finally()
 
 
 func _on_child_complete(child: Node, children: Array, resource: Resource) -> void:
