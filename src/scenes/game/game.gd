@@ -18,8 +18,8 @@ func wait(wait_time: float) -> void:
 func sound(name: String, pitch := 1.0) -> void:
 	print([ "sound", name, pitch ])
 
-func dialog(text: String, speaker: String, characters_per_second: int):
-	return $DialogBox.dialog(text, speaker, characters_per_second)
+func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
+	yield($DialogBox.dialog(text, speaker, characters_per_sec), "completed")
 
 func info(text: String) -> void:
 	$DialogBox.info(text)
