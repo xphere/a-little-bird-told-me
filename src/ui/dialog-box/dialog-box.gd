@@ -58,6 +58,9 @@ func _input(event: InputEvent) -> void:
 	if not mouse_event or not mouse_event.is_pressed():
 		return
 
+	if mouse_event.button_index != BUTTON_LEFT:
+		return
+
 	if _is_fully_shown():
 		emit_signal("completed")
 	else:

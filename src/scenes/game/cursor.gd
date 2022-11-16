@@ -3,6 +3,7 @@ extends CanvasItem
 signal exited(node)
 signal entered(node)
 signal interact(node)
+signal help(node)
 signal drag(node)
 signal drop(node)
 
@@ -106,6 +107,10 @@ func _is_drag_event(event: InputEvent) -> bool:
 
 
 func _on_button(event: InputEventMouseButton) -> void:
+	if event.button_index == BUTTON_RIGHT and _selected and not _dragging and not event.is_pressed():
+		_request_help(_selected)
+		return
+
 	if event.button_index != BUTTON_LEFT:
 		return
 
@@ -141,3 +146,7 @@ func _on_drag(position: Vector2) -> void:
 
 func _interact_with(node: Node) -> void:
 	emit_signal("interact", node)
+
+
+func _request_help(node: Node) -> void:
+	emit_signal("help", node)

@@ -150,4 +150,5 @@ speaker = "assistant"
 dialog = "But I'll be your guide in the meantime! Just ask me anything!"
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
+[connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]
 [connection signal="interact" from="Cursor" to="." method="_on_Cursor_interact"]

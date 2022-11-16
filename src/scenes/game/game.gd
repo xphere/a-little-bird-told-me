@@ -168,6 +168,16 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 		node.select(false)
 
 
+func _on_Cursor_help(node: CollisionObject2D) -> void:
+	$Cursor.lock(true)
+	if node.has_method("on_help_request"):
+		yield(node.on_help_request(), "completed")
+	elif node.has_node("on-help-request"):
+		var help_node := node.get_node("on-help-request") as Action
+		help_node and yield(help_node.execute(), "completed")
+	$Cursor.lock(false)
+
+
 func _set_current_screen(next_screen: Node) -> void:
 	_current_screen = next_screen
 	$Cursor.set_context(_current_screen)
