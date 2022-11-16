@@ -2,7 +2,6 @@ extends Control
 
 onready var transitions := [
 	$MailDesk,
-	$MapDesk,
 ]
 
 
