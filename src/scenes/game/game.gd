@@ -135,14 +135,6 @@ func to_screen(name: String, context: Dictionary = {}) -> void:
 		_current_screen.on_enter()
 
 
-func _on_Cursor_interact(node: CollisionObject2D) -> void:
-	if _current_screen and _current_screen.has_method("on_interact"):
-		_current_screen.on_interact(node)
-
-	if node.has_method("on_interact"):
-		node.on_interact()
-
-
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if node.has_method("select"):
 		node.select(true)
@@ -168,13 +160,31 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 		node.select(false)
 
 
+func _on_Cursor_interact(node: CollisionObject2D) -> void:
+	if node.has_node("on-interact"):
+		var interact_node := node.get_node("on-interact") as Action
+		interact_node and interact_node.execute()
+
+	elif node.has_method("on_interact"):
+		node.on_interact()
+
+	elif _current_screen and _current_screen.has_method("on_interact"):
+		_current_screen.on_interact(node)
+
+
 func _on_Cursor_help(node: CollisionObject2D) -> void:
 	$Cursor.lock(true)
-	if node.has_method("on_help_request"):
-		yield(node.on_help_request(), "completed")
-	elif node.has_node("on-help-request"):
+
+	if node.has_node("on-help-request"):
 		var help_node := node.get_node("on-help-request") as Action
 		help_node and yield(help_node.execute(), "completed")
+
+	elif node.has_method("on_help_request"):
+		yield(node.on_help_request(), "completed")
+
+	elif _current_screen and _current_screen.has_method("on_help_request"):
+		yield(_current_screen.on_help_request(node), "completed")
+
 	$Cursor.lock(false)
 
 
