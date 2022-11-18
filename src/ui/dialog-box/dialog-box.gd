@@ -2,6 +2,7 @@ extends CanvasItem
 
 signal completed()
 
+const MAX_CHARACTERS_PER_SECOND = 1024
 
 onready var _content := $"%Content/Text/Label" as Label
 onready var _speaker := $"%Speaker/Text/Label" as Label
@@ -28,7 +29,8 @@ func hide() -> void:
 		.hide()
 
 
-func info(content: String) -> void:
+func info(content: String, wait_input := false) -> void:
+	_characters_per_sec = MAX_CHARACTERS_PER_SECOND
 	_speaker.text = ""
 	$"%Speaker".visible = false
 	$"%Continue".visible = false
@@ -36,6 +38,8 @@ func info(content: String) -> void:
 	_content.visible_characters = -1
 	$"%Content".theme_type_variation = "PanelContainerInformation"
 	show()
+	if wait_input:
+		yield(_wait_input(), "completed")
 
 
 func dialog(content: String, speaker: String, characters_per_sec: float) -> void:
@@ -48,6 +52,10 @@ func dialog(content: String, speaker: String, characters_per_sec: float) -> void
 	_content.visible_characters = 0
 	$"%Content".theme_type_variation = ""
 	show()
+	yield(_wait_input(), "completed")
+
+
+func _wait_input() -> void:
 	set_process(true)
 	set_process_input(true)
 	yield(self, "completed")
@@ -80,4 +88,4 @@ func _input(event: InputEvent) -> void:
 	if _is_fully_shown():
 		emit_signal("completed")
 	else:
-		_characters_per_sec = 1024
+		_characters_per_sec = MAX_CHARACTERS_PER_SECOND

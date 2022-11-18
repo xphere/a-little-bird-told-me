@@ -17,7 +17,6 @@ func animation(element: String, animation: String) -> void:
 	print([ "animation", element, animation ])
 
 func wait(wait_time: float) -> void:
-	print([ "wait", wait_time ])
 	yield(get_tree().create_timer(wait_time), "timeout")
 
 func sound(name: String, pitch := 1.0) -> void:
@@ -26,10 +25,8 @@ func sound(name: String, pitch := 1.0) -> void:
 func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
 	yield($DialogBox.dialog(text, speaker, characters_per_sec), "completed")
 
-func info(text: String) -> void:
-	$DialogBox.info(text)
-	yield()
-	$DialogBox.hide()
+func info(text: String, wait_input := true) -> void:
+	yield($DialogBox.info(text, wait_input), "completed")
 
 func cursor_lock(lock: bool) -> void:
 	$Cursor.lock(lock)
