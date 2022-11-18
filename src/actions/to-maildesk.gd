@@ -13,8 +13,5 @@ func execute() -> void:
 func _create_letter(resource: Resource) -> Node2D:
 	var scene := preload("res://src/objects/letters/letter.tscn") as PackedScene
 	var instance := scene.instance() as Node2D
-	resource.connect_to(instance)
-	instance.id = resource.letter_id
-	instance.letter_name = resource.letter_name
-	instance.letter_content = resource.letter_contents
+	instance.setup(resource)
 	return instance
