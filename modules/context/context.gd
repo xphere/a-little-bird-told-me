@@ -4,12 +4,12 @@ extends Node
 var _data := {}
 
 
-func context(name: String):
-	return _data[name] if _data.has(name) else null
+func context(name: String, default_value = null):
+	return _data[name] if _data.has(name) else default_value
 
 
-func consume_context(name: String):
-	var result = context(name)
+func consume_context(name: String, default_value = null):
+	var result = context(name, default_value)
 	_data.erase(name)
 
 	return result

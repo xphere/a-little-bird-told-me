@@ -51,23 +51,12 @@ func add_to_maildesk(letter: Node2D) -> void:
 	$MailDesk.add_child(letter)
 
 
-func context(name: String):
-	return $Context.context(name)
+func context(name: String, default_value = null):
+	return $Context.context(name, default_value)
 
 
-func consume_context(name: String):
-	return $Context.consume_context(name)
-
-
-func to_next_story(story: Node) -> void:
-	var index := 1 + story.get_index()
-	var parent := story.get_parent()
-	if parent.get_child_count() > index:
-		_play_story(parent.get_child(index))
-
-
-func _play_story(story: Action) -> void:
-	story and story.call_deferred("execute")
+func consume_context(name: String, default_value = null):
+	return $Context.consume_context(name, default_value)
 
 
 func push_screen(name: String, context: Dictionary = {}) -> void:
