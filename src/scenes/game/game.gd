@@ -33,7 +33,7 @@ func cursor_lock(lock: bool) -> void:
 
 
 func _ready() -> void:
-	_play_story($Story.get_child(0))
+	$Story.execute()
 
 
 func has_stacked_screen() -> bool:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
+[ext_resource path="res://modules/action/match.gd" type="Script" id=9]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
 
 [node name="Game" type="Control"]
@@ -36,8 +37,10 @@ layers_2d_physics = 1
 script = ExtResource( 18 )
 
 [node name="Story" type="Node" parent="."]
+script = ExtResource( 9 )
+expression_contents = "\"Day#%d\" % context(\"day\", 0)"
 
-[node name="Start" parent="Story" instance=ExtResource( 5 )]
+[node name="Day#0" parent="Story" instance=ExtResource( 5 )]
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]
