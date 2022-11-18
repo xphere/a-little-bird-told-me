@@ -15,10 +15,13 @@ func consume_context(name: String, default_value = null):
 	return result
 
 
+func set_value(key: String, value) -> void:
+	if value == null:
+		_data.erase(key)
+	else:
+		_data[key] = value
+
+
 func merge(context: Dictionary) -> void:
 	for key in context.keys():
-		var value = context[key]
-		if value == null:
-			_data.erase(key)
-		else:
-			_data[key] = value
+		set_value(key, context[key])
