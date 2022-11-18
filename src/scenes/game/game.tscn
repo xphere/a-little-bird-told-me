@@ -1,24 +1,14 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/screens/tower/tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/screens/mail-desk/mail-desk.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actions/to-maildesk.gd" type="Script" id=5]
+[ext_resource path="res://src/stories/start.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
-[ext_resource path="res://src/actions/dialog.gd" type="Script" id=9]
-[ext_resource path="res://src/actions/letter.gd" type="Script" id=10]
-[ext_resource path="res://src/actions/to-screen.gd" type="Script" id=11]
-[ext_resource path="res://modules/action/wait.gd" type="Script" id=12]
-[ext_resource path="res://modules/action/serial.gd" type="Script" id=13]
-[ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=14]
-[ext_resource path="res://src/actions/info.gd" type="Script" id=15]
-[ext_resource path="res://modules/action/parallel.gd" type="Script" id=16]
-[ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=17]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
-[ext_resource path="res://src/actions/cast-character.gd" type="Script" id=19]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -47,121 +37,7 @@ script = ExtResource( 18 )
 
 [node name="Story" type="Node" parent="."]
 
-[node name="Start" type="Node" parent="Story"]
-script = ExtResource( 13 )
-
-[node name="introduce#maester" type="Node" parent="Story/Start"]
-script = ExtResource( 19 )
-character_name = "maester"
-
-[node name="hide#assistant" type="Node" parent="Story/Start"]
-script = ExtResource( 19 )
-character_name = "assistant"
-is_leaving = true
-
-[node name="letter#their-majesties#1" type="Node" parent="Story/Start"]
-script = ExtResource( 10 )
-letter_id = "letter#their-majesties#1"
-letter_name = "Welcome letter from Their Majesties"
-letter_contents = "Congratulations!
-
-Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
-
-From the time present your presence will be required at The Watchtower to take care of the Royal Flock.
-
-Signed:
-Their Royal Majesties of Earauthain
-
-B.A.R."
-
-[node name="to-maildesk#their-majesties#1" type="Node" parent="Story/Start"]
-script = ExtResource( 5 )
-letter_id = "letter#their-majesties#1"
-
-[node name="to-screen#mail-desk#1" type="Node" parent="Story/Start"]
-script = ExtResource( 11 )
-screen_name = "MailDesk"
-
-[node name="wait#closed#letter-their-majesties#1" type="Node" parent="Story/Start"]
-script = ExtResource( 14 )
-path = NodePath("../letter#their-majesties#1")
-signal_name = "closed"
-
-[node name="talk#intro" type="Node" parent="Story/Start"]
-script = ExtResource( 17 )
-
-[node name="to-screen#tower#1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 11 )
-
-[node name="dialog#maester#1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "maester"
-dialog = "Hmm..."
-
-[node name="parallel#knock#1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 16 )
-
-[node name="info#knock#1" type="Node" parent="Story/Start/talk#intro/parallel#knock#1"]
-script = ExtResource( 15 )
-information = "KNOCK! KNOCK!"
-
-[node name="wait#1" type="Node" parent="Story/Start/talk#intro/parallel#knock#1"]
-script = ExtResource( 12 )
-waiting_time = 2.0
-
-[node name="introduce#assistant" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 19 )
-character_name = "assistant"
-
-[node name="dialog#assistant#1,1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "Good morning! Name's Derris, and I'm the assistant of the Maester."
-
-[node name="dialog#assistant#1,2" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "And that must be you!"
-
-[node name="dialog#maester#2" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "maester"
-dialog = "Indeed."
-
-[node name="dialog#assistant#2,1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "Last Maester was so nice to me! She taught me a lot about the craft!"
-
-[node name="dialog#assistant#2,2" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "And I'm eager to keep learning!"
-
-[node name="dialog#maester#3" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "maester"
-dialog = "If you like this job that much, why don't you do it for me?"
-
-[node name="dialog#assistant#3,1" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "Sorry, Maester. I'm not allowed to help you during the first days."
-
-[node name="dialog#assistant#3,2" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "By... Royal Decree."
-
-[node name="dialog#maester#4" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "maester"
-dialog = "What...?"
-
-[node name="dialog#assistant#4" type="Node" parent="Story/Start/talk#intro"]
-script = ExtResource( 9 )
-speaker = "assistant"
-dialog = "But I'll be your guide in the meantime! Just ask me anything!"
+[node name="Start" parent="Story" instance=ExtResource( 5 )]
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]

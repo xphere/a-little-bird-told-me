@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+[ext_resource path="res://modules/action/serial.gd" type="Script" id=2]
+[ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=3]
+[ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=5]
+[ext_resource path="res://src/actions/info.gd" type="Script" id=6]
+[ext_resource path="res://src/actions/to-maildesk.gd" type="Script" id=7]
+[ext_resource path="res://src/actions/letter.gd" type="Script" id=8]
+[ext_resource path="res://src/actions/cast-character.gd" type="Script" id=9]
+[ext_resource path="res://src/actions/to-screen.gd" type="Script" id=10]
+[ext_resource path="res://src/actions/dialog.gd" type="Script" id=11]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+letter_id = "letter#their-majesties#1"
+letter_name = "Welcome letter from Their Majesties"
+letter_contents = "Congratulations!
+
+Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
+
+From the time present your presence will be required at The Watchtower to take care of the Royal Flock.
+
+Signed:
+Their Royal Majesties of Earauthain
+
+B.A.R."
+
+[node name="Start" type="Node"]
+script = ExtResource( 2 )
+
+[node name="letter#intro" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="letter#their-majesties#1" type="Node" parent="letter#intro"]
+script = ExtResource( 8 )
+letter_resource = SubResource( 1 )
+
+[node name="to-maildesk#their-majesties#1" type="Node" parent="letter#intro"]
+script = ExtResource( 7 )
+letter_path = NodePath("../letter#their-majesties#1")
+
+[node name="to-screen#mail-desk#1" type="Node" parent="letter#intro"]
+script = ExtResource( 10 )
+screen_name = "MailDesk"
+
+[node name="info#1" type="Node" parent="letter#intro"]
+script = ExtResource( 6 )
+information = "Left click to interact"
+
+[node name="wait#closed#letter-their-majesties#1" type="Node" parent="."]
+script = ExtResource( 3 )
+path = NodePath("../letter#intro/letter#their-majesties#1")
+signal_name = "closed"
+
+[node name="introduce#maester" type="Node" parent="."]
+script = ExtResource( 9 )
+character_name = "maester"
+
+[node name="hide#assistant" type="Node" parent="."]
+script = ExtResource( 9 )
+character_name = "assistant"
+is_leaving = true
+
+[node name="to-screen#tower#1" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="talk#intro" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="dialog#maester#1" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "maester"
+dialog = "Hmm..."
+
+[node name="info#1" type="Node" parent="talk#intro"]
+script = ExtResource( 6 )
+information = "KNOCK! KNOCK!"
+
+[node name="introduce#assistant" type="Node" parent="talk#intro"]
+script = ExtResource( 9 )
+character_name = "assistant"
+
+[node name="dialog#assistant#1,1" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Good morning! Name's Derris, and I'm the assistant of the Maester."
+
+[node name="dialog#assistant#1,2" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "And that must be you!"
+
+[node name="dialog#maester#2" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "maester"
+dialog = "Indeed."
+
+[node name="dialog#assistant#2,1" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Last Maester was so nice to me! She taught me a lot about the craft!"
+
+[node name="dialog#assistant#2,2" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "And I'm eager to keep learning!"
+
+[node name="dialog#maester#3" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "maester"
+dialog = "If you like this job that much, why don't you do it for me?"
+
+[node name="dialog#assistant#3,1" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Sorry, Maester. I'm not allowed to help you during the first days."
+
+[node name="dialog#assistant#3,2" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "By... Royal Decree."
+
+[node name="dialog#maester#4" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "maester"
+dialog = "What...?"
+
+[node name="dialog#assistant#4" type="Node" parent="talk#intro"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "But I'll be your guide in the meantime! Just ask me anything!"
+
+[node name="info#2" type="Node" parent="talk#intro"]
+script = ExtResource( 6 )
+information = "Right click to ask for help"

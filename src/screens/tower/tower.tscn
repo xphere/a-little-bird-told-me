@@ -65,8 +65,59 @@ scale = Vector2( -1, 1 )
 [node name="Assistant" parent="." instance=ExtResource( 3 )]
 position = Vector2( 185, 185 )
 
-[node name="on-help-request" type="Node" parent="Assistant"]
+[node name="on-interact" type="Node" parent="Assistant"]
 script = ExtResource( 10 )
+
+[node name="dialog#1" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "How may I assist you, Maester?"
+
+[node name="dialog#2" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "Anything I can do for you, Maester?"
+
+[node name="dialog#3" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "I'm willing to help, Maester!"
+
+[node name="dialog#4" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "I hope to live up to your expectations, Maester..."
+
+[node name="dialog#5" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "Can I help you, Maester?"
+
+[node name="dialog#6" type="Node" parent="Assistant/on-interact"]
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+speaker = "assistant"
+dialog = "I wish I could be of more use to you, Maester."
+
+[node name="on-help-request" type="Node" parent="Assistant"]
+script = ExtResource( 8 )
 
 [node name="dialog#1" type="Node" parent="Assistant/on-help-request"]
 script = ExtResource( 6 )
@@ -81,9 +132,14 @@ dialog = "I've been learning the craft for more than two years already."
 [node name="dialog#3" type="Node" parent="Assistant/on-help-request"]
 script = ExtResource( 6 )
 speaker = "assistant"
-dialog = "I'm going to make my parents proud!"
+dialog = "I was the best student of the former Maester!"
 
 [node name="dialog#4" type="Node" parent="Assistant/on-help-request"]
 script = ExtResource( 6 )
 speaker = "assistant"
-dialog = "I wish I could be of more use to you, Maester."
+dialog = "In fact I was also her only student..."
+
+[node name="dialog#5" type="Node" parent="Assistant/on-help-request"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "I'm going to make my parents proud anyway!"

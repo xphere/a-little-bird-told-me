@@ -42,22 +42,13 @@ func has_stacked_screen() -> bool:
 
 var _letters := {}
 
-func register_letter(letter: Node) -> Node:
+func register_letter(letter: Resource) -> void:
 	_letters[letter.letter_id] = letter
-	return letter
 
 
-func move_letter_to_mail_desk(letter_id: String) -> Node:
-	var node = _letters[letter_id]
-	var letter_scene := preload("res://src/objects/letters/letter.tscn") as PackedScene
-	var letter := letter_scene.instance() as Node2D
-	letter.connect("closed", node, "emit_signal", ["closed"], CONNECT_DEFERRED)
-	letter.id = letter_id
-	letter.letter_name = node.letter_name
-	letter.letter_content = node.letter_contents
+func add_to_maildesk(letter: Node2D) -> void:
 	letter.global_position = Vector2(rand_range(40, 256 - 40), rand_range(15, 240 - 15))
 	$MailDesk.add_child(letter)
-	return letter
 
 
 func context(name: String):
@@ -165,29 +156,33 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 
 
 func _on_Cursor_interact(node: CollisionObject2D) -> void:
-	if node.has_node("on-interact"):
-		var interact_node := node.get_node("on-interact") as Action
-		interact_node and interact_node.execute()
-
-	elif node.has_method("on_interact"):
-		node.on_interact()
-
-	elif _current_screen and _current_screen.has_method("on_interact"):
-		_current_screen.on_interact(node)
+	_try_interactions(node, "on-interact", "on_interact")
 
 
 func _on_Cursor_help(node: CollisionObject2D) -> void:
+	_try_interactions(node, "on-help-request", "on_help_request")
+
+
+func _try_interactions(node: Node, child_name: String, method_name: String) -> void:
 	$Cursor.lock(true)
 
-	if node.has_node("on-help-request"):
-		var help_node := node.get_node("on-help-request") as Action
-		help_node and yield(help_node.execute(), "completed")
+	var ref_signal : GDScriptFunctionState
 
-	elif node.has_method("on_help_request"):
-		yield(node.on_help_request(), "completed")
+	if node.has_node(child_name):
+		var child_node := node.get_node(child_name) as Action
+		if child_node:
+			ref_signal = RefSignal.as_async(child_node.execute())
 
-	elif _current_screen and _current_screen.has_method("on_help_request"):
-		yield(_current_screen.on_help_request(node), "completed")
+	elif node.has_method(method_name):
+		ref_signal = RefSignal.as_async(node.call(method_name))
+
+	elif _current_screen and _current_screen.has_method(method_name):
+		ref_signal = RefSignal.as_async(
+			_current_screen.call(method_name, node)
+		)
+
+	if ref_signal:
+		yield(ref_signal, "completed")
 
 	$Cursor.lock(false)
 
