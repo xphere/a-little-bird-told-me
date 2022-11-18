@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://modules/action/action.gd"
 }, {
+"base": "Reference",
+"class": "NodeUtils",
+"language": "GDScript",
+"path": "res://modules/nodes/node-utils.gd"
+}, {
 "base": "Object",
 "class": "RefSignal",
 "language": "GDScript",
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Action": "",
+"NodeUtils": "",
 "RefSignal": "",
 "ResourceSignal": "",
 "Selectable": ""

@@ -3,12 +3,7 @@ extends Node
 
 
 func _enter_tree() -> void:
-	var node : Node = self
-	var iterations := 0
-	while node.owner:
-		iterations += 1
-		node = node.owner
-	owner = node
+	owner = NodeUtils.top_owner(self)
 
 
 func execute() -> void:
