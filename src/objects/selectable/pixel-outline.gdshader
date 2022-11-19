@@ -6,6 +6,7 @@ uniform bool is_v8 = false;
 uniform vec4 border_color : hint_color = vec4(vec3(1.0), 1.0);
 uniform float alpha_threshold : hint_range(0.0, 1.0, 0.001) = 0.75;
 uniform float neighbourhood_threshold : hint_range(0.0, 1.0, 0.001) = 0.75;
+uniform vec4 texture_color : hint_color = vec4(vec3(1.0), 1.0);
 
 void vertex() {
 	vec2 scale = vec2(1.0) + 2.0 * TEXTURE_PIXEL_SIZE;
@@ -57,6 +58,6 @@ void fragment() {
 	if (enabled && is_transparent(color) && is_border(uv)) {
 		COLOR = outline(uv, color, TEXTURE, TEXTURE_PIXEL_SIZE);
 	} else {
-		COLOR = color;
+		COLOR = color * texture_color;
 	}
 }

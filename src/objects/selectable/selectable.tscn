@@ -11,6 +11,7 @@ shader_param/is_v8 = false
 shader_param/border_color = Color( 1, 1, 1, 1 )
 shader_param/alpha_threshold = 0.75
 shader_param/neighbourhood_threshold = 0.75
+shader_param/texture_color = Color( 1, 1, 1, 1 )
 
 [node name="Selectable" type="Area2D"]
 script = ExtResource( 1 )
