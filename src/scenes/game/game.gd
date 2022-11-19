@@ -32,7 +32,19 @@ func cursor_lock(lock: bool) -> void:
 	$Cursor.lock(lock)
 
 func discover(topic: String) -> void:
-	pass
+	var value = null
+	var split = topic.split(":", false, 1)
+	if split.size() < 2:
+		$Context.set_if_higher(topic, 0)
+		return
+
+	topic = split[0]
+	value = split[1]
+	if value.is_valid_integer():
+		$Context.set_if_higher(topic, value.to_int())
+	else:
+		$Context.set_flag(topic, value)
+
 
 func _ready() -> void:
 	$Story.execute()
