@@ -1,15 +1,16 @@
-extends "expression.gd"
+extends "native-expression.gd"
 
 var _if : Node
 var _else : Node
 
 
 func _ready() -> void:
-	_if = $"if" if has_node("if") else null
-	_else = $"else" if has_node("else") else null
+	var child_count := get_child_count()
+	_if = get_child(0) if child_count > 0 else null
+	_else = get_child(1) if child_count > 1 else null
 
 
 func execute() -> void:
-	var result = _execute_expression()
-	var branch := _else if result == false or result == null else _if
+	var result = evaluate()
+	var branch := _else if not result else _if
 	yield(RefSignal.as_async(branch.execute() if branch else null), "completed")

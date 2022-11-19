@@ -1,8 +1,8 @@
-extends "expression.gd"
+extends "native-expression.gd"
 
 
 func execute() -> void:
-	var result = _execute_expression()
+	var result = evaluate()
 	if not result:
 		return
 
