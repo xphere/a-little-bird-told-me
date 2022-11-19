@@ -14,7 +14,6 @@ shader_param/alpha_threshold = 0.75
 shader_param/neighbourhood_threshold = 0.75
 
 [node name="MailDesk" instance=ExtResource( 1 )]
-position = Vector2( 0, 0 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 1 )
