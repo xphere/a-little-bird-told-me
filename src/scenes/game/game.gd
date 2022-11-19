@@ -31,6 +31,8 @@ func info(text: String, wait_input := true) -> void:
 func cursor_lock(lock: bool) -> void:
 	$Cursor.lock(lock)
 
+func discover(topic: String) -> void:
+	pass
 
 func _ready() -> void:
 	$Story.execute()

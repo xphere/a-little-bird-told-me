@@ -32,7 +32,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 248.0
 margin_bottom = 232.0
-custom_constants/margin_right = 8
+custom_constants/margin_right = 6
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
@@ -40,14 +40,19 @@ custom_constants/margin_bottom = 8
 [node name="Content" type="Control" parent="Margins"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 232.0
+margin_right = 234.0
 margin_bottom = 216.0
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Label" type="Label" parent="Margins/Content"]
+[node name="Text" type="RichTextLabel" parent="Margins/Content"]
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-autowrap = true
+rect_clip_content = false
+custom_constants/line_separation = 3
+bbcode_enabled = true
+scroll_active = false
+
+[connection signal="meta_clicked" from="Margins/Content/Text" to="." method="_on_Label_meta_clicked"]
