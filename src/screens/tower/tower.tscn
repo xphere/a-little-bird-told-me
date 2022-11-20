@@ -154,7 +154,7 @@ script = ExtResource( 15 )
 
 [node name="if there is a known bird" type="Node" parent="Window/on-help-request"]
 script = ExtResource( 16 )
-expression_contents = "context(\"bird\") and context(\"bird\").is_known"
+expression_contents = "context(\"bird\").is_known"
 
 [node name="dialog#known-bird" type="Node" parent="Window/on-help-request/if there is a known bird"]
 script = ExtResource( 6 )
