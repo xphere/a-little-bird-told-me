@@ -85,6 +85,12 @@ func _input(event: InputEvent) -> void:
 	if mouse_event.button_index != BUTTON_LEFT:
 		return
 
+	if not visible:
+		set_process_input(false)
+		return
+
+	get_tree().set_input_as_handled()
+
 	if _is_fully_shown():
 		emit_signal("completed")
 	else:
