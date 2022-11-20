@@ -1,5 +1,8 @@
 extends Control
 
+signal on_help_request(element)
+signal on_interact(element)
+
 
 var _current_screen : CanvasItem
 var _screens_stack := []
@@ -220,6 +223,7 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 	if ref_signal:
 		yield(ref_signal, "completed")
 
+	emit_signal(method_name, node)
 	unlock(lock)
 
 
