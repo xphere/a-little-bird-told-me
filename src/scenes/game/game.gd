@@ -31,19 +31,20 @@ func info(text: String, wait_input := true) -> void:
 func cursor_lock(lock: bool) -> void:
 	$Cursor.lock(lock)
 
-func discover(topic: String) -> void:
-	var value = null
-	var split = topic.split(":", false, 1)
-	if split.size() < 2:
-		$Context.set_if_higher(topic, 0)
-		return
-
-	topic = split[0]
-	value = split[1]
-	if value.is_valid_integer():
+func discover(url: String) -> void:
+	var split = url.split(":", false, 1)
+	var topic = split[0] if split.size() > 1 else url
+	var value = split[1] if split.size() > 1 else "0"
+	if  value.is_valid_integer():
 		$Context.set_if_higher(topic, value.to_int())
 	else:
 		$Context.set_flag(topic, value)
+
+	var action : Action = $Topics.topic(topic)
+	if action:
+		$Cursor.lock(true)
+		yield(RefSignal.as_async(action.execute()), "completed")
+		$Cursor.lock(false)
 
 
 func _ready() -> void:
