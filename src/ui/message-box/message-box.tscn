@@ -42,9 +42,6 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 234.0
 margin_bottom = 216.0
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Text" type="RichTextLabel" parent="Margins/Content"]
 unique_name_in_owner = true

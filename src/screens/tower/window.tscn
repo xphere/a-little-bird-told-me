@@ -19,9 +19,6 @@ shader_param/texture_color = Color( 1, 1, 1, 0 )
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 3 )
 texture = ExtResource( 3 )
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Shape" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PoolVector2Array( 3, -18.8, 7, -14.8, 7, -11.4, 11, -2.4, 11, 4, 13.3, 20, -14, 20, -14, 3.9, -11.7, -12, -10.5, -12, -8.5, -19, -6.5, -19, -6, -19.2, -6, -21, 3, -21 )

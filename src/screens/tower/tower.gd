@@ -1,5 +1,12 @@
 extends Control
 
+signal bird_arrived(bird)
+signal bird_picked(bird)
+
+var _birds := []
+var _current_bird : Node2D
+
+
 func _ready() -> void:
 	owner.cast("maester", $Maester)
 	owner.cast("assistant", $Assistant)
@@ -7,3 +14,15 @@ func _ready() -> void:
 
 func on_enter() -> void:
 	show()
+
+
+func bird_arrives(bird: Node2D) -> void:
+	_birds.push_back(bird)
+	update_birds()
+
+
+func update_birds() -> void:
+	if not _current_bird and not _birds.empty():
+		_current_bird = _birds.pop_front() as Node2D
+		$"Window/Bird".add_child(_current_bird)
+		emit_signal("bird_arrived", _current_bird.bird_resource)

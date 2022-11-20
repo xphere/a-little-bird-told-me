@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/screens/tower/sky.png" type="Texture" id=11]
 [ext_resource path="res://src/screens/tower/window.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/screens/tower/sky.gdshader" type="Shader" id=13]
+[ext_resource path="res://src/screens/tower/window.gd" type="Script" id=14]
 [ext_resource path="res://modules/action/first-match.gd" type="Script" id=15]
 [ext_resource path="res://modules/action/branch.gd" type="Script" id=16]
 
@@ -143,45 +144,33 @@ dialog = "I'm going to make my parents proud anyway!"
 
 [node name="Window" parent="." instance=ExtResource( 12 )]
 position = Vector2( 52, 114 )
+script = ExtResource( 14 )
+
+[node name="Bird" type="Position2D" parent="Window"]
+position = Vector2( 0, 20 )
 
 [node name="on-help-request" type="Node" parent="Window"]
 script = ExtResource( 15 )
 
-[node name="if there is a bird" type="Node" parent="Window/on-help-request"]
+[node name="if there is a known bird" type="Node" parent="Window/on-help-request"]
+script = ExtResource( 16 )
+expression_contents = "context(\"bird\") and context(\"bird\").is_known"
+
+[node name="dialog#known-bird" type="Node" parent="Window/on-help-request/if there is a known bird"]
+script = ExtResource( 6 )
+speaker = "assistant"
+dialog = "{{context(\"bird\").name}} is in the window, Maester"
+
+[node name="if there is an unknown bird" type="Node" parent="Window/on-help-request"]
 script = ExtResource( 16 )
 expression_contents = "context(\"bird\")"
 
-[node name="one-of" type="Node" parent="Window/on-help-request/if there is a bird"]
-script = ExtResource( 10 )
-
-[node name="dialog#1" type="Node" parent="Window/on-help-request/if there is a bird/one-of"]
+[node name="dialog#unknown-bird" type="Node" parent="Window/on-help-request/if there is an unknown bird"]
 script = ExtResource( 6 )
 speaker = "assistant"
-dialog = "There's a bird waiting for you, Maester"
-
-[node name="dialog#2" type="Node" parent="Window/on-help-request/if there is a bird/one-of"]
-script = ExtResource( 6 )
-speaker = "assistant"
-dialog = "There's a bird waiting for you, Maester"
-
-[node name="if it is dawn" type="Node" parent="Window/on-help-request"]
-script = ExtResource( 16 )
-expression_contents = "context(\"time\") == \"dawn\""
-
-[node name="one-of" type="Node" parent="Window/on-help-request/if it is dawn"]
-script = ExtResource( 10 )
-
-[node name="dialog#1" type="Node" parent="Window/on-help-request/if it is dawn/one-of"]
-script = ExtResource( 6 )
-speaker = "assistant"
-dialog = "It's dawn"
-
-[node name="dialog#2" type="Node" parent="Window/on-help-request/if it is dawn/one-of"]
-script = ExtResource( 6 )
-speaker = "assistant"
-dialog = "Soon it will be sleepy time"
+dialog = "There's a bird in the window, Maester"
 
 [node name="dialog#default" type="Node" parent="Window/on-help-request"]
 script = ExtResource( 6 )
 speaker = "assistant"
-dialog = "Nice window"
+dialog = "Nice views from here"

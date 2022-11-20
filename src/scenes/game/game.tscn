@@ -46,6 +46,8 @@ expression_contents = "\"Day#%d\" % context(\"day\", 0)"
 [node name="Topics" type="Node" parent="."]
 script = ExtResource( 17 )
 
+[connection signal="bird_arrived" from="Tower" to="." method="_on_Tower_bird_arrived"]
+[connection signal="bird_picked" from="Tower" to="." method="_on_Tower_bird_picked"]
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]
 [connection signal="interact" from="Cursor" to="." method="_on_Cursor_interact"]

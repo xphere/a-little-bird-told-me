@@ -47,6 +47,15 @@ func discover(url: String) -> void:
 		$Cursor.lock(false)
 
 
+var _birds := {}
+
+func register_bird(bird_resource: Resource) -> void:
+	_birds[bird_resource.name] = bird_resource
+
+func bird_arrives(bird: Node2D) -> void:
+	$Tower.bird_arrives(bird)
+
+
 func _ready() -> void:
 	$Story.execute()
 
@@ -198,3 +207,11 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 func _set_current_screen(next_screen: Node) -> void:
 	_current_screen = next_screen
 	$Cursor.set_context(_current_screen)
+
+
+func _on_Tower_bird_arrived(bird: Resource) -> void:
+	set_context("bird", bird)
+
+
+func _on_Tower_bird_picked(bird: Resource) -> void:
+	set_context("bird", null)
