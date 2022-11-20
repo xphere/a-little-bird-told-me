@@ -2,7 +2,7 @@ extends "native-expression.gd"
 
 
 func execute() -> void:
-	var result = evaluate()
+	var result = str(evaluate())
 	if not result:
 		return
 
