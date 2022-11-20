@@ -31,7 +31,9 @@ func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
 	$Cursor.lock(false)
 
 func info(text: String, wait_input := true) -> void:
+	$Cursor.lock(true)
 	yield($DialogBox.info(text, wait_input), "completed")
+	$Cursor.lock(false)
 
 var _lock : Resource
 
