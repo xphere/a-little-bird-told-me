@@ -69,6 +69,10 @@ func context(name: String, default_value = null):
 	return $Context.context(name, default_value)
 
 
+func set_context(name: String, value):
+	$Context.set_value(name, value)
+
+
 func consume_context(name: String, default_value = null):
 	return $Context.consume_context(name, default_value)
 
