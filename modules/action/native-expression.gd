@@ -1,5 +1,6 @@
 extends "expression.gd"
 
+export var base_path : NodePath
 export(String, MULTILINE) var expression_contents := ""
 
 var _expression := Expression.new()
@@ -10,12 +11,9 @@ func _ready() -> void:
 		push_error(_expression.get_error_text())
 
 
-func context(name: String, default_value = null):
-	return owner.context(name, default_value)
-
-
 func evaluate():
-	var result = _expression.execute([], self)
+	var instance : Node = get_node(base_path) if base_path else owner
+	var result = _expression.execute([], instance, false)
 	if _expression.has_execute_failed():
 		return null
 
