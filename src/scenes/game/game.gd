@@ -23,13 +23,33 @@ func sound(name: String, pitch := 1.0) -> void:
 	print([ "sound", name, pitch ])
 
 func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
+	$Cursor.lock(true)
 	yield($DialogBox.dialog(text, speaker, characters_per_sec), "completed")
+	$Cursor.lock(false)
 
 func info(text: String, wait_input := true) -> void:
 	yield($DialogBox.info(text, wait_input), "completed")
 
-func cursor_lock(lock: bool) -> void:
-	$Cursor.lock(lock)
+var _lock : Resource
+
+func is_unlocked() -> bool:
+	return not $Cursor.is_locked()
+
+func lock() -> Resource:
+	var previous := _lock
+	_lock = Resource.new()
+	if previous:
+		yield(previous, "changed")
+	else:
+		yield(RefSignal.to_async(), "completed")
+	$Cursor.lock(true)
+	return _lock
+
+func unlock(lock: Resource) -> void:
+	if _lock == lock:
+		_lock = null
+	$Cursor.lock(false)
+	lock.emit_changed()
 
 func discover(url: String) -> void:
 	var split = url.split(":", false, 1)
@@ -42,9 +62,9 @@ func discover(url: String) -> void:
 
 	var action : Action = $Topics.topic(topic)
 	if action:
-		$Cursor.lock(true)
+		var lock = yield(lock(), "completed")
 		yield(RefSignal.as_async(action.execute()), "completed")
-		$Cursor.lock(false)
+		unlock(lock)
 
 
 var _birds := {}
@@ -181,8 +201,7 @@ func _on_Cursor_help(node: CollisionObject2D) -> void:
 
 
 func _try_interactions(node: Node, child_name: String, method_name: String) -> void:
-	$Cursor.lock(true)
-
+	var lock = yield(lock(), "completed")
 	var ref_signal : GDScriptFunctionState
 
 	if node.has_node(child_name):
@@ -201,7 +220,7 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 	if ref_signal:
 		yield(ref_signal, "completed")
 
-	$Cursor.lock(false)
+	unlock(lock)
 
 
 func _set_current_screen(next_screen: Node) -> void:

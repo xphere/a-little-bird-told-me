@@ -22,15 +22,19 @@ func set_context(context: Node) -> void:
 	set_process(_context != null)
 
 
+func is_locked() -> bool:
+	return _locks > 0
+
+
 func lock(lock: bool) -> void:
 	_locks = max(0, _locks + 1 if lock else -1)
-	if _locks == 0:
-		set_process(true)
-	else:
+	if is_locked():
 		if _dragging:
 			emit_signal("drop", _dragging)
 			_dragging = null
 		_pressed = null
+	else:
+		set_process(true)
 
 
 func _process(_delta: float) -> void:
@@ -61,7 +65,7 @@ func _check_selected_element() -> void:
 
 
 func _get_objects_intersected() -> Array:
-	if _locks > 0:
+	if is_locked():
 		set_process(false)
 		return []
 
