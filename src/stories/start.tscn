@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=2]
 [ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=3]
+[ext_resource path="res://modules/action/interval.gd" type="Script" id=4]
 [ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=5]
 [ext_resource path="res://src/actions/info.gd" type="Script" id=6]
 [ext_resource path="res://src/actions/to-maildesk.gd" type="Script" id=7]
@@ -10,6 +11,13 @@
 [ext_resource path="res://src/actions/cast-character.gd" type="Script" id=9]
 [ext_resource path="res://src/actions/to-screen.gd" type="Script" id=10]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=11]
+[ext_resource path="res://modules/action/sequential.gd" type="Script" id=12]
+[ext_resource path="res://modules/action/stop-interval.gd" type="Script" id=13]
+[ext_resource path="res://modules/action/restart-interval.gd" type="Script" id=14]
+[ext_resource path="res://modules/action/branch.gd" type="Script" id=15]
+[ext_resource path="res://src/resources/bird.gd" type="Script" id=16]
+[ext_resource path="res://src/actions/bird-arrives.gd" type="Script" id=17]
+[ext_resource path="res://src/actions/bird.gd" type="Script" id=18]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 1 )
@@ -26,43 +34,53 @@ Their Royal Majesties of Earauthain
 
 B.A.R."
 
+[sub_resource type="Resource" id=2]
+script = ExtResource( 16 )
+name = "WhiteHead"
+energy = 100
+is_known = false
+type = 0
+
 [node name="Start" type="Node"]
 script = ExtResource( 2 )
 
-[node name="letter#intro" type="Node" parent="."]
-script = ExtResource( 5 )
+[node name="letter#welcome" type="Node" parent="."]
+script = ExtResource( 2 )
 
-[node name="letter#their-majesties#1" type="Node" parent="letter#intro"]
+[node name="letter#their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 8 )
 letter_resource = SubResource( 1 )
 
-[node name="to-maildesk#their-majesties#1" type="Node" parent="letter#intro"]
+[node name="to-maildesk#their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 7 )
 letter_path = NodePath("../letter#their-majesties#1")
 
-[node name="to-screen#mail-desk#1" type="Node" parent="letter#intro"]
+[node name="to-screen#mail-desk#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 10 )
 screen_name = "MailDesk"
 
-[node name="info#1" type="Node" parent="letter#intro"]
+[node name="info#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 6 )
 information = "Left click to interact"
 
-[node name="wait#closed#letter-their-majesties#1" type="Node" parent="."]
+[node name="wait#closed#letter-their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 3 )
-path = NodePath("../letter#intro/letter#their-majesties#1")
+path = NodePath("../letter#their-majesties#1")
 signal_name = "closed"
 
-[node name="introduce#maester" type="Node" parent="."]
+[node name="introduce#tower" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="introduce#maester" type="Node" parent="introduce#tower"]
 script = ExtResource( 9 )
 character_name = "maester"
 
-[node name="hide#assistant" type="Node" parent="."]
+[node name="hide#assistant" type="Node" parent="introduce#tower"]
 script = ExtResource( 9 )
 character_name = "assistant"
 is_leaving = true
 
-[node name="to-screen#tower#1" type="Node" parent="."]
+[node name="to-screen#tower#1" type="Node" parent="introduce#tower"]
 script = ExtResource( 10 )
 
 [node name="talk#intro" type="Node" parent="."]
@@ -134,3 +152,95 @@ dialog = "But I'll be your guide in the meantime! Just ask me anything!"
 [node name="info#2" type="Node" parent="talk#intro"]
 script = ExtResource( 6 )
 information = "Right click to ask for help"
+
+[node name="learn#on_help_request" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="interval#remember-help-request" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 4 )
+every_sec = 10
+
+[node name="if#unlocked" type="Node" parent="learn#on_help_request/interval#remember-help-request"]
+script = ExtResource( 15 )
+expression_contents = "is_unlocked()"
+
+[node name="dialogs" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked"]
+script = ExtResource( 12 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Please! I want to be helpful!"
+
+[node name="dialog#2" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Try me, Maester!"
+
+[node name="dialog#3" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Don't you trust in my vast knowledge?"
+
+[node name="dialog#4" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Now this is boring..."
+
+[node name="dialog#5" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
+script = ExtResource( 2 )
+
+[node name="info#1" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs/dialog#5"]
+script = ExtResource( 6 )
+information = "Right click to ask for help"
+
+[node name="dialog" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs/dialog#5"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "What was that?"
+
+[node name="wait#on_help_request#1" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 3 )
+signal_name = "on_help_request"
+
+[node name="restart-interval#remember-help-request#1" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 14 )
+interval_path = NodePath("../interval#remember-help-request")
+
+[node name="wait#on_help_request#2" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 3 )
+signal_name = "on_help_request"
+
+[node name="restart-interval#remember-help-request#2" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 14 )
+interval_path = NodePath("../interval#remember-help-request")
+
+[node name="wait#on_help_request#3" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 3 )
+signal_name = "on_help_request"
+
+[node name="stop-interval#remember-help-request" type="Node" parent="learn#on_help_request"]
+script = ExtResource( 13 )
+interval_path = NodePath("../interval#remember-help-request")
+
+[node name="learn#bird" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="bird#1" type="Node" parent="learn#bird"]
+script = ExtResource( 18 )
+bird_resource = SubResource( 2 )
+
+[node name="bird-arrives#1" type="Node" parent="learn#bird"]
+script = ExtResource( 17 )
+bird_path = NodePath("../bird#1")
+
+[node name="dialog#assistant#1" type="Node" parent="learn#bird"]
+script = ExtResource( 11 )
+speaker = "assistant"
+dialog = "Oh look! A bird from the Royal Flock has arrived!"
+
+[node name="dialog#maester#1" type="Node" parent="learn#bird"]
+script = ExtResource( 11 )
+speaker = "maester"
+dialog = "Time to work!"
