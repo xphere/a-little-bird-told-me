@@ -1,4 +1,4 @@
-extends "native-expression.gd"
+extends ActionNativeExpression
 
 
 func execute() -> void:

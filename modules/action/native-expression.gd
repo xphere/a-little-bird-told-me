@@ -1,4 +1,5 @@
-extends "expression.gd"
+class_name ActionNativeExpression
+extends ActionExpression
 
 export var base_path : NodePath
 export(String, MULTILINE) var expression_contents := ""

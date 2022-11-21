@@ -1,4 +1,4 @@
-extends "res://modules/action/native-expression.gd"
+extends ActionNativeExpression
 
 export var context_name : String
 

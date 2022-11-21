@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://modules/action/action.gd"
 }, {
-"base": "",
+"base": "ActionNativeExpression",
 "class": "ActionBranch",
 "language": "GDScript",
 "path": "res://modules/action/branch.gd"
@@ -29,10 +29,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actions/discover.gd"
 }, {
-"base": "",
+"base": "Action",
+"class": "ActionExpression",
+"language": "GDScript",
+"path": "res://modules/action/expression.gd"
+}, {
+"base": "ActionExpression",
 "class": "ActionFirstMatch",
 "language": "GDScript",
 "path": "res://modules/action/first-match.gd"
+}, {
+"base": "ActionExpression",
+"class": "ActionNativeExpression",
+"language": "GDScript",
+"path": "res://modules/action/native-expression.gd"
 }, {
 "base": "Action",
 "class": "ActionOneOf",
@@ -90,11 +100,13 @@ _global_script_classes=[ {
 "path": "res://src/objects/selectable/selectable.gd"
 } ]
 _global_script_class_icons={
-"Action": "",
+"Action": "res://modules/action/action.icon.png",
 "ActionBranch": "res://modules/action/branch.icon.png",
 "ActionDialog": "res://src/actions/dialog.icon.png",
 "ActionDiscover": "res://src/actions/discover.icon.png",
+"ActionExpression": "res://modules/action/expression.icon.png",
 "ActionFirstMatch": "res://modules/action/first-match.icon.png",
+"ActionNativeExpression": "",
 "ActionOneOf": "res://modules/action/one-of.icon.png",
 "ActionParallel": "res://modules/action/parallel.icon.png",
 "ActionPushScreen": "res://src/actions/to-screen.icon.png",

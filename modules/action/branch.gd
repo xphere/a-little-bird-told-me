@@ -1,5 +1,5 @@
 class_name ActionBranch, "branch.icon.png"
-extends "native-expression.gd"
+extends ActionNativeExpression
 
 var _if : Node
 var _else : Node

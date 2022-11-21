@@ -1,4 +1,4 @@
-class_name Action
+class_name Action, "action.icon.png"
 extends Node
 
 

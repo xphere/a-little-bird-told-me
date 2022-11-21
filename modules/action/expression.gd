@@ -1,3 +1,4 @@
+class_name ActionExpression, "expression.icon.png"
 extends Action
 
 
