@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/screens/tower/window.gd" type="Script" id=14]
 [ext_resource path="res://modules/action/first-match.gd" type="Script" id=15]
 [ext_resource path="res://modules/action/branch.gd" type="Script" id=16]
+[ext_resource path="res://src/actions/discover.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 13 )
@@ -149,12 +150,30 @@ script = ExtResource( 14 )
 [node name="Bird" type="Position2D" parent="Window"]
 position = Vector2( 0, 20 )
 
+[node name="on-interact" type="Node" parent="Window"]
+script = ExtResource( 15 )
+
+[node name="if there\'s a bird with a message" type="Node" parent="Window/on-interact"]
+script = ExtResource( 16 )
+base_path = NodePath("../..")
+expression_contents = "get_bird().carries"
+
+[node name="discover#messages" type="Node" parent="Window/on-interact/if there\'s a bird with a message"]
+script = ExtResource( 17 )
+topic = "messages"
+
+[node name="dialog#default" type="Node" parent="Window/on-interact"]
+script = ExtResource( 6 )
+speaker = "maester"
+dialog = "One can see the whole city from here."
+
 [node name="on-help-request" type="Node" parent="Window"]
 script = ExtResource( 15 )
 
 [node name="if there is a known bird" type="Node" parent="Window/on-help-request"]
 script = ExtResource( 16 )
-expression_contents = "context(\"bird\").is_known"
+base_path = NodePath("../..")
+expression_contents = "get_bird().is_known"
 
 [node name="dialog#known-bird" type="Node" parent="Window/on-help-request/if there is a known bird"]
 script = ExtResource( 6 )
@@ -163,7 +182,8 @@ dialog = "{{context(\"bird\").name}} is in the window, Maester"
 
 [node name="if there is an unknown bird" type="Node" parent="Window/on-help-request"]
 script = ExtResource( 16 )
-expression_contents = "context(\"bird\")"
+base_path = NodePath("../..")
+expression_contents = "has_bird()"
 
 [node name="dialog#unknown-bird" type="Node" parent="Window/on-help-request/if there is an unknown bird"]
 script = ExtResource( 6 )

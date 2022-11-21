@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actions/dialog.gd"
 }, {
+"base": "Action",
+"class": "ActionDiscover",
+"language": "GDScript",
+"path": "res://src/actions/discover.gd"
+}, {
 "base": "",
 "class": "ActionFirstMatch",
 "language": "GDScript",
@@ -49,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actions/to-screen.gd"
 }, {
+"base": "Resource",
+"class": "BirdResource",
+"language": "GDScript",
+"path": "res://src/resources/bird.gd"
+}, {
 "base": "Reference",
 "class": "NodeUtils",
 "language": "GDScript",
@@ -73,11 +83,13 @@ _global_script_class_icons={
 "Action": "",
 "ActionBranch": "res://modules/action/branch.icon.png",
 "ActionDialog": "res://src/actions/dialog.icon.png",
+"ActionDiscover": "res://src/actions/discover.icon.png",
 "ActionFirstMatch": "res://modules/action/first-match.icon.png",
 "ActionOneOf": "res://modules/action/one-of.icon.png",
 "ActionPushScreen": "res://src/actions/to-screen.icon.png",
 "ActionSequential": "res://modules/action/sequential.icon.png",
 "ActionToScreen": "res://src/actions/to-screen.icon.png",
+"BirdResource": "",
 "NodeUtils": "",
 "RefSignal": "",
 "ResourceSignal": "",

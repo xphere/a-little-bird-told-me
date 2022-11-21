@@ -1,3 +1,4 @@
+class_name BirdResource
 extends Resource
 
 enum BirdType {
