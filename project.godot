@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://modules/action/sequential.gd"
 }, {
 "base": "Action",
+"class": "ActionSerial",
+"language": "GDScript",
+"path": "res://modules/action/serial.gd"
+}, {
+"base": "Action",
 "class": "ActionToScreen",
 "language": "GDScript",
 "path": "res://src/actions/to-screen.gd"
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "ActionOneOf": "res://modules/action/one-of.icon.png",
 "ActionPushScreen": "res://src/actions/to-screen.icon.png",
 "ActionSequential": "res://modules/action/sequential.icon.png",
+"ActionSerial": "res://modules/action/serial.icon.png",
 "ActionToScreen": "res://src/actions/to-screen.icon.png",
 "BirdResource": "",
 "NodeUtils": "",

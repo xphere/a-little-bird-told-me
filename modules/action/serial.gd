@@ -1,3 +1,4 @@
+class_name ActionSerial, "serial.icon.png"
 extends Action
 
 
