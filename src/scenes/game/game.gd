@@ -68,7 +68,9 @@ func discover(url: String) -> void:
 		$Context.set_flag(topic, value)
 
 	var action : Action = $Topics.topic(topic)
-	if action:
+	if action and _lock:
+		yield(RefSignal.as_async(action.execute()), "completed")
+	elif action:
 		var lock = yield(lock(), "completed")
 		yield(RefSignal.as_async(action.execute()), "completed")
 		unlock(lock)
