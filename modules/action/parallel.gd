@@ -1,3 +1,4 @@
+class_name ActionParallel, "parallel.icon.png"
 extends Action
 
 

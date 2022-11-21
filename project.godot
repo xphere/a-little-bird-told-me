@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://modules/action/one-of.gd"
 }, {
 "base": "Action",
+"class": "ActionParallel",
+"language": "GDScript",
+"path": "res://modules/action/parallel.gd"
+}, {
+"base": "Action",
 "class": "ActionPushScreen",
 "language": "GDScript",
 "path": "res://src/actions/push-screen.gd"
@@ -91,6 +96,7 @@ _global_script_class_icons={
 "ActionDiscover": "res://src/actions/discover.icon.png",
 "ActionFirstMatch": "res://modules/action/first-match.icon.png",
 "ActionOneOf": "res://modules/action/one-of.icon.png",
+"ActionParallel": "res://modules/action/parallel.icon.png",
 "ActionPushScreen": "res://src/actions/to-screen.icon.png",
 "ActionSequential": "res://modules/action/sequential.icon.png",
 "ActionSerial": "res://modules/action/serial.icon.png",
