@@ -3,6 +3,8 @@ extends Control
 signal on_help_request(element)
 signal on_interact(element)
 
+export var current_day := 0
+
 
 var _current_screen : CanvasItem
 var _screens_stack := []
@@ -82,6 +84,9 @@ func bird_arrives(bird: Node2D) -> void:
 
 
 func _ready() -> void:
+	$Context.merge({
+		"day": current_day,
+	})
 	$Story.execute()
 
 
