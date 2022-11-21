@@ -1,3 +1,4 @@
+class_name ActionDialog, "dialog.icon.png"
 extends Action
 
 export var speaker := ""

@@ -1,3 +1,4 @@
+class_name ActionBranch, "branch.icon.png"
 extends "native-expression.gd"
 
 var _if : Node

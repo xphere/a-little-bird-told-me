@@ -1,3 +1,4 @@
+class_name ActionOneOf, "one-of.icon.png"
 extends Action
 
 var times := 0

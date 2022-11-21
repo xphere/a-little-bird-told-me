@@ -1,3 +1,4 @@
+class_name ActionSequential, "sequential.icon.png"
 extends Action
 
 export var loop := true

@@ -1,3 +1,4 @@
+class_name ActionFirstMatch, "first-match.icon.png"
 extends "expression.gd"
 
 const ActionExpression := preload("expression.gd")

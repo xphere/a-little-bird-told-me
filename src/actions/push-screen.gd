@@ -1,3 +1,4 @@
+class_name ActionPushScreen, "to-screen.icon.png"
 extends Action
 
 export var screen_name : String = ""
