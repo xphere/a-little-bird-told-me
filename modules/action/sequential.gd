@@ -7,7 +7,15 @@ var _current : Action
 
 
 func execute() -> void:
-	yield(RefSignal.as_async(_execute()), "completed")
+	_next_action()
+	yield(
+		RefSignal.as_async(
+			_current.execute()
+				if _current
+				else null
+		),
+		"completed"
+	)
 
 
 func _next_action() -> void:
@@ -34,8 +42,3 @@ func _find_next_action(current: Action) -> Action:
 		if next:
 			return next
 	return current
-
-
-func _execute() -> void:
-	_next_action()
-	_current and yield(_current.execute(), "completed")
