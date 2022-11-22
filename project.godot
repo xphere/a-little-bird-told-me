@@ -98,6 +98,11 @@ _global_script_classes=[ {
 "class": "Selectable",
 "language": "GDScript",
 "path": "res://src/objects/selectable/selectable.gd"
+}, {
+"base": "Object",
+"class": "StringUtils",
+"language": "GDScript",
+"path": "res://modules/strings/StringUtils.gd"
 } ]
 _global_script_class_icons={
 "Action": "res://modules/action/action.icon.png",
@@ -117,7 +122,8 @@ _global_script_class_icons={
 "NodeUtils": "",
 "RefSignal": "",
 "ResourceSignal": "",
-"Selectable": ""
+"Selectable": "",
+"StringUtils": ""
 }
 
 [application]
