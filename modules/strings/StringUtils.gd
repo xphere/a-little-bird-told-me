@@ -14,5 +14,5 @@ static func set_flag(value: String, flag: String) -> String:
 	)
 
 
-static func get_flag_count(value: String) -> int:
+static func flag_count(value: String) -> int:
 	return value.count(FLAG_SEP)

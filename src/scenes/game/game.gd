@@ -111,6 +111,14 @@ func context(name: String, default_value = null):
 	return $Context.context(name, default_value)
 
 
+func context_flag(name: String, flag: String) -> bool:
+	return $Context.context_flag(name, flag)
+
+
+func context_flag_count(name: String) -> int:
+	return $Context.context_flag_count(name)
+
+
 func set_context(name: String, value):
 	$Context.set_value(name, value)
 

@@ -8,11 +8,19 @@ func context(name: String, default_value = null):
 
 
 func context_flag(name: String, flag: String) -> bool:
-	return StringUtils.is_flag_set(_data[name], flag) if _data.has(name) else false
+	return (
+		StringUtils.is_flag_set(str(_data[name]), flag)
+		if _data.has(name)
+		else false
+	)
 
 
-func context_count(name: String) -> int:
-	return StringUtils.count_flags(str(_data[name])) if _data.has(name) else 0
+func context_flag_count(name: String) -> int:
+	return (
+		StringUtils.flag_count(str(_data[name]))
+		if _data.has(name)
+		else 0
+	)
 
 
 func consume_context(name: String, default_value = null):
