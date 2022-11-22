@@ -86,6 +86,7 @@ func bird_arrives(bird: Node2D) -> void:
 
 
 func _ready() -> void:
+	randomize()
 	$Context.merge({
 		"day": current_day,
 	})
