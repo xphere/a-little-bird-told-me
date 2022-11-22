@@ -61,7 +61,7 @@ func unlock(lock: Resource) -> void:
 func discover(url: String) -> void:
 	var split = url.split(":", false, 1)
 	var topic = split[0] if split.size() > 1 else url
-	var value = split[1] if split.size() > 1 else "0"
+	var value = split[1] if split.size() > 1 else ""
 	if  value.is_valid_integer():
 		$Context.set_if_higher(topic, value.to_int())
 	else:
