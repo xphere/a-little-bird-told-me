@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -9,12 +9,9 @@
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
 [ext_resource path="res://modules/action/match.gd" type="Script" id=9]
-[ext_resource path="res://modules/action/serial.gd" type="Script" id=11]
-[ext_resource path="res://src/scenes/game/topics.gd" type="Script" id=17]
+[ext_resource path="res://src/stories/topics.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/stories/debug.tscn" type="PackedScene" id=11]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
-[ext_resource path="res://src/actions/dialog.gd" type="Script" id=19]
-[ext_resource path="res://modules/action/action.gd" type="Script" id=20]
-[ext_resource path="res://modules/action/sequential.gd" type="Script" id=22]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -45,43 +42,11 @@ script = ExtResource( 18 )
 script = ExtResource( 9 )
 expression_contents = "\"Day#%d\" % context(\"day\", 0)"
 
+[node name="Day#-1" parent="Story" instance=ExtResource( 11 )]
+
 [node name="Day#0" parent="Story" instance=ExtResource( 5 )]
 
-[node name="Topics" type="Node" parent="."]
-script = ExtResource( 17 )
-
-[node name="messages" type="Node" parent="Topics"]
-script = ExtResource( 22 )
-loop = false
-
-[node name="0" type="Node" parent="Topics/messages"]
-script = ExtResource( 11 )
-
-[node name="dialog#1" type="Node" parent="Topics/messages/0"]
-script = ExtResource( 19 )
-speaker = "maester"
-dialog = "What's this in your leg?"
-
-[node name="dialog#2" type="Node" parent="Topics/messages/0"]
-script = ExtResource( 19 )
-speaker = "maester"
-dialog = "A letter?"
-
-[node name="dialog#3" type="Node" parent="Topics/messages/0"]
-script = ExtResource( 19 )
-speaker = "maester"
-dialog = "I'll leave it at the desk"
-
-[node name="1" type="Node" parent="Topics/messages"]
-script = ExtResource( 11 )
-
-[node name="dialog#1" type="Node" parent="Topics/messages/1"]
-script = ExtResource( 19 )
-speaker = "maester"
-dialog = "Another message? Let's see..."
-
-[node name="2" type="Node" parent="Topics/messages"]
-script = ExtResource( 20 )
+[node name="Topics" parent="." instance=ExtResource( 10 )]
 
 [connection signal="bird_arrived" from="Tower" to="." method="_on_Tower_bird_arrived"]
 [connection signal="bird_picked" from="Tower" to="." method="_on_Tower_bird_picked"]
