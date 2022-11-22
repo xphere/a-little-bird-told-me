@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://modules/action/action.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=2]
 [ext_resource path="res://modules/action/sequential.gd" type="Script" id=3]
 [ext_resource path="res://src/scenes/game/topics.gd" type="Script" id=4]
+[ext_resource path="res://modules/action/first-match.gd" type="Script" id=5]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=6]
+[ext_resource path="res://modules/action/branch.gd" type="Script" id=7]
+[ext_resource path="res://modules/action/random.gd" type="Script" id=8]
 
 [node name="Topics" type="Node"]
 script = ExtResource( 4 )
@@ -41,3 +44,125 @@ dialog = "Another message? Let's see..."
 
 [node name="2" type="Node" parent="messages"]
 script = ExtResource( 1 )
+
+[node name="inn-waiter" type="Node" parent="."]
+
+[node name="agreement" type="Node" parent="inn-waiter"]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "context(name)"
+}
+
+[node name="0" type="Node" parent="inn-waiter/agreement"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="inn-waiter/agreement/0"]
+script = ExtResource( 2 )
+speaker = "master"
+dialog = "Looks like they had an \"agreement\" with the previous maester."
+
+[node name="dialog#2" type="Node" parent="inn-waiter/agreement/0"]
+script = ExtResource( 2 )
+speaker = "master"
+dialog = "I wonder what kind of deal are we talking about."
+
+[node name="bar" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="all" type="Node" parent="bar"]
+script = ExtResource( 7 )
+expression_contents = "context_flag_count(\"bar\") >= 2"
+
+[node name="sequential#1" type="Node" parent="bar/all"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="bar/all/sequential#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Oh... Burn After Reading... B.A.R. Now I understand."
+
+[node name="dialog#2" type="Node" parent="bar/all/sequential#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Burn After Reading"
+
+[node name="description" type="Node" parent="bar"]
+script = ExtResource( 7 )
+expression_contents = "context_flag(\"bar\", \"description\")"
+
+[node name="sequential#1" type="Node" parent="bar/description"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="bar/description/sequential#1"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="bar/description/sequential#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "An order to burn the letter after reading.
+So you can keep your secrets more secret."
+
+[node name="dialog#2" type="Node" parent="bar/description/sequential#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Where can I burn these letters?"
+
+[node name="dialog#3" type="Node" parent="bar/description/sequential#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Oh! Previous master forbade it. After..."
+
+[node name="dialog#4" type="Node" parent="bar/description/sequential#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Well, she had her reasons."
+
+[node name="dialog#5" type="Node" parent="bar/description/sequential#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "There goes our secrecy, down the drain."
+
+[node name="dialog#2" type="Node" parent="bar/description/sequential#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I can't keep that promise. But I know how to keep a secret."
+
+[node name="acronym" type="Node" parent="bar"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="bar/acronym"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "B.A.R. I wonder who it is. Or what it means."
+
+[node name="random" type="Node" parent="bar/acronym"]
+script = ExtResource( 8 )
+
+[node name="dialog#1" type="Node" parent="bar/acronym/random"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Beyond All Recognition?"
+
+[node name="dialog#2" type="Node" parent="bar/acronym/random"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Bells Are Ringing?"
+
+[node name="dialog#3" type="Node" parent="bar/acronym/random"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Blades And Roses?"
+
+[node name="dialog#4" type="Node" parent="bar/acronym/random"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Bimonthly Activity Report?"
+
+[node name="dialog#5" type="Node" parent="bar/acronym/random"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Business Activity Register?"
