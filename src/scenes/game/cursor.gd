@@ -54,12 +54,11 @@ func _check_selected_element() -> void:
 			collider = intersect.collider
 			break
 
-	if collider == null:
-		if _selected:
-			emit_signal("exited", _selected)
-			_selected = null
+	if _selected and collider != _selected:
+		emit_signal("exited", _selected)
+		_selected = null
 
-	elif collider != _selected:
+	if collider:
 		_selected = collider
 		emit_signal("entered", _selected)
 

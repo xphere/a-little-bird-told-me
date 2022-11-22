@@ -189,10 +189,7 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if _current_screen and _current_screen.has_method("on_select"):
 		_current_screen.on_select(node)
 
-	while true:
-		var exited : CanvasItem = yield($Cursor, "exited")
-		if exited == node:
-			break
+	yield($Cursor, "exited")
 
 	if node.has_method("get_name_when_selected"):
 		$DialogBox.hide()
