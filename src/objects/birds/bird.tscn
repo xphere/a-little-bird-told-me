@@ -9,7 +9,7 @@
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/enabled = false
-shader_param/is_v8 = true
+shader_param/is_v8 = false
 shader_param/border_color = Color( 1, 1, 1, 1 )
 shader_param/alpha_threshold = 0.75
 shader_param/neighbourhood_threshold = 0.75
@@ -20,6 +20,7 @@ script = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
-position = Vector2( 0, -4 )
+position = Vector2( -9, -19 )
 texture = ExtResource( 2 )
+centered = false
 hframes = 3

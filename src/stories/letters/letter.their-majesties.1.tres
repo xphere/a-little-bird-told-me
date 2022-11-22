@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#their-majesties#1"
+letter_name = "Welcome letter from Their Majesties"
+letter_contents = "Congratulations!
+
+Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
+
+From the time present your presence will be required at The Watchtower to take care of the Royal Flock.
+
+Signed:
+Their Royal Majesties of Earauthain
+
+[url=bar:bar]B.A.R.[/url]"
+letter_type = 2

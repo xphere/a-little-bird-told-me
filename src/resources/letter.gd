@@ -4,9 +4,16 @@ signal received()
 signal opened()
 signal closed()
 
+enum Type {
+	Neat,
+	Weathered,
+	Royal,
+}
+
 export var letter_id : String
 export(String, MULTILINE) var letter_name : String
 export(String, MULTILINE) var letter_contents : String
+export(Type) var letter_type := Type.Neat
 
 var _has_been_opened := false
 

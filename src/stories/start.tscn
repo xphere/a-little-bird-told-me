@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+[ext_resource path="res://src/stories/letters/letter.their-majesties.1.tres" type="Resource" id=1]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=2]
 [ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=3]
 [ext_resource path="res://modules/action/interval.gd" type="Script" id=4]
@@ -19,21 +19,6 @@
 [ext_resource path="res://src/actions/bird-arrives.gd" type="Script" id=17]
 [ext_resource path="res://src/actions/bird.gd" type="Script" id=18]
 
-[sub_resource type="Resource" id=1]
-script = ExtResource( 1 )
-letter_id = "letter#their-majesties#1"
-letter_name = "Welcome letter from Their Majesties"
-letter_contents = "Congratulations!
-
-Their Majesties are pleased to announce that you'll be honored with the grade of Kingdom's Maester Bird Caretaker.
-
-From the time present your presence will be required at The Watchtower to take care of the Royal Flock.
-
-Signed:
-Their Royal Majesties of Earauthain
-
-B.A.R."
-
 [sub_resource type="Resource" id=2]
 script = ExtResource( 16 )
 name = "WhiteHead"
@@ -49,7 +34,7 @@ script = ExtResource( 2 )
 
 [node name="letter#their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 8 )
-letter_resource = SubResource( 1 )
+letter_resource = ExtResource( 1 )
 
 [node name="to-maildesk#their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 7 )
@@ -238,9 +223,9 @@ bird_path = NodePath("../bird#1")
 [node name="dialog#assistant#1" type="Node" parent="learn#bird"]
 script = ExtResource( 11 )
 speaker = "assistant"
-dialog = "Oh look! A bird from the Royal Flock has arrived!"
+dialog = "Oh look! One of the birds from the Royal Flock is back!"
 
 [node name="dialog#maester#1" type="Node" parent="learn#bird"]
 script = ExtResource( 11 )
 speaker = "maester"
-dialog = "Time to work!"
+dialog = "Time to work, I supose"

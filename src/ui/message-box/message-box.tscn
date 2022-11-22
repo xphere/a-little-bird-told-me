@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ui/message-box/message-box.gd" type="Script" id=1]
-
-[sub_resource type="OpenSimplexNoise" id=2]
-
-[sub_resource type="NoiseTexture" id=1]
-width = 1
-height = 1
-noise = SubResource( 2 )
+[ext_resource path="res://src/screens/letter/weathered-letter.png" type="Texture" id=2]
+[ext_resource path="res://src/screens/letter/royal-letter.png" type="Texture" id=3]
+[ext_resource path="res://src/screens/letter/neat-letter.png" type="Texture" id=4]
 
 [node name="MessageBox" type="MarginContainer"]
 anchor_right = 1.0
@@ -18,29 +14,55 @@ custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 script = ExtResource( 1 )
 
-[node name="Texture" type="NinePatchRect" parent="."]
+[node name="Texture" type="CenterContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 248.0
 margin_bottom = 232.0
+
+[node name="NeatTexture" type="NinePatchRect" parent="Texture"]
+margin_left = 28.0
+margin_right = 212.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 184, 224 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="RoyalTexture" type="NinePatchRect" parent="Texture"]
+visible = false
+margin_left = 28.0
+margin_right = 212.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 184, 224 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+
+[node name="WeatheredTexture" type="NinePatchRect" parent="Texture"]
+visible = false
+margin_left = 28.0
+margin_right = 212.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 184, 224 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
 
 [node name="Margins" type="MarginContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 248.0
 margin_bottom = 232.0
-custom_constants/margin_right = 6
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
+custom_constants/margin_right = 8
+custom_constants/margin_top = 22
+custom_constants/margin_left = 18
 custom_constants/margin_bottom = 8
 
 [node name="Content" type="Control" parent="Margins"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 234.0
+margin_left = 18.0
+margin_top = 22.0
+margin_right = 232.0
 margin_bottom = 216.0
 
 [node name="Text" type="RichTextLabel" parent="Margins/Content"]

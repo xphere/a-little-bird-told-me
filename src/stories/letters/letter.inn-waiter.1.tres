@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#inn-waiter#1"
+letter_name = "Agreement?"
+letter_contents = "Fine by me, [b]Maester[/b].
+
+Looks like we have an [url=inn-waiter.agreement]agreement[/url], then.
+
+[url=bar:description]Burn After Reading[/url]"
+letter_type = 1
