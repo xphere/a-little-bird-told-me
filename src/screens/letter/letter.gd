@@ -5,6 +5,10 @@ const Letter := preload("res://src/objects/letters/letter.gd")
 var letter : Letter
 
 
+func allow_topics(value: bool) -> void:
+	$MessageBox.highlight_topics = value
+
+
 func on_enter() -> void:
 	$Back.visible = owner.has_stacked_screen()
 	letter = owner.consume_context("#letter")

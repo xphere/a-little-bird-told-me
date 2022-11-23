@@ -37,6 +37,10 @@ func info(text: String, wait_input := true) -> void:
 	yield($DialogBox.info(text, wait_input), "completed")
 	$Cursor.lock(false)
 
+func allow_topics(value: bool) -> void:
+	$Letter.allow_topics(value)
+
+
 var _lock : Resource
 
 func is_unlocked() -> bool:
