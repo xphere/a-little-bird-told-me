@@ -16,3 +16,14 @@ static func set_flag(value: String, flag: String) -> String:
 
 static func flag_count(value: String) -> int:
 	return value.count(FLAG_SEP)
+
+
+static func replace_all_with_match(subject: String, rx: RegEx) -> String:
+	while true:
+		var rxm := rx.search(subject)
+		if not rxm:
+			break
+		subject.erase(rxm.get_start(), rxm.get_string(0).length())
+		subject = subject.insert(rxm.get_start(), rxm.get_string(1))
+
+	return subject
