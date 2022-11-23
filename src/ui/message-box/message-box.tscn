@@ -1,28 +1,31 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/ui/message-box/message-box.gd" type="Script" id=1]
 [ext_resource path="res://src/screens/letter/weathered-letter.png" type="Texture" id=2]
 [ext_resource path="res://src/screens/letter/royal-letter.png" type="Texture" id=3]
 [ext_resource path="res://src/screens/letter/neat-letter.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/SandyForest.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 5 )
 
 [node name="MessageBox" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 8
+custom_constants/margin_right = 36
 custom_constants/margin_top = 8
-custom_constants/margin_left = 8
+custom_constants/margin_left = 36
 custom_constants/margin_bottom = 8
 script = ExtResource( 1 )
 
 [node name="Texture" type="CenterContainer" parent="."]
-margin_left = 8.0
+margin_left = 36.0
 margin_top = 8.0
-margin_right = 248.0
+margin_right = 220.0
 margin_bottom = 232.0
 
 [node name="NeatTexture" type="NinePatchRect" parent="Texture"]
-margin_left = 28.0
-margin_right = 212.0
+margin_right = 184.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 184, 224 )
 size_flags_horizontal = 3
@@ -31,8 +34,7 @@ texture = ExtResource( 4 )
 
 [node name="RoyalTexture" type="NinePatchRect" parent="Texture"]
 visible = false
-margin_left = 28.0
-margin_right = 212.0
+margin_right = 184.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 184, 224 )
 size_flags_horizontal = 3
@@ -41,8 +43,7 @@ texture = ExtResource( 3 )
 
 [node name="WeatheredTexture" type="NinePatchRect" parent="Texture"]
 visible = false
-margin_left = 28.0
-margin_right = 212.0
+margin_right = 184.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 184, 224 )
 size_flags_horizontal = 3
@@ -50,28 +51,28 @@ size_flags_vertical = 3
 texture = ExtResource( 2 )
 
 [node name="Margins" type="MarginContainer" parent="."]
-margin_left = 8.0
+margin_left = 36.0
 margin_top = 8.0
-margin_right = 248.0
+margin_right = 220.0
 margin_bottom = 232.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 22
-custom_constants/margin_left = 18
-custom_constants/margin_bottom = 8
+custom_constants/margin_right = 12
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
 
-[node name="Content" type="Control" parent="Margins"]
-margin_left = 18.0
-margin_top = 22.0
-margin_right = 232.0
-margin_bottom = 216.0
-
-[node name="Text" type="RichTextLabel" parent="Margins/Content"]
+[node name="Text" type="RichTextLabel" parent="Margins"]
 unique_name_in_owner = true
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 172.0
+margin_bottom = 208.0
 rect_clip_content = false
-custom_constants/line_separation = 3
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_constants/line_separation = -3
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 scroll_active = false
 
-[connection signal="meta_clicked" from="Margins/Content/Text" to="." method="_on_Label_meta_clicked"]
+[connection signal="meta_clicked" from="Margins/Text" to="." method="_on_Label_meta_clicked"]

@@ -6,7 +6,7 @@
 script = ExtResource( 1 )
 letter_id = "letter#inn-waiter#1"
 letter_name = "Agreement?"
-letter_contents = "Fine by me, [b]Maester[/b].
+letter_contents = "Fine by me, Maester.
 
 Looks like we have an [url=inn-waiter.agreement]agreement[/url], then.
 
