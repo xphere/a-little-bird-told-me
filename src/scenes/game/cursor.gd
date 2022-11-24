@@ -58,7 +58,7 @@ func _check_selected_element() -> void:
 		emit_signal("exited", _selected)
 		_selected = null
 
-	if collider:
+	if collider and collider != _selected:
 		_selected = collider
 		emit_signal("entered", _selected)
 
