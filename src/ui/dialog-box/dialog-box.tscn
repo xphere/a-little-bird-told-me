@@ -1,7 +1,50 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.gd" type="Script" id=2]
+[ext_resource path="res://src/ui/dialog-box/dialog-box.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/Bangalor.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="StyleBoxTexture" id=2]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 10, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="DynamicFont" id=4]
+size = 8
+outline_color = Color( 0.105882, 0.0823529, 0.133333, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 20, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=1]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 10, 10 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
 
 [node name="DialogBox" type="VBoxContainer"]
 anchor_top = 1.0
@@ -10,71 +53,87 @@ anchor_bottom = 1.0
 margin_top = -34.0
 grow_vertical = 0
 theme = ExtResource( 1 )
-custom_constants/separation = -4
+custom_constants/separation = -5
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 256.0
-margin_bottom = 15.0
+margin_bottom = 18.0
 
 [node name="Speaker" type="PanelContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 89.0
-margin_bottom = 15.0
+margin_right = 85.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 0, 18 )
 size_flags_horizontal = 0
 theme_type_variation = "PanelContainerTitle"
+custom_styles/panel = SubResource( 2 )
 
 [node name="Text" type="MarginContainer" parent="HBoxContainer/Speaker"]
-margin_left = 4.0
+margin_left = 2.0
 margin_top = 4.0
-margin_right = 85.0
-margin_bottom = 11.0
+margin_right = 83.0
+margin_bottom = 14.0
 grow_vertical = 0
 size_flags_horizontal = 4
 custom_constants/margin_right = 4
 custom_constants/margin_left = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/Speaker/Text"]
+modulate = Color( 0.364706, 0.235294, 0.227451, 1 )
 margin_left = 4.0
 margin_right = 77.0
-margin_bottom = 7.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+custom_fonts/font = SubResource( 4 )
 text = "Speaker Name"
+align = 1
+valign = 1
 
 [node name="Continue" type="PanelContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 222.0
+margin_left = 226.0
 margin_right = 256.0
-margin_bottom = 15.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 0, 18 )
 size_flags_horizontal = 10
+custom_styles/panel = SubResource( 3 )
 
 [node name="Text" type="MarginContainer" parent="HBoxContainer/Continue"]
-margin_left = 4.0
+margin_left = 2.0
 margin_top = 4.0
-margin_right = 30.0
-margin_bottom = 11.0
+margin_right = 28.0
+margin_bottom = 14.0
 grow_vertical = 0
 size_flags_horizontal = 4
 custom_constants/margin_right = 4
 custom_constants/margin_left = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/Continue/Text"]
+modulate = Color( 0.364706, 0.235294, 0.227451, 1 )
 margin_left = 4.0
+margin_top = 1.0
 margin_right = 22.0
-margin_bottom = 7.0
+margin_bottom = 9.0
+custom_fonts/font = SubResource( 4 )
 text = ">>>"
+align = 1
+valign = 1
 
 [node name="Content" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 11.0
+show_behind_parent = true
+margin_top = 13.0
 margin_right = 256.0
-margin_bottom = 34.0
+margin_bottom = 37.0
 size_flags_vertical = 10
+custom_styles/panel = SubResource( 1 )
 
 [node name="Text" type="MarginContainer" parent="Content"]
-margin_left = 4.0
+margin_left = 2.0
 margin_top = 4.0
-margin_right = 252.0
-margin_bottom = 19.0
+margin_right = 254.0
+margin_bottom = 20.0
 grow_vertical = 0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
@@ -82,9 +141,11 @@ custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
 [node name="Label" type="Label" parent="Content/Text"]
+modulate = Color( 0.364706, 0.235294, 0.227451, 1 )
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 244.0
-margin_bottom = 11.0
+margin_right = 248.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 4 )
 text = "Content"
 autowrap = true
