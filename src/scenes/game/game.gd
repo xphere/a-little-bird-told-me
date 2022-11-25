@@ -220,6 +220,7 @@ func _update_time() -> void:
 	})
 
 	$Story.execute(current_day, time_string)
+	$Tower.on_time_change(time_string)
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:

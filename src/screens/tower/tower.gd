@@ -26,3 +26,16 @@ func update_birds() -> void:
 		_current_bird = _birds.pop_front() as Node2D
 		$"Window/Bird".add_child(_current_bird)
 		emit_signal("bird_arrived", _current_bird.bird_resource)
+
+
+const BackgroundColors := {
+	"laudes": Color("FFFFFF"),
+	"prima": Color("FFFFFF"),
+	"tercia": Color("FFFFFF"),
+	"sexta": Color("FFFFFF"),
+	"nona": Color("FFFFFF"),
+	"visperas": Color("FFFFFF"),
+}
+
+func on_time_change(time_of_day: String) -> void:
+	$BackgroundSky.modulate = BackgroundColors[time_of_day]
