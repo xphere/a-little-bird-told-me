@@ -37,5 +37,15 @@ const BackgroundColors := {
 	"visperas": Color("FFFFFF"),
 }
 
+var _tween : SceneTreeTween
+
 func on_time_change(time_of_day: String) -> void:
-	$BackgroundSky.modulate = BackgroundColors[time_of_day]
+	if _tween and _tween.is_running():
+		yield(_tween, "finished")
+
+	_tween = get_tree().create_tween()
+	_tween.tween_property(
+		$BackgroundSky, "modulate",
+		BackgroundColors[time_of_day],
+		0.3
+	)
