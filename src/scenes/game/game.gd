@@ -88,6 +88,10 @@ func register_bird(bird_resource: Resource) -> void:
 func bird_arrives(bird: Node2D) -> void:
 	$Tower.bird_arrives(bird)
 
+func bird_pickup(bird: BirdResource) -> void:
+	if bird.carries is LetterResource:
+		to_maildesk(bird.carries)
+
 
 func _ready() -> void:
 	randomize()
