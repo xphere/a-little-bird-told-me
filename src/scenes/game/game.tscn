@@ -8,7 +8,7 @@
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
-[ext_resource path="res://modules/action/match.gd" type="Script" id=9]
+[ext_resource path="res://src/scenes/game/story.gd" type="Script" id=9]
 [ext_resource path="res://src/stories/topics.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/stories/debug.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=12]
@@ -44,7 +44,6 @@ script = ExtResource( 18 )
 
 [node name="Story" type="Node" parent="."]
 script = ExtResource( 9 )
-expression_contents = "\"Day#%d\" % context(\"day\", 0)"
 
 [node name="Day#-1" parent="Story" instance=ExtResource( 11 )]
 

@@ -211,11 +211,15 @@ func move_time_forward() -> void:
 
 
 func _update_time() -> void:
+	var time_string : String = TimeOfDay.keys()[time_of_day]
+	time_string = time_string.to_lower()
+
 	$Context.merge({
 		"day": current_day,
-		"time": TimeOfDay.keys()[time_of_day],
+		"time": time_string,
 	})
-	$Story.execute()
+
+	$Story.execute(current_day, time_string)
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
