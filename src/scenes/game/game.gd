@@ -19,6 +19,11 @@ var _current_screen : CanvasItem
 var _screens_stack := []
 
 
+func _ready() -> void:
+	randomize()
+	_update_time()
+
+
 var _casting := {}
 
 func cast(name: String, node: Node2D) -> void:
@@ -100,14 +105,6 @@ func bird_arrives(bird: Node2D) -> void:
 func bird_pickup(bird: BirdResource) -> void:
 	if bird.carries is LetterResource:
 		to_maildesk(bird.carries)
-
-
-func _ready() -> void:
-	randomize()
-	$Context.merge({
-		"day": current_day,
-	})
-	$Story.execute()
 
 
 func has_stacked_screen() -> bool:
@@ -210,6 +207,15 @@ func move_time_forward() -> void:
 		time_of_day = TimeOfDay.LAUDES
 	else:
 		time_of_day += 1
+	_update_time()
+
+
+func _update_time() -> void:
+	$Context.merge({
+		"day": current_day,
+		"time": TimeOfDay.keys()[time_of_day],
+	})
+	$Story.execute()
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
