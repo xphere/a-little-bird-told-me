@@ -3,8 +3,17 @@ extends Control
 signal on_help_request(element)
 signal on_interact(element)
 
-export var current_day := 0
+enum TimeOfDay {
+	LAUDES,
+	PRIMA,
+	TERCIA,
+	SEXTA,
+	NONA,
+	VISPERAS,
+}
 
+export var current_day := 0
+export(TimeOfDay) var time_of_day := TimeOfDay.LAUDES
 
 var _current_screen : CanvasItem
 var _screens_stack := []
@@ -193,6 +202,14 @@ func to_screen(name: String, context: Dictionary = {}) -> void:
 
 	if _current_screen and _current_screen.has_method("on_enter"):
 		_current_screen.on_enter()
+
+
+func move_time_forward() -> void:
+	if time_of_day == TimeOfDay.VISPERAS:
+		current_day += 1
+		time_of_day = TimeOfDay.LAUDES
+	else:
+		time_of_day += 1
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
