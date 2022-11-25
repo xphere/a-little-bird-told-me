@@ -107,9 +107,8 @@ func register_letter(letter: Resource) -> void:
 	_letters[letter.letter_id] = letter
 
 
-func add_to_maildesk(letter: Node2D) -> void:
-	letter.global_position = Vector2(rand_range(40, 256 - 40), rand_range(15, 240 - 15))
-	$MailDesk.add_child(letter)
+func to_maildesk(letter: LetterResource) -> void:
+	$MailDesk.add_letter(letter)
 
 
 func context(name: String, default_value = null):
