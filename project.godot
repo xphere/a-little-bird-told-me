@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/bird.gd"
 }, {
+"base": "Resource",
+"class": "LetterResource",
+"language": "GDScript",
+"path": "res://src/resources/letter.gd"
+}, {
 "base": "Reference",
 "class": "NodeUtils",
 "language": "GDScript",
@@ -131,6 +136,7 @@ _global_script_class_icons={
 "ActionSerial": "res://modules/action/serial.icon.png",
 "ActionToScreen": "res://src/actions/to-screen.icon.png",
 "BirdResource": "",
+"LetterResource": "",
 "NodeUtils": "",
 "RefSignal": "",
 "ResourceSignal": "",

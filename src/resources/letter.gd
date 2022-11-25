@@ -1,3 +1,4 @@
+class_name LetterResource
 extends Resource
 
 signal received()
