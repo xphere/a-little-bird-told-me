@@ -22,10 +22,16 @@ func bird_arrives(bird: Node2D) -> void:
 
 
 func update_birds() -> void:
-	if not _current_bird and not _birds.empty():
-		_current_bird = _birds.pop_front() as Node2D
-		$"Window/Bird".add_child(_current_bird)
-		emit_signal("bird_arrived", _current_bird.bird_resource)
+	if _current_bird and is_instance_valid(_current_bird):
+		return
+
+	_current_bird = null
+	if _birds.empty():
+		return
+
+	_current_bird = _birds.pop_front() as Node2D
+	$"Window/Bird".add_child(_current_bird)
+	emit_signal("bird_arrived", _current_bird.bird_resource)
 
 
 const BackgroundColors := {
