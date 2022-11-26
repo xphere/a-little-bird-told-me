@@ -42,7 +42,7 @@ script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Another message? Let's see..."
 
-[node name="2" type="Node" parent="messages"]
+[node name="noop" type="Node" parent="messages"]
 script = ExtResource( 1 )
 
 [node name="inn-waiter" type="Node" parent="."]
@@ -72,7 +72,7 @@ script = ExtResource( 5 )
 
 [node name="all" type="Node" parent="bar"]
 script = ExtResource( 7 )
-expression_contents = "context_flag_count(\"bar\") >= 2"
+expression_contents = "discovery.value == \"bar\" and context_flag(\"bar\", \"description\")"
 
 [node name="sequential#1" type="Node" parent="bar/all"]
 script = ExtResource( 3 )
@@ -87,6 +87,11 @@ dialog = "Oh... Burn After Reading... B.A.R. Now I understand."
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Burn After Reading"
+
+[node name="dialog#3" type="Node" parent="bar/all/sequential#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I can't keep that promise. But I know how to keep a secret."
 
 [node name="description" type="Node" parent="bar"]
 script = ExtResource( 7 )

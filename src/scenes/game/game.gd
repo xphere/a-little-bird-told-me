@@ -76,14 +76,25 @@ func unlock(lock: Resource) -> void:
 	$Cursor.lock(false)
 	lock.emit_changed()
 
+var discovery := {}
+
 func discover(url: String) -> void:
 	var split = url.split(":", false, 1)
 	var topic = split[0] if split.size() > 1 else url
 	var value = split[1] if split.size() > 1 else ""
+	var previous = $Context.context(topic, "")
 	if  value.is_valid_integer():
 		$Context.set_if_higher(topic, value.to_int())
 	else:
 		$Context.set_flag(topic, value)
+	var current = $Context.context(topic)
+
+	discovery = {
+		"topic": topic,
+		"value": value,
+		"from": previous,
+		"to": current,
+	}
 
 	var action : Action = $Topics.topic(topic)
 	if action and _lock:
