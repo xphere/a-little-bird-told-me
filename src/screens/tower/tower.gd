@@ -19,24 +19,16 @@ func update_birds() -> void:
 	$Window.update_bird_queue()
 
 
-const BackgroundColors := {
-	"laudes": Color("FFFFFF"),
-	"prima": Color("FFFFFF"),
-	"tercia": Color("FFFFFF"),
-	"sexta": Color("FFFFFF"),
-	"nona": Color("FFFFFF"),
-	"visperas": Color("FFFFFF"),
-}
-
-var _tween : SceneTreeTween
+var wait : GDScriptFunctionState
 
 func on_time_change(time_of_day: String) -> void:
-	if _tween and _tween.is_running():
-		yield(_tween, "finished")
+	if wait:
+		yield(wait, "completed")
 
-	_tween = get_tree().create_tween()
-	_tween.tween_property(
-		$BackgroundSky, "modulate",
-		BackgroundColors[time_of_day],
-		0.3
-	)
+	wait = Wait.all([
+		$BackgroundSky.on_time_change(time_of_day),
+		$Time.on_time_change(time_of_day),
+	])
+
+	yield(wait, "completed")
+	wait = null

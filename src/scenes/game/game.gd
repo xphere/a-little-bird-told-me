@@ -221,8 +221,9 @@ func _update_time() -> void:
 		"time": time_string,
 	})
 
+	yield($Tower.on_time_change(time_string), "completed")
+
 	$Story.execute(current_day, time_string)
-	$Tower.on_time_change(time_string)
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
