@@ -281,6 +281,9 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 
 
 func _get_name_of(node: Node) -> String:
+	if node.has_node("with-name"):
+		return node.get_node("with-name").evaluate()
+
 	if node.has_method("get_name_when_selected"):
 		return node.get_name_when_selected()
 
