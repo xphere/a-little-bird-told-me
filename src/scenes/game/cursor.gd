@@ -82,7 +82,7 @@ func _is_selectable(node: CanvasItem) -> bool:
 	if not node or not node.visible:
 		return false
 
-	if not _context.is_a_parent_of(node):
+	if not _context or not _context.is_a_parent_of(node):
 		return false
 
 	if node.has_method("is_selectable") and not node.is_selectable():
