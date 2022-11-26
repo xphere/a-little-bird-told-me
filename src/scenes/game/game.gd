@@ -106,6 +106,8 @@ func bird_pickup(bird: BirdResource) -> void:
 	if bird.carries is LetterResource:
 		to_maildesk(bird.carries)
 
+func update_birds() -> void:
+	$Tower.update_birds()
 
 func has_stacked_screen() -> bool:
 	return not _screens_stack.empty()
