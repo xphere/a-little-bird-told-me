@@ -47,13 +47,13 @@ script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 256.0
-margin_bottom = 18.0
+margin_bottom = 17.0
 
 [node name="Speaker" type="PanelContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
 margin_right = 85.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 0, 18 )
+margin_bottom = 17.0
+rect_min_size = Vector2( 0, 17 )
 size_flags_horizontal = 0
 theme_type_variation = "PanelContainerTitle"
 custom_styles/panel = SubResource( 2 )
@@ -62,17 +62,19 @@ custom_styles/panel = SubResource( 2 )
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 83.0
-margin_bottom = 14.0
+margin_bottom = 13.0
 grow_vertical = 0
 size_flags_horizontal = 4
 custom_constants/margin_right = 4
+custom_constants/margin_top = -1
 custom_constants/margin_left = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/Speaker/Text"]
 modulate = Color( 0.364706, 0.235294, 0.227451, 1 )
 margin_left = 4.0
+margin_top = -1.0
 margin_right = 77.0
-margin_bottom = 10.0
+margin_bottom = 9.0
 rect_min_size = Vector2( 0, 10 )
 custom_fonts/font = SubResource( 4 )
 text = "Speaker Name"
@@ -83,8 +85,8 @@ valign = 1
 unique_name_in_owner = true
 margin_left = 226.0
 margin_right = 256.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 0, 18 )
+margin_bottom = 17.0
+rect_min_size = Vector2( 0, 17 )
 size_flags_horizontal = 10
 custom_styles/panel = SubResource( 3 )
 
@@ -92,7 +94,7 @@ custom_styles/panel = SubResource( 3 )
 margin_left = 2.0
 margin_top = 4.0
 margin_right = 28.0
-margin_bottom = 14.0
+margin_bottom = 13.0
 grow_vertical = 0
 size_flags_horizontal = 4
 custom_constants/margin_right = 4
@@ -101,9 +103,8 @@ custom_constants/margin_left = 4
 [node name="Label" type="Label" parent="HBoxContainer/Continue/Text"]
 modulate = Color( 0.364706, 0.235294, 0.227451, 1 )
 margin_left = 4.0
-margin_top = 1.0
 margin_right = 22.0
-margin_bottom = 9.0
+margin_bottom = 8.0
 custom_fonts/font = SubResource( 4 )
 text = ">>>"
 align = 1
@@ -112,9 +113,9 @@ valign = 1
 [node name="Content" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 show_behind_parent = true
-margin_top = 13.0
+margin_top = 12.0
 margin_right = 256.0
-margin_bottom = 37.0
+margin_bottom = 36.0
 size_flags_vertical = 10
 custom_styles/panel = ExtResource( 5 )
 
