@@ -1,5 +1,8 @@
 extends Node
 
+export var first : String
+export var default_mapping : Dictionary
+
 var _executing := false
 
 
@@ -27,13 +30,20 @@ func _evaluate(day: int, time: String) -> String:
 	if _executing:
 		return ""
 
-	if time == "laudes":
-		var branch = "Day#%s" % [day]
+	var branch : String
+
+	if time == first:
+		branch = "Day#%s" % [day]
 		if has_node(branch):
 			return branch
 
-	var branch := "Day#%s#%s" % [day, time]
+	branch = "Day#%s#%s" % [day, time]
 	if has_node(branch):
 		return branch
 
-	return ""
+	if default_mapping.has(time):
+		branch = "default#%s" % [default_mapping[time]]
+		if has_node(branch):
+			return branch
+
+	return "default"

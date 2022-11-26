@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/stories/debug.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/objects/letters/letter.gd" type="Script" id=13]
+[ext_resource path="res://modules/action/action.gd" type="Script" id=15]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
 
 [node name="Game" type="Control"]
@@ -44,6 +45,17 @@ script = ExtResource( 18 )
 
 [node name="Story" type="Node" parent="."]
 script = ExtResource( 9 )
+first = "laudes"
+default_mapping = {
+"laudes": "no-action",
+"visperas": "no-action"
+}
+
+[node name="default" type="Node" parent="Story"]
+script = ExtResource( 15 )
+
+[node name="default#no-action" type="Node" parent="Story"]
+script = ExtResource( 15 )
 
 [node name="Day#-1" parent="Story" instance=ExtResource( 11 )]
 
