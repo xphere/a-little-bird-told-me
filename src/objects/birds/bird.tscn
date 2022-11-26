@@ -17,6 +17,7 @@ shader_param/texture_color = Color( 1, 1, 1, 1 )
 
 [node name="Bird" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
+id = "bird#%s"
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )

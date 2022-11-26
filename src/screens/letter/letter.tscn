@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 
 [node name="Back" parent="." instance=ExtResource( 3 )]
 position = Vector2( 16, 16 )
+id = "back"
 
 [node name="MessageBox" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true

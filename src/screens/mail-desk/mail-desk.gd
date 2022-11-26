@@ -24,8 +24,9 @@ func _on_Back_pressed() -> void:
 
 func add_letter(letter: LetterResource) -> void:
 	var instance := LetterScene.instance() as Node2D
-	add_child(instance)
 	instance.setup(letter)
+
+	add_child(instance)
 	instance.global_position = Vector2(
 		rand_range(40, 256 - 40),
 		rand_range(15, 240 - 15)

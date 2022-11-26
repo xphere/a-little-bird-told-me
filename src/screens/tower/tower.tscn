@@ -58,6 +58,7 @@ texture = ExtResource( 7 )
 
 [node name="MailDesk" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 160 )
+id = "mail-desk"
 
 [node name="with-name" type="Node" parent="MailDesk"]
 script = ExtResource( 23 )
@@ -101,6 +102,7 @@ texture = ExtResource( 18 )
 
 [node name="MapDesk" parent="." instance=ExtResource( 24 )]
 position = Vector2( 187, 157 )
+id = "map-desk"
 
 [node name="with-name" type="Node" parent="MapDesk"]
 script = ExtResource( 23 )
