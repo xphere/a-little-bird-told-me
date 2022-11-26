@@ -69,8 +69,6 @@ script = ExtResource( 14 )
 
 [node name="Topics" parent="." instance=ExtResource( 10 )]
 
-[connection signal="bird_arrived" from="Tower" to="." method="_on_Tower_bird_arrived"]
-[connection signal="bird_picked" from="Tower" to="." method="_on_Tower_bird_picked"]
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]
 [connection signal="interact" from="Cursor" to="." method="_on_Cursor_interact"]

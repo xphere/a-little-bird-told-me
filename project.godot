@@ -84,6 +84,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actions/to-screen.gd"
 }, {
+"base": "Action",
+"class": "BirdArriveAction",
+"language": "GDScript",
+"path": "res://src/actions/bird-arrives.gd"
+}, {
+"base": "Action",
+"class": "BirdRegisterAction",
+"language": "GDScript",
+"path": "res://src/actions/bird.gd"
+}, {
 "base": "Resource",
 "class": "BirdResource",
 "language": "GDScript",
@@ -135,6 +145,8 @@ _global_script_class_icons={
 "ActionSequential": "res://modules/action/sequential.icon.png",
 "ActionSerial": "res://modules/action/serial.icon.png",
 "ActionToScreen": "res://src/actions/to-screen.icon.png",
+"BirdArriveAction": "res://src/actions/bird.icon.png",
+"BirdRegisterAction": "res://src/actions/bird.icon.png",
 "BirdResource": "",
 "LetterResource": "",
 "NodeUtils": "",

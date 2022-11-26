@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://src/screens/tower/map.png" type="Texture" id=19]
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=20]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=21]
+[ext_resource path="res://src/objects/birds/bird.tscn" type="PackedScene" id=22]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 13 )
@@ -158,6 +159,7 @@ dialog = "I'm going to make my parents proud anyway!"
 [node name="Window" parent="." instance=ExtResource( 12 )]
 position = Vector2( 52, 114 )
 script = ExtResource( 14 )
+BirdScene = ExtResource( 22 )
 
 [node name="Bird" type="Position2D" parent="Window"]
 position = Vector2( 0, 20 )

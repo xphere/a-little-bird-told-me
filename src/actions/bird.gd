@@ -1,4 +1,5 @@
 tool
+class_name BirdRegisterAction, "bird.icon.png"
 extends Action
 
 const BirdResource := preload("res://src/resources/bird.gd")

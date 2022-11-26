@@ -1,11 +1,5 @@
 extends Control
 
-signal bird_arrived(bird)
-signal bird_picked(bird)
-
-var _birds := []
-var _current_bird : Node2D
-
 
 func _ready() -> void:
 	owner.cast("maester", $Maester)
@@ -16,22 +10,13 @@ func on_enter() -> void:
 	show()
 
 
-func bird_arrives(bird: Node2D) -> void:
-	_birds.push_back(bird)
+func bird_arrives(bird: BirdResource) -> void:
+	$Window.queue_bird(bird)
 	update_birds()
 
 
 func update_birds() -> void:
-	if _current_bird and is_instance_valid(_current_bird):
-		return
-
-	_current_bird = null
-	if _birds.empty():
-		return
-
-	_current_bird = _birds.pop_front() as Node2D
-	$"Window/Bird".add_child(_current_bird)
-	emit_signal("bird_arrived", _current_bird.bird_resource)
+	$Window.update_bird_queue()
 
 
 const BackgroundColors := {
