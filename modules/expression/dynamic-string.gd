@@ -1,29 +1,30 @@
+class_name DynamicString
 extends Resource
 
 var _text := ""
 var _expressions := []
 
 
-static func is_dynamic(content: String) -> bool:
-	return content.find("{{") >= 0
+static func is_dynamic(text: String) -> bool:
+	return text.find("{{") >= 0
 
 
-func _init(content: String) -> void:
-	parse(content)
+func _init(text: String) -> void:
+	parse(text)
 
 
-func evaluate(content: Object) -> String:
+func evaluate(instance: Object, inputs: Array = []) -> String:
 	var values := []
 	for expression in _expressions:
-		values.push_back(expression.execute([], content))
+		values.push_back(expression.execute(inputs, instance))
 
 	return _text % values
 
 
-func parse(content: String) -> void:
-	_text = content
+func parse(text: String) -> void:
+	_text = text
 	_expressions = []
-	if not is_dynamic(content):
+	if not is_dynamic(text):
 		return
 
 	var rx := RegEx.new()
