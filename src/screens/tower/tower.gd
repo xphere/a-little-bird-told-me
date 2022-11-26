@@ -21,9 +21,11 @@ func update_birds() -> void:
 
 var wait : GDScriptFunctionState
 
-func on_time_change(time_of_day: String) -> void:
+func on_time_change(day: int, time_of_day: String) -> void:
 	if wait:
 		yield(wait, "completed")
+
+	$Calendar/Margin/Label.text = "Day %d" % [day]
 
 	wait = Wait.all([
 		$BackgroundSky.on_time_change(time_of_day),

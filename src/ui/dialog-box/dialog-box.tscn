@@ -4,6 +4,7 @@
 [ext_resource path="res://src/ui/dialog-box/dialog-box.gd" type="Script" id=2]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Bangalor.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/ui/dialog-box/dialog.stylebox.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxTexture" id=2]
 content_margin_left = 2.0
@@ -33,18 +34,6 @@ margin_left = 5.0
 margin_right = 4.0
 margin_top = 4.0
 margin_bottom = 5.0
-
-[sub_resource type="StyleBoxTexture" id=1]
-content_margin_left = 2.0
-content_margin_right = 2.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 10, 10 )
-margin_left = 4.0
-margin_right = 4.0
-margin_top = 4.0
-margin_bottom = 4.0
 
 [node name="DialogBox" type="VBoxContainer"]
 anchor_top = 1.0
@@ -127,7 +116,7 @@ margin_top = 13.0
 margin_right = 256.0
 margin_bottom = 37.0
 size_flags_vertical = 10
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="Text" type="MarginContainer" parent="Content"]
 margin_left = 2.0
