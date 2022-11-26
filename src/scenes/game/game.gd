@@ -229,15 +229,16 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if node.has_method("select"):
 		node.select(true)
 
-	if node.has_method("get_name_when_selected"):
-		$DialogBox.info(node.get_name_when_selected())
+	var node_name := _get_name_of(node)
+	if node_name:
+		$DialogBox.info(node_name)
 
 	if _current_screen and _current_screen.has_method("on_select"):
 		_current_screen.on_select(node)
 
 	yield($Cursor, "exited")
 
-	if node.has_method("get_name_when_selected"):
+	if node_name:
 		$DialogBox.hide()
 
 	if _current_screen and _current_screen.has_method("on_unselect"):
@@ -277,6 +278,13 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 
 	emit_signal(method_name, node)
 	unlock(lock)
+
+
+func _get_name_of(node: Node) -> String:
+	if node.has_method("get_name_when_selected"):
+		return node.get_name_when_selected()
+
+	return ""
 
 
 func _set_current_screen(next_screen: Node) -> void:
