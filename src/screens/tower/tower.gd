@@ -1,5 +1,7 @@
 extends Control
 
+var _time_change_queue := Wait.queue()
+
 
 func _ready() -> void:
 	owner.cast("maester", $Maester)
@@ -19,18 +21,39 @@ func update_birds() -> void:
 	$Window.update_bird_queue()
 
 
-var wait : GDScriptFunctionState
-
-func on_time_change(day: int, time_of_day: String) -> void:
-	if wait:
-		yield(wait, "completed")
+func on_time_change(day: int, time_of_day: int) -> void:
+	var turn = yield(
+		_time_change_queue.turn(), "completed"
+	)
 
 	$Calendar/Margin/Label.text = "Day %d" % [day]
 
-	wait = Wait.all([
-		$BackgroundSky.on_time_change(time_of_day),
-		$Time.on_time_change(time_of_day),
-	])
+	yield(
+		Wait.all([
+			_on_time_change_sky($StaticSky, 2 * time_of_day, 1.0),
+			_on_time_change_sky($AnimatedSky, 2 * time_of_day + 1, 1.0),
+			$Time.on_time_change(time_of_day),
+		]),
+		"completed"
+	)
 
-	yield(wait, "completed")
-	wait = null
+
+func _on_time_change_sky(node: Sprite, frame: int, duration: float) -> void:
+	var white := Color(1.0, 1.0, 1.0, 1.0)
+	var transparent := Color(1.0, 1.0, 1.0, 0.0)
+
+	var dup := node.duplicate(0) as Sprite
+	dup.modulate = transparent
+	dup.frame = frame
+	dup.position = Vector2.ZERO
+	node.add_child(dup)
+
+	var tween := node.create_tween()
+	tween.tween_property(node, "self_modulate", transparent, duration)
+	tween.parallel().tween_property(dup, "modulate", white, duration)
+	yield(tween, "finished")
+
+	node.frame = frame
+	node.self_modulate = white
+	dup.modulate = transparent
+	dup.queue_free()
