@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -16,7 +16,9 @@
 [ext_resource path="res://src/actions/advance-time.gd" type="Script" id=14]
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=15]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=16]
+[ext_resource path="res://assets/sound/monk_tune_extended.ogg" type="AudioStream" id=17]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
+[ext_resource path="res://assets/sound/select.ogg" type="AudioStream" id=19]
 [ext_resource path="res://src/screens/mailbox/mailbox.tscn" type="PackedScene" id=20]
 
 [node name="Game" type="Control"]
@@ -45,6 +47,10 @@ visible = false
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource( 7 )
 layers_2d_physics = 1
+
+[node name="Select" type="AudioStreamPlayer" parent="Cursor"]
+stream = ExtResource( 19 )
+volume_db = -15.0
 
 [node name="Context" type="Node" parent="."]
 script = ExtResource( 18 )
@@ -92,6 +98,11 @@ script = ExtResource( 14 )
 [node name="inn-keeper" type="Node" parent="Recipients"]
 
 [node name="Discoveries" parent="." instance=ExtResource( 10 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+autoplay = true
+bus = "Music"
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]

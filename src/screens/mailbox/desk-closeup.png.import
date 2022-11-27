@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/maester-idle.png-bdbca339ff849eb43060bb329285c45e.stex"
+path="res://.import/desk-closeup.png-ca2ed2bcc70f3534d7948a9ef60b1f01.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/characters/maester/maester-idle.png"
-dest_files=[ "res://.import/maester-idle.png-bdbca339ff849eb43060bb329285c45e.stex" ]
+source_file="res://src/screens/mailbox/desk-closeup.png"
+dest_files=[ "res://.import/desk-closeup.png-ca2ed2bcc70f3534d7948a9ef60b1f01.stex" ]
 
 [params]
 

@@ -3,8 +3,9 @@ extends Resource
 
 enum BirdType {
 	CANARY,
-	PIGEON,
 	ROBIN,
+	PIGEON,
+	CROW,
 }
 
 

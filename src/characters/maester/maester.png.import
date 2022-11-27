@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/assistant-talking.png-caa1624e5660a90561641a4b6c624a7a.stex"
+path="res://.import/maester.png-af31cdceec8318c6b853ca1153b9b9eb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/characters/assistant/assistant-talking.png"
-dest_files=[ "res://.import/assistant-talking.png-caa1624e5660a90561641a4b6c624a7a.stex" ]
+source_file="res://src/characters/maester/maester.png"
+dest_files=[ "res://.import/maester.png-af31cdceec8318c6b853ca1153b9b9eb.stex" ]
 
 [params]
 

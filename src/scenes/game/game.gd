@@ -32,8 +32,9 @@ func cast(name: String, node: Node2D) -> void:
 func character(name: String) -> Node2D:
 	return _casting[name]
 
-func animation(element: String, animation: String) -> void:
-	print([ "animation", element, animation ])
+func animate(name: String, animation: String) -> void:
+	if _casting.has(name):
+		_casting[name].animate(animation)
 
 func wait(wait_time: float) -> void:
 	yield(get_tree().create_timer(wait_time), "timeout")
@@ -43,7 +44,9 @@ func sound(name: String, pitch := 1.0) -> void:
 
 func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
 	$Cursor.lock(true)
+	_casting[speaker].animate("talk")
 	yield($DialogBox.dialog(text, speaker, characters_per_sec), "completed")
+	_casting[speaker].animate("idle")
 	$Cursor.lock(false)
 
 func info(text: String, wait_input := true) -> void:
@@ -288,6 +291,9 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 
 	if _current_screen and _current_screen.has_method("on_select"):
 		_current_screen.on_select(node)
+
+	$Cursor/Select.pitch_scale = rand_range(0.7, 1.3)
+	$Cursor/Select.play()
 
 	yield($Cursor, "exited")
 

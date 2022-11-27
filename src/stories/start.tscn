@@ -25,7 +25,7 @@ script = ExtResource( 16 )
 name = "WhiteHead"
 energy = 100
 is_known = false
-type = 0
+type = 1
 
 [node name="Start" type="Node"]
 script = ExtResource( 2 )

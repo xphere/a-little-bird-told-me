@@ -56,12 +56,12 @@ loop = false
 
 [node name="dialog#1" type="Node" parent="inn-waiter/agreement/0"]
 script = ExtResource( 2 )
-speaker = "master"
+speaker = "maester"
 dialog = "Looks like they had an \"agreement\" with the previous maester."
 
 [node name="dialog#2" type="Node" parent="inn-waiter/agreement/0"]
 script = ExtResource( 2 )
-speaker = "master"
+speaker = "maester"
 dialog = "I wonder what kind of deal are we talking about."
 
 [node name="bar" type="Node" parent="."]
@@ -115,7 +115,7 @@ dialog = "Where can I burn these letters?"
 [node name="dialog#3" type="Node" parent="bar/description/sequential#1/dialog#1"]
 script = ExtResource( 2 )
 speaker = "assistant"
-dialog = "Oh! Previous master forbade it. After..."
+dialog = "Oh! Previous maester forbade it. After..."
 
 [node name="dialog#4" type="Node" parent="bar/description/sequential#1/dialog#1"]
 script = ExtResource( 2 )

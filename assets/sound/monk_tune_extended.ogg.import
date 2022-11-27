@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/monk_tune_extended.ogg-c1721a0a2048946968265cd99ee65ec1.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/monk_tune_extended.ogg"
+dest_files=[ "res://.import/monk_tune_extended.ogg-c1721a0a2048946968265cd99ee65ec1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

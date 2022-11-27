@@ -21,7 +21,7 @@ id = "bird#%s"
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
-position = Vector2( -9, -19 )
+position = Vector2( -16, -23 )
 texture = ExtResource( 2 )
 centered = false
-hframes = 3
+hframes = 4
