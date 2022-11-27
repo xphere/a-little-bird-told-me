@@ -4,6 +4,7 @@ var _time_change_queue := Wait.queue()
 
 
 func _ready() -> void:
+	$StaticSky.visible = false
 	owner.cast("maester", $Maester)
 	owner.cast("assistant", $Assistant)
 
@@ -22,20 +23,28 @@ func update_birds() -> void:
 
 
 func on_time_change(day: int, time_of_day: int) -> void:
-	var turn = yield(
+	var immediate : bool = not $StaticSky.visible
+	if immediate:
+		$StaticSky.visible = true
+
+	var turn : Wait.QueueTurn = yield(
 		_time_change_queue.turn(), "completed"
 	)
 
 	$Calendar/Margin/Label.text = "Day %d" % [day]
 
+	var time_multiplier := 0.0 if immediate else 1.0
+
 	yield(
 		Wait.all([
-			_on_time_change_sky($StaticSky, 2 * time_of_day, 1.0),
-			_on_time_change_sky($AnimatedSky, 2 * time_of_day + 1, 1.0),
-			$Time.on_time_change(time_of_day),
+			_on_time_change_sky($StaticSky, 2 * time_of_day, 1.0 * time_multiplier),
+			_on_time_change_sky($AnimatedSky, 2 * time_of_day + 1, 1.0 * time_multiplier),
+			$Time.on_time_change(time_of_day, 0.3 * time_multiplier),
 		]),
 		"completed"
 	)
+
+	turn.finish()
 
 
 func _on_time_change_sky(node: Sprite, frame: int, duration: float) -> void:

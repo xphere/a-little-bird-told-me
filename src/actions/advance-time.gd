@@ -2,4 +2,4 @@ extends Action
 
 
 func execute() -> void:
-	owner.move_time_forward()
+	owner.call_deferred("move_time_forward")

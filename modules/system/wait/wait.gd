@@ -3,61 +3,51 @@ extends Object
 
 
 static func all(elements: Array) -> void:
-	var resource := Resource.new()
+	var resource := ResourceSignal.new()
 
 	for element in elements:
 		element.connect(
 			"completed",
-			resource, "emit_changed", [],
+			resource, "emit_signal", ["signaled", resource],
 			Object.CONNECT_DEFERRED | Object.CONNECT_ONESHOT
 		)
 
 	for element in elements:
-		yield(resource, "changed")
+		yield(resource, "signaled")
 
 
-static func queue() -> WaitQueue:
-	return WaitQueue.new()
+static func queue() -> Queue:
+	return Queue.new()
 
 
-class WaitQueueTurn:
-	extends Resource
+class QueueTurn extends Resource:
+	signal finished()
 
-	var _turn : GDScriptFunctionState
-
-	func _init(turn: GDScriptFunctionState) -> void:
-		_turn = turn
-
-	func _notification(what: int) -> void:
-		if what == NOTIFICATION_PREDELETE:
-			_turn.call_deferred("resume")
+	func finish() -> void:
+		emit_signal("finished")
 
 
-class WaitQueue:
-	var _current_turn : GDScriptFunctionState
+class Queue extends Reference:
+	var _queue := []
 
-	func turn() -> Resource:
-		var prev := _current_turn
-		var turn := _wait_to_resume()
-		_current_turn = turn
-
-		var next := _wait_to_resume()
-		if prev:
-			prev.connect("completed", next, "resume")
+	func turn() -> QueueTurn:
+		var previous := _last_in_line()
+		var turn := QueueTurn.new()
+		turn.connect(
+			"finished",
+			self, "_on_turn_finished", [turn],
+			CONNECT_DEFERRED
+		)
+		_queue.push_back(turn)
+		if previous:
+			yield(previous, "finished")
 		else:
-			next.call_deferred("resume")
+			yield(RefSignal.to_async(), "completed")
 
-		yield(next, "completed")
-		turn.connect("completed", self, "_on_turn", [turn])
+		return turn
 
-		return WaitQueueTurn.new(turn)
+	func _on_turn_finished(turn: QueueTurn) -> void:
+		_queue.erase(turn)
 
-	func _wait_to_resume() -> GDScriptFunctionState:
-		return _wait_to_resume_yield()
-
-	func _wait_to_resume_yield() -> void:
-		yield()
-
-	func _on_turn(turn) -> void:
-		if _current_turn == turn:
-			_current_turn = null
+	func _last_in_line() -> QueueTurn:
+		return null if _queue.empty() else _queue.back()
