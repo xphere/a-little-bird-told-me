@@ -1,5 +1,8 @@
 extends Control
 
+onready var _list := $"Center/List/Label"
+onready var _message_box := $"MessageBox"
+
 
 func on_enter() -> void:
 	$Back.visible = owner.has_stacked_screen()
@@ -12,7 +15,7 @@ func on_enter() -> void:
 		return
 
 	var text := "Dear %s" % recipient.name
-	$MessageBox.set_contents(text)
+	_message_box.set_contents(text)
 
 	var topics : Array = owner.get_topics_for(recipient.name)
 	var select_topic = _select("topics", topics)
@@ -22,13 +25,13 @@ func on_enter() -> void:
 
 	text += "\n\n"
 	text += "Want %s" % topic.name
-	$MessageBox.set_contents(text)
+	_message_box.set_contents(text)
 
 
 func on_leave() -> void:
 	hide()
-	$MessageBox.set_contents("")
-	$"%List".cancel()
+	_message_box.set_contents("")
+	_list.cancel()
 
 
 func _on_Back_pressed() -> void:
@@ -36,4 +39,7 @@ func _on_Back_pressed() -> void:
 
 
 func _select(title: String, options: Array) -> Node:
-	return yield($"%List".select(title, options), "completed")
+	return yield(
+		_list.select(title, options),
+		"completed"
+	)

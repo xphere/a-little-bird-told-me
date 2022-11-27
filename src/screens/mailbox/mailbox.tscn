@@ -17,14 +17,12 @@ position = Vector2( 16, 16 )
 id = "back"
 
 [node name="MessageBox" parent="." instance=ExtResource( 1 )]
-unique_name_in_owner = true
 
 [node name="Center" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="List" type="VBoxContainer" parent="Center"]
-unique_name_in_owner = true
 visible = false
 margin_left = 53.0
 margin_top = 101.0
