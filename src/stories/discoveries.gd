@@ -4,7 +4,7 @@ extends Node
 const SUBTOPIC_SEP := "."
 
 
-func topic(topic: String) -> Action:
+func discover(topic: String) -> Action:
 	var split := topic.split(SUBTOPIC_SEP, false, 1)
 	if split.size() > 1:
 		topic = split[0]

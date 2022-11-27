@@ -214,31 +214,36 @@ script = ExtResource( 6 )
 speaker = "assistant"
 dialog = "I'm going to make my parents proud anyway!"
 
-[node name="Mailbox" parent="." instance=ExtResource( 29 )]
+[node name="MailBox" parent="." instance=ExtResource( 29 )]
 position = Vector2( 33, 124 )
+id = "box"
 
-[node name="with-name" type="Node" parent="Mailbox"]
+[node name="with-name" type="Node" parent="MailBox"]
 script = ExtResource( 23 )
-expression_contents = "\"Mailbox\""
+expression_contents = "\"Box\""
 
-[node name="on-help-request" type="Node" parent="Mailbox"]
+[node name="on-interact" type="Node" parent="MailBox"]
+script = ExtResource( 9 )
+screen_name = "MailBox"
+
+[node name="on-help-request" type="Node" parent="MailBox"]
 script = ExtResource( 8 )
 
-[node name="dialog#1" type="Node" parent="Mailbox/on-help-request"]
+[node name="dialog#1" type="Node" parent="MailBox/on-help-request"]
 script = ExtResource( 6 )
 speaker = "assistant"
 dialog = "This is where we put blank papers."
 
-[node name="if" type="Node" parent="Mailbox/on-help-request"]
+[node name="if" type="Node" parent="MailBox/on-help-request"]
 script = ExtResource( 16 )
 expression_contents = "context(\"send-letters\", false)"
 
-[node name="dialog#has-papers" type="Node" parent="Mailbox/on-help-request/if"]
+[node name="dialog#has-papers" type="Node" parent="MailBox/on-help-request/if"]
 script = ExtResource( 6 )
 speaker = "assistant"
 dialog = "There is plenty of blank paper"
 
-[node name="dialog#is-empty" type="Node" parent="Mailbox/on-help-request/if"]
+[node name="dialog#is-empty" type="Node" parent="MailBox/on-help-request/if"]
 script = ExtResource( 6 )
 speaker = "assistant"
 dialog = "It is empty, I must go get some blank paper."

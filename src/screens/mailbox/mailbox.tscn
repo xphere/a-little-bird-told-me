@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/ui/message-box/message-box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/screens/mailbox/mailbox.gd" type="Script" id=2]
+[ext_resource path="res://src/objects/back/back.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/screens/mailbox/list.gd" type="Script" id=4]
+
+[node name="MailBox" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0901961, 0.0705882, 0.0980392, 1 )
+script = ExtResource( 2 )
+
+[node name="Back" parent="." instance=ExtResource( 3 )]
+position = Vector2( 16, 16 )
+id = "back"
+
+[node name="MessageBox" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="List" type="VBoxContainer" parent="Center"]
+unique_name_in_owner = true
+visible = false
+margin_left = 53.0
+margin_top = 101.0
+margin_right = 203.0
+margin_bottom = 139.0
+rect_min_size = Vector2( 150, 0 )
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Center/List"]
+margin_right = 150.0
+margin_bottom = 14.0
+text = "Recipients"
+
+[node name="Button" type="Button" parent="Center/List"]
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 38.0
+
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

@@ -96,13 +96,54 @@ func discover(url: String) -> void:
 		"to": current,
 	}
 
-	var action : Action = $Topics.topic(topic)
+	var action : Action = $Discoveries.discover(topic)
 	if action and _lock:
 		yield(RefSignal.as_async(action.execute()), "completed")
 	elif action:
 		var lock = yield(lock(), "completed")
 		yield(RefSignal.as_async(action.execute()), "completed")
 		unlock(lock)
+
+
+onready var _recipients := []
+
+func get_recipients() -> Array:
+	return _recipients.duplicate()
+
+func set_recipient(name: String, unlock: bool = true) -> void:
+	var recipient := $Recipients.get_node(name)
+	var is_unlocked := _recipients.has(recipient)
+	if unlock and not is_unlocked:
+		_recipients.push_back(recipient)
+	elif not unlock and is_unlocked:
+		_recipients.erase(recipient)
+
+
+onready var _topics := {
+	"common": [],
+}
+
+func get_topics_for(recipient: String) -> Array:
+	var topics := []
+	topics.append_array(_topics["common"])
+	if _topics.has(recipient):
+		topics.append_array(_topics[recipient])
+
+	return topics
+
+
+func set_topic(name: String, recipient: String = "") -> void:
+	if not $Topics.has_node(name):
+		return
+
+	var topic := $Topics.get_node(name)
+	var key := recipient if recipient else "common"
+	if not _topics.has(key):
+		_topics[key] = []
+
+	var topics : Array = _topics[key]
+	if not topics.has(topic):
+		topics.append(topic)
 
 
 var _birds := {}
@@ -196,14 +237,14 @@ func pop_screen(context: Dictionary = {}) -> void:
 
 
 func to_screen(name: String, context: Dictionary = {}) -> void:
-	$Context.merge(context)
-
 	if not has_node(name):
 		return
 
 	var next_screen := get_node(name) as CanvasItem
 	if next_screen == null:
 		return
+
+	$Context.merge(context)
 
 	if _current_screen and _current_screen.has_method("on_leave"):
 		_current_screen.on_leave()
