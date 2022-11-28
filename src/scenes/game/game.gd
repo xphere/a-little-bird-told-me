@@ -151,6 +151,18 @@ func set_topic(name: String, recipient: String = "") -> void:
 		topics.append(topic)
 
 
+onready var _closings := []
+
+func get_closings() -> Array:
+	return _closings.duplicate()
+
+
+onready var _signatures := []
+
+func get_signatures() -> Array:
+	return _signatures.duplicate()
+
+
 var _birds := {}
 
 func register_bird(bird_resource: Resource) -> void:

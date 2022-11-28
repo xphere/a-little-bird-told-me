@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/sound/select.ogg" type="AudioStream" id=19]
 [ext_resource path="res://src/screens/mailbox/mailbox.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/scenes/game/planned.gd" type="Script" id=21]
+[ext_resource path="res://src/objects/letters/section.gd" type="Script" id=22]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -79,27 +80,65 @@ script = ExtResource( 14 )
 
 [node name="Day#-1" parent="Story" instance=ExtResource( 11 )]
 
-[node name="Day#0" parent="Story" instance=ExtResource( 5 )]
-
-[node name="Topics" type="Node" parent="."]
-
-[node name="bar" type="Node" parent="Topics"]
-
-[node name="beverages" type="Node" parent="Topics"]
-
-[node name="soldiers" type="Node" parent="Topics"]
+[node name="Day#-2" parent="Story" instance=ExtResource( 5 )]
 
 [node name="Recipients" type="Node" parent="."]
 
 [node name="king" type="Node" parent="Recipients"]
+script = ExtResource( 22 )
+content = "To Your Majesty the King of Earauthain
+I wish to inform you of an important event I believe deserves your attention."
 
 [node name="queen" type="Node" parent="Recipients"]
+script = ExtResource( 22 )
+content = "To Your Majesty the Queen of Earauthain
+I wish to inform you of an important event I believe deserves your attention."
 
 [node name="witch" type="Node" parent="Recipients"]
+script = ExtResource( 22 )
+content = "To the witch in the forest"
 
 [node name="aristocrats" type="Node" parent="Recipients"]
+script = ExtResource( 22 )
+content = "To the aristocrats"
 
 [node name="inn-keeper" type="Node" parent="Recipients"]
+script = ExtResource( 22 )
+content = "To the inn-keeper of The Happy Bagpipe"
+
+[node name="Topics" type="Node" parent="."]
+
+[node name="bar" type="Node" parent="Topics"]
+script = ExtResource( 22 )
+content = "I would like to ask you about this reading B.A.R. at the end of the letters. What is their meaning?"
+
+[node name="beverages" type="Node" parent="Topics"]
+script = ExtResource( 22 )
+content = "I wonder if you can send some of your best beverages to the soldier camp outside town?"
+
+[node name="soldiers" type="Node" parent="Topics"]
+script = ExtResource( 22 )
+content = "I've heard rumours of enemy movement near the east frontier. Would you send a soldier troop to the zone? Just to make sure."
+
+[node name="Closings" type="Node" parent="."]
+
+[node name="request-info" type="Node" parent="Closings"]
+script = ExtResource( 22 )
+content = "As usual, any information you can provide to me will be disclosed to The Crown."
+
+[node name="your-humble-servant" type="Node" parent="Closings"]
+script = ExtResource( 22 )
+content = "Your humble servant,"
+
+[node name="Signatures" type="Node" parent="."]
+
+[node name="maester" type="Node" parent="Signatures"]
+script = ExtResource( 22 )
+content = "The Kingdom's Bird Caretaker"
+
+[node name="ear-of-the-king" type="Node" parent="Signatures"]
+script = ExtResource( 22 )
+content = "The Ear of the King"
 
 [node name="Discoveries" parent="." instance=ExtResource( 10 )]
 
