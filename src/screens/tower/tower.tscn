@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://modules/action/native-expression.gd" type="Script" id=23]
 [ext_resource path="res://src/screens/tower/map-desk.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/screens/tower/time.gd" type="Script" id=25]
+[ext_resource path="res://src/screens/tower/sky.gd" type="Script" id=26]
 [ext_resource path="res://src/ui/dialog-box/dialog.stylebox.tres" type="StyleBox" id=27]
 [ext_resource path="res://assets/fonts/Bangalor.ttf" type="DynamicFontData" id=28]
 [ext_resource path="res://src/screens/tower/mailbox.tscn" type="PackedScene" id=29]
@@ -49,6 +50,8 @@ script = ExtResource( 4 )
 position = Vector2( 52, 114 )
 texture = ExtResource( 11 )
 vframes = 12
+script = ExtResource( 26 )
+frame_multiplier = 2
 
 [node name="AnimatedSky" type="Sprite" parent="."]
 material = SubResource( 2 )
@@ -56,6 +59,9 @@ position = Vector2( 66, 114 )
 texture = ExtResource( 11 )
 vframes = 12
 frame = 1
+script = ExtResource( 26 )
+frame_multiplier = 2
+frame_offset = 1
 
 [node name="BackgroundWall" type="TextureRect" parent="."]
 anchor_right = 1.0

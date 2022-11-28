@@ -37,32 +37,11 @@ func on_time_change(day: int, time_of_day: int) -> void:
 
 	yield(
 		Wait.all([
-			_on_time_change_sky($StaticSky, 2 * time_of_day, 1.0 * time_multiplier),
-			_on_time_change_sky($AnimatedSky, 2 * time_of_day + 1, 1.0 * time_multiplier),
+			$StaticSky.transition(time_of_day, 1.0 * time_multiplier),
+			$AnimatedSky.transition(time_of_day, 1.0 * time_multiplier),
 			$Time.on_time_change(time_of_day, 0.3 * time_multiplier),
 		]),
 		"completed"
 	)
 
 	turn.finish()
-
-
-func _on_time_change_sky(node: Sprite, frame: int, duration: float) -> void:
-	var white := Color(1.0, 1.0, 1.0, 1.0)
-	var transparent := Color(1.0, 1.0, 1.0, 0.0)
-
-	var dup := node.duplicate(0) as Sprite
-	dup.modulate = transparent
-	dup.frame = frame
-	dup.position = Vector2.ZERO
-	node.add_child(dup)
-
-	var tween := node.create_tween()
-	tween.tween_property(node, "self_modulate", transparent, duration)
-	tween.parallel().tween_property(dup, "modulate", white, duration)
-	yield(tween, "finished")
-
-	node.frame = frame
-	node.self_modulate = white
-	dup.modulate = transparent
-	dup.queue_free()
