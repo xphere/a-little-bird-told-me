@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/royal-letter.png-db19b55b8084d4c6d6c314451c10bbb2.stex"
+path="res://.import/neat-letter.png-1df11548ae55fe219cabe140c51519e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/screens/letter/royal-letter.png"
-dest_files=[ "res://.import/royal-letter.png-db19b55b8084d4c6d6c314451c10bbb2.stex" ]
+source_file="res://src/screens/letter/assets/neat-letter.png"
+dest_files=[ "res://.import/neat-letter.png-1df11548ae55fe219cabe140c51519e4.stex" ]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/ui/message-box/message-box.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/screens/letter/letter.gd" type="Script" id=2]
+[ext_resource path="res://src/screens/letter/scripts/letter.gd" type="Script" id=2]
 [ext_resource path="res://src/objects/back/back.tscn" type="PackedScene" id=3]
 
 [node name="Letter" type="ColorRect"]

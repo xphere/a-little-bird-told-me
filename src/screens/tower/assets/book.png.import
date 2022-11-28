@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mailbox.png-aea306694da6149d697fff7a42b77831.stex"
+path="res://.import/book.png-cf04776a4a4cd50034c986e3ba559e27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/screens/tower/mailbox.png"
-dest_files=[ "res://.import/mailbox.png-aea306694da6149d697fff7a42b77831.stex" ]
+source_file="res://src/screens/tower/assets/book.png"
+dest_files=[ "res://.import/book.png-cf04776a4a4cd50034c986e3ba559e27.stex" ]
 
 [params]
 

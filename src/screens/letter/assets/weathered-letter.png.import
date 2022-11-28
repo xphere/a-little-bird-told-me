@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bird.png-5f73d5ace09220cb0b412a6b53fcfcea.stex"
+path="res://.import/weathered-letter.png-4add613be9d1492827ae3020e351ed31.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/screens/tower/bird.png"
-dest_files=[ "res://.import/bird.png-5f73d5ace09220cb0b412a6b53fcfcea.stex" ]
+source_file="res://src/screens/letter/assets/weathered-letter.png"
+dest_files=[ "res://.import/weathered-letter.png-4add613be9d1492827ae3020e351ed31.stex" ]
 
 [params]
 

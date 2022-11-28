@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mail-desk.png-d04ec2cd3566eace6162f9a37ef3fa56.stex"
+path="res://.import/map-desk.png-7660bf01e9046231f1cb80df5bd02e7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/screens/tower/mail-desk.png"
-dest_files=[ "res://.import/mail-desk.png-d04ec2cd3566eace6162f9a37ef3fa56.stex" ]
+source_file="res://src/screens/tower/assets/map-desk.png"
+dest_files=[ "res://.import/map-desk.png-7660bf01e9046231f1cb80df5bd02e7f.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background.png-e94b0757bd68c00d6f67b2f15418e7c8.stex"
+path="res://.import/desk-closeup.png-faa88df9e694de56c6c2a860894d4ce4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/screens/tower/background.png"
-dest_files=[ "res://.import/background.png-e94b0757bd68c00d6f67b2f15418e7c8.stex" ]
+source_file="res://src/screens/mail-desk/assets/desk-closeup.png"
+dest_files=[ "res://.import/desk-closeup.png-faa88df9e694de56c6c2a860894d4ce4.stex" ]
 
 [params]
 
