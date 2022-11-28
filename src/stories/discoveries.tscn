@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://modules/action/action.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=6]
 [ext_resource path="res://modules/action/branch.gd" type="Script" id=7]
 [ext_resource path="res://modules/action/random.gd" type="Script" id=8]
+[ext_resource path="res://src/actions/plan-action.gd" type="Script" id=9]
 
 [node name="Discoveries" type="Node"]
 script = ExtResource( 4 )
@@ -76,9 +77,28 @@ script = ExtResource( 3 )
 loop = false
 
 [node name="dialog#1" type="Node" parent="bar/all/sequential#1"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="bar/all/sequential#1/dialog#1"]
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Oh... Burn After Reading... B.A.R. Now I understand."
+
+[node name="plan#1" type="Node" parent="bar/all/sequential#1/dialog#1"]
+script = ExtResource( 9 )
+
+[node name="dialog#1" type="Node" parent="bar/all/sequential#1/dialog#1/plan#1"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="bar/all/sequential#1/dialog#1/plan#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I wonder if I should worry about burning those messages..."
+
+[node name="dialog#2" type="Node" parent="bar/all/sequential#1/dialog#1/plan#1/dialog#1"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Believe me, you don't want to."
 
 [node name="dialog#2" type="Node" parent="bar/all/sequential#1"]
 script = ExtResource( 2 )
