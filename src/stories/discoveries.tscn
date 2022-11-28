@@ -188,3 +188,33 @@ dialog = "Bimonthly Activity Report?"
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Business Activity Register?"
+
+[node name="innkeeper" type="Node" parent="."]
+
+[node name="unlock" type="Node" parent="innkeeper"]
+script = ExtResource( 3 )
+
+[node name="ActionDialog" type="Node" parent="innkeeper/unlock"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "You have unlocked the innkeeper."
+
+[node name="aristocrats" type="Node" parent="."]
+
+[node name="unlock" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "Maese"
+dialog = "What is this Order about?"
+
+[node name="dialog#2" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "Maese"
+dialog = "And why they are giving us money?"
+
+[node name="dialog#3" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "Maese"
+dialog = "I should answer back..."

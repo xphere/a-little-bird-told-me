@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "A warm welcome"
+letter_contents = "Congratulations and welcome to the Aviary, Maese. 
+We are a group of aristocrats, close friends with King Berteram and we just heard about the sad news realted to your father's passing, he will be missed in Palace. Maese, you will find a chest with gold and jewels at the entrance of the aviary, it is just a small help for you and your family. 
+Please, contact us as soon as possible for an important matter.
+
+[url=aristocrats.unlock]The Order of the Silent Scarf[/url]"
+letter_type = 2
