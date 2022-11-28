@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
 [ext_resource path="res://assets/sound/select.ogg" type="AudioStream" id=19]
 [ext_resource path="res://src/screens/mailbox/mailbox.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/scenes/game/planned.gd" type="Script" id=21]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -54,6 +55,9 @@ volume_db = -15.0
 
 [node name="Context" type="Node" parent="."]
 script = ExtResource( 18 )
+
+[node name="Planned" type="Node" parent="."]
+script = ExtResource( 21 )
 
 [node name="Story" type="Node" parent="."]
 script = ExtResource( 9 )

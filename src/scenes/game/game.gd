@@ -107,6 +107,8 @@ func discover(url: String) -> void:
 		yield(RefSignal.as_async(action.execute()), "completed")
 		unlock(lock)
 
+func plan_action(in_steps: int, action: Action) -> void:
+	$Planned.register(in_steps, action)
 
 onready var _recipients := []
 
@@ -277,8 +279,8 @@ func _update_time() -> void:
 	})
 
 	yield($Tower.on_time_change(current_day, time_of_day), "completed")
-
-	$Story.execute(current_day, time_string)
+	yield($Planned.execute(current_day, time_of_day), "completed")
+	yield($Story.execute(current_day, time_string), "completed")
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
