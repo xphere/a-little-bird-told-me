@@ -1,6 +1,6 @@
 extends Control
 
-onready var _list := $"Center/List/Label"
+onready var _list := $"Center/List"
 onready var _message_box := $"MessageBox"
 
 
