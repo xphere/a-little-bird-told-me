@@ -6,6 +6,7 @@ var _signal := ResourceSignal.new()
 
 func _ready() -> void:
 	_button_template = $Button
+	_button_template.visible = true
 	remove_child(_button_template)
 
 
@@ -28,8 +29,8 @@ func select(title: String, options: Array) -> Node:
 			_signal, "emit_signal", ["signaled", option],
 			CONNECT_DEFERRED | CONNECT_ONESHOT
 		)
-		button.text = option.name
-		add_child(button)
+		button.text = option.title
+		$Buttons.add_child(button)
 		buttons.append(button)
 
 	show()
