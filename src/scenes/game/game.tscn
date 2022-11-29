@@ -22,6 +22,7 @@
 [ext_resource path="res://src/screens/mailbox/mailbox.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/scenes/game/planned.gd" type="Script" id=21]
 [ext_resource path="res://src/objects/letters/section.gd" type="Script" id=22]
+[ext_resource path="res://src/stories/day1.tscn" type="PackedScene" id=23]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -158,6 +159,8 @@ content = "The Ear of the King"
 stream = ExtResource( 17 )
 autoplay = true
 bus = "Music"
+
+[node name="Day#1" parent="Story" instance=ExtResource( 23 )]
 
 [connection signal="entered" from="Cursor" to="." method="_on_Cursor_entered"]
 [connection signal="help" from="Cursor" to="." method="_on_Cursor_help"]

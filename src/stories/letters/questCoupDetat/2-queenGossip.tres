@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#queenGossip#1"
+letter_name = "Rumors about our Queen"
+letter_contents = "Thanks for responding back, Maester Bird Caretaker.
+
+We wanted to ask help from you to remove the sin and chaos that surrounds the Palace. Have you heard the rumors about the Queen's love for young soldiers and mead? 
+
+We request your help to get that to palace. [url=aristocrats.JohnMarshal]John Marshal[/url] at the Kingdom frontier and [url=aristocrats.Eldelbar]Eldelbar the Innkeeper[/url] could help us.
+
+The Order of the Silent Scarf"
+letter_type = 1

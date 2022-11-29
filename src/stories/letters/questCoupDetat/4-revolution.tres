@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#queenGossip#1"
+letter_name = "Latest News from Liyord Today"
+letter_contents = "Extra! Extra! 
+
+Fire in the palace! A furious crowd has attacked the Royal residency after the controversy of the Queen that was announced as an exclusive by this newspaper. 
+
+[url=aristocrats.revolution]More than 5O people died[/url] in the rally and members of the royal family in other counties of Earauthain are being imprisoned.
+
+Liyord Today."
+letter_type = 1

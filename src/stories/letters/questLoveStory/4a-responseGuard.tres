@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "The Death of an Innocent"
+letter_contents = "Dear Maester,
+
+I am sending this letter to inform you that the royal guard at the Lesukar tower has been found helping the Princess escape. [url=witch.guardExecution]He was executed this morning[/url] and the vigilance has been increased so no more letters will be sent there.  
+
+What did I see in my crystal ball? I have the feeling that you were somehow involved...
+
+Asumcordas Virgilia"
+letter_type = 2

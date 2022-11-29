@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#queenGossip#1"
+letter_name = "Thank you"
+letter_contents = "Maester Bird Caretaker,
+
+After your help, the entire nation will thank you. 
+
+You choosed the path of the good people and the [url=aristocrats.helpDelivered]Royal Family[/url] will finally get what they deserve.
+
+The Order of the Silent Scarf"
+letter_type = 1

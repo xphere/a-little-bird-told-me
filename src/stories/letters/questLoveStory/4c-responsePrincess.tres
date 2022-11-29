@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "A warm welcome"
+letter_contents = "Thank you Maester for helping me escape from the Tower.
+
+I will now head to Thiperis with the love of my live. I just felt in love with the Royal Guard of my prison. 
+
+You know I really appreciated your father and because of that I want to invite you and your family to [url=princess.escape]my wedding[/url] next year.
+
+Thank you again Maester.
+
+Princess Nylfena."
+letter_type = 2

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "A warm welcome"
+letter_contents = "Dear Maester,
+
+I am sending this letter to inform you that the Royal Guard is coming to the Aviary to judge and [url=witch.executionMaester]execute you[/url] because of your intentions to help the Princess escape from the Lesukar tower. Enjoy your last moments of freedom!
+
+Asumcordas Virgilia"
+letter_type = 2

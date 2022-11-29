@@ -188,3 +188,169 @@ dialog = "Bimonthly Activity Report?"
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Business Activity Register?"
+
+[node name="innkeeper" type="Node" parent="."]
+
+[node name="unlock" type="Node" parent="innkeeper"]
+script = ExtResource( 3 )
+
+[node name="ActionDialog" type="Node" parent="innkeeper/unlock"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "You have unlocked the innkeeper."
+
+[node name="aristocrats" type="Node" parent="."]
+
+[node name="unlock" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "What is this Order about?"
+
+[node name="dialog#2" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "And why they are giving us money?"
+
+[node name="dialog#3" type="Node" parent="aristocrats/unlock"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I should answer back..."
+
+[node name="JohnMarshal" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/JohnMarshal"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I wonder how long our birds will take  to go that far."
+
+[node name="Eldelbar" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/Eldelbar"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Can we send messages to people not related to the interests of the King?"
+
+[node name="dialog#2" type="Node" parent="aristocrats/Eldelbar"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Well... In fact this is an interest of the Queen, so..."
+
+[node name="helpDelivered" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/helpDelivered"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Your father would be proud of this decision."
+
+[node name="revolution" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/revolution"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "I hope they don't come after us..."
+
+[node name="dialog#2" type="Node" parent="aristocrats/revolution"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Do not be afraid kid, there is nothing to worry about. The nobility will take care of us and our birds."
+
+[node name="newQueen" type="Node" parent="aristocrats"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="aristocrats/newQueen"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Long Live the Queen!"
+
+[node name="witch" type="Node" parent="."]
+
+[node name="foundPrincess" type="Node" parent="witch"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="witch/foundPrincess"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Why the princess is in a tower? That is unfair!"
+
+[node name="dialog#2" type="Node" parent="witch/foundPrincess"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Are not you thinking about trying to rescue her, right?"
+
+[node name="guardExecution" type="Node" parent="witch"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="witch/guardExecution"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "You did not see anything."
+
+[node name="dialog#2" type="Node" parent="witch/guardExecution"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "What are you talking about maester?"
+
+[node name="executionMaester" type="Node" parent="witch"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="witch/executionMaester"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "No no no!! I did nothing wrong! Noo!!"
+
+[node name="princess" type="Node" parent="."]
+
+[node name="prophecy" type="Node" parent="princess"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="princess/prophecy"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "I thought those  were just stories for when children didn't want to go to bed..."
+
+[node name="father" type="Node" parent="princess"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="princess/father"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I need to help the Princess."
+
+[node name="love" type="Node" parent="princess"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="princess/love"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I will save you me love!"
+
+[node name="dialog#2" type="Node" parent="princess/love"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "That is going to be a disaster..."
+
+[node name="dialog#3" type="Node" parent="princess/love"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "What did you say?!"
+
+[node name="dialog#4" type="Node" parent="princess/love"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Nothing maester, nothing..."
+
+[node name="escape" type="Node" parent="princess"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="princess/escape"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Did not you were in love with me? Why do you abandon me in this miserable city? 
+Me Love!!"
