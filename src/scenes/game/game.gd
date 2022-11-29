@@ -17,11 +17,13 @@ export(TimeOfDay) var time_of_day := TimeOfDay.LAUDES
 
 var _current_screen : CanvasItem
 var _screens_stack := []
+var _is_ready := false
 
 
 func _ready() -> void:
 	randomize()
-	_update_time()
+	yield(_update_time(), "completed")
+	_is_ready = true
 
 
 var _casting := {}
@@ -56,6 +58,11 @@ func info(text: String, wait_input := true) -> void:
 
 func allow_topics(value: bool) -> void:
 	$Letter.allow_topics(value)
+
+var _notice_queue := Wait.queue()
+
+func notice(text: String) -> void:
+	yield($Notice.notice(text, 1.0), "completed")
 
 
 var _lock : Resource
@@ -117,6 +124,8 @@ func get_recipients() -> Array:
 
 func set_recipient(name: String, unlock: bool = true) -> void:
 	$Recipients.set_availability(name, unlock)
+	if unlock and _is_ready:
+		notice("Unlocked new recipient")
 
 
 func get_topics_for(recipient: String) -> Array:
@@ -125,6 +134,8 @@ func get_topics_for(recipient: String) -> Array:
 
 func set_topic(name: String, unlock: bool = true) -> void:
 	$Topics.set_availability(name, unlock)
+	if unlock and _is_ready:
+		notice("Unlocked new topic")
 
 
 func get_closings() -> Array:
@@ -133,6 +144,8 @@ func get_closings() -> Array:
 
 func set_closing(name: String, unlock: bool = true) -> void:
 	$Closings.set_availability(name, unlock)
+	if unlock and _is_ready:
+		notice("Unlocked new closing")
 
 
 func get_signatures() -> Array:
@@ -141,6 +154,8 @@ func get_signatures() -> Array:
 
 func set_signature(name: String, unlock: bool = true) -> void:
 	$Signatures.set_availability(name, unlock)
+	if unlock and _is_ready:
+		notice("Unlocked new signature")
 
 
 var _birds := {}

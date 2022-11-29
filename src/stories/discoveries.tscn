@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://modules/action/action.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://modules/action/branch.gd" type="Script" id=7]
 [ext_resource path="res://modules/action/random.gd" type="Script" id=8]
 [ext_resource path="res://src/actions/plan-action.gd" type="Script" id=9]
+[ext_resource path="res://src/actions/unlock-section.gd" type="Script" id=10]
 
 [node name="Discoveries" type="Node"]
 script = ExtResource( 4 )
@@ -157,9 +158,17 @@ script = ExtResource( 3 )
 loop = false
 
 [node name="dialog#1" type="Node" parent="bar/acronym"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="bar/acronym/dialog#1"]
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "B.A.R. I wonder who it is. Or what it means."
+
+[node name="unlock#bar" type="Node" parent="bar/acronym/dialog#1"]
+script = ExtResource( 10 )
+type = 1
+key = "bar"
 
 [node name="random" type="Node" parent="bar/acronym"]
 script = ExtResource( 8 )
@@ -225,7 +234,7 @@ script = ExtResource( 6 )
 [node name="dialog#1" type="Node" parent="aristocrats/JohnMarshal"]
 script = ExtResource( 2 )
 speaker = "maester"
-dialog = "I wonder how long our birds will take  to go that far."
+dialog = "I wonder how long our birds will take to go that far."
 
 [node name="Eldelbar" type="Node" parent="aristocrats"]
 script = ExtResource( 6 )

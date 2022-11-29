@@ -16,7 +16,7 @@ texture = ExtResource( 5 )
 script = ExtResource( 2 )
 
 [node name="Back" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 16 )
+position = Vector2( 16, 23 )
 id = "back"
 
 [node name="MessageBox" parent="." instance=ExtResource( 1 )]

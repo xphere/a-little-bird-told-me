@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scenes/game/section-list.gd" type="Script" id=1]
+[ext_resource path="res://src/objects/letters/section.gd" type="Script" id=2]
+
+[node name="Recipients" type="Node"]
+script = ExtResource( 1 )
+
+[node name="king" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "The King"
+content = "To Your Majesty the King of Earauthain"
+
+[node name="queen" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "The Queen"
+content = "To Your Majesty the Queen of Earauthain"
+
+[node name="witch" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "The Witch"
+content = "To the witch in the forest"
+
+[node name="aristocrats" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "Aristocrats"
+content = "To the aristocrats"
+
+[node name="inn-keeper" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "Inn-Keeper"
+content = "To the inn-keeper of The Happy Bagpipe"
