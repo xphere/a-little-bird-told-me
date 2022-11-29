@@ -1,7 +1,8 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/resources/bird.gd" type="Script" id=1]
-[ext_resource path="res://src/stories/letters/letter.inn-waiter.1.tres" type="Resource" id=3]
+[ext_resource path="res://src/stories/letters/questCoupDetat/4-revolution.tres" type="Resource" id=2]
+[ext_resource path="res://src/stories/letters/questLoveStory/4c-responsePrincess.tres" type="Resource" id=3]
 [ext_resource path="res://src/actions/letter.gd" type="Script" id=4]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=5]
 [ext_resource path="res://src/actions/cast-character.gd" type="Script" id=6]
@@ -9,7 +10,6 @@
 [ext_resource path="res://src/actions/to-screen.gd" type="Script" id=8]
 [ext_resource path="res://src/actions/to-maildesk.gd" type="Script" id=9]
 [ext_resource path="res://src/actions/bird.gd" type="Script" id=10]
-[ext_resource path="res://src/stories/letters/questCoupDetat/queenGossip.tres" type="Resource" id=11]
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 1 )
@@ -37,11 +37,7 @@ script = ExtResource( 8 )
 
 [node name="letter#aristocrats-intro#1" type="Node" parent="introduce#tower"]
 script = ExtResource( 4 )
-letter_resource = ExtResource( 11 )
-
-[node name="letter#aristocrats-queengossip#2" type="Node" parent="introduce#tower"]
-script = ExtResource( 4 )
-letter_resource = ExtResource( 11 )
+letter_resource = ExtResource( 2 )
 
 [node name="letter#inn-waiter#1" type="Node" parent="introduce#tower"]
 script = ExtResource( 4 )

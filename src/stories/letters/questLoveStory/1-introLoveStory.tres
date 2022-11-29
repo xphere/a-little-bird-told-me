@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "Royal Secrets"
+letter_contents = "Nice to meet you Maester,
+
+I am Virgilia, the Asumcordas. Do you want to know the secrets of this Kingdom? You send the pidgeon to the right place.
+
+There is a secret that you need to know, now that you work for the Royal Family, a big family. Big enough to keep the legitimate [url=witch.foundPrincess]Princess of Earauthain in a Tower at Lesukar[/url]. 
+
+Oh damn, not again, I cannot keep a secret!
+
+Asumcordas Virgilia"
+letter_type = 2

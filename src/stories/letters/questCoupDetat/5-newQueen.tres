@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#queenGossip#1"
+letter_name = "Long Live the Queen!"
+letter_contents = "Maester Bird Caretaker,
+
+Or should we say - Marquess of Southwold. We have finished with the tyranny of King Berteram VI and we have been blessed to live in the same era as Queen Mirabelle. The Queen herself wants to thank you personally for the help to the people of Earauthain and give you the title of Marquess. 
+
+[url=aristocrats.newQueen]Long Live the Queen Mirabelle![/url]
+
+
+The Order of the Silent Scarf"
+letter_type = 1

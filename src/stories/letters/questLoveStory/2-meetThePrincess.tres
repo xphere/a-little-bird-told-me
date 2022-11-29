@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "The Lovely Princess"
+letter_contents = "What happened to Raimondo, your father?
+
+Oh sorry, I am the legitimate Princess of Earauthain. I have been in this tower for as long as I can remember and for most of my years here, your [url=princess.father]father was my friend and confident[/url], the only person that was brave enough to talk with this \"monster\". 
+
+I imagine you already had heard about the [url=princess.prophecy]prophecy[/url]...
+
+Princess Nylfena."
+letter_type = 2

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#intro#1"
+letter_name = "... --- ..."
+letter_contents = "Thank you Maester,
+
+I appreciate your poem but I would appreciate even more if you could help me escape this damn tower. I would owe you me life. Please! [url=princess.love]Be my hero![/url]
+
+Princess Nylfena."
+letter_type = 2
