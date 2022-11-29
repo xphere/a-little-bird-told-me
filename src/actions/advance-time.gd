@@ -1,3 +1,4 @@
+class_name ActionAdvanceTime
 extends Action
 
 
