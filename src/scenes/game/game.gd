@@ -110,57 +110,37 @@ func discover(url: String) -> void:
 func plan_action(in_steps: int, action: Action) -> void:
 	$Planned.register(in_steps, action)
 
-onready var _recipients := []
 
 func get_recipients() -> Array:
-	return _recipients.duplicate()
+	return $Recipients.get_available()
+
 
 func set_recipient(name: String, unlock: bool = true) -> void:
-	var recipient := $Recipients.get_node(name)
-	var is_unlocked := _recipients.has(recipient)
-	if unlock and not is_unlocked:
-		_recipients.push_back(recipient)
-	elif not unlock and is_unlocked:
-		_recipients.erase(recipient)
+	$Recipients.set_availability(name, unlock)
 
-
-onready var _topics := {
-	"common": [],
-}
 
 func get_topics_for(recipient: String) -> Array:
-	var topics := []
-	topics.append_array(_topics["common"])
-	if _topics.has(recipient):
-		topics.append_array(_topics[recipient])
-
-	return topics
+	return $Topics.get_available_for(recipient)
 
 
-func set_topic(name: String, recipient: String = "") -> void:
-	if not $Topics.has_node(name):
-		return
+func set_topic(name: String, unlock: bool = true) -> void:
+	$Topics.set_availability(name, unlock)
 
-	var topic := $Topics.get_node(name)
-	var key := recipient if recipient else "common"
-	if not _topics.has(key):
-		_topics[key] = []
-
-	var topics : Array = _topics[key]
-	if not topics.has(topic):
-		topics.append(topic)
-
-
-onready var _closings := []
 
 func get_closings() -> Array:
-	return _closings.duplicate()
+	return $Closings.get_available()
 
 
-onready var _signatures := []
+func set_closing(name: String, unlock: bool = true) -> void:
+	$Closings.set_availability(name, unlock)
+
 
 func get_signatures() -> Array:
-	return _signatures.duplicate()
+	return $Signatures.get_available()
+
+
+func set_signature(name: String, unlock: bool = true) -> void:
+	$Signatures.set_availability(name, unlock)
 
 
 var _birds := {}

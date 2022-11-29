@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://src/scenes/game/planned.gd" type="Script" id=21]
 [ext_resource path="res://src/objects/letters/section.gd" type="Script" id=22]
 [ext_resource path="res://src/stories/day1.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/scenes/game/section-dict.gd" type="Script" id=24]
+[ext_resource path="res://src/scenes/game/section-list.gd" type="Script" id=25]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -84,6 +86,7 @@ script = ExtResource( 14 )
 [node name="Day#-2" parent="Story" instance=ExtResource( 5 )]
 
 [node name="Recipients" type="Node" parent="."]
+script = ExtResource( 25 )
 
 [node name="king" type="Node" parent="Recipients"]
 script = ExtResource( 22 )
@@ -113,6 +116,7 @@ title = "Inn-Keeper"
 content = "To the inn-keeper of The Happy Bagpipe"
 
 [node name="Topics" type="Node" parent="."]
+script = ExtResource( 24 )
 
 [node name="bar" type="Node" parent="Topics"]
 script = ExtResource( 22 )
@@ -130,6 +134,7 @@ title = "Soldiers"
 content = "I've heard rumours of enemy movement near the east frontier. Would you send a soldier troop to the zone? Just to make sure."
 
 [node name="Closings" type="Node" parent="."]
+script = ExtResource( 25 )
 
 [node name="request-info" type="Node" parent="Closings"]
 script = ExtResource( 22 )
@@ -142,6 +147,7 @@ title = "Your humble servant"
 content = "Your humble servant,"
 
 [node name="Signatures" type="Node" parent="."]
+script = ExtResource( 25 )
 
 [node name="maester" type="Node" parent="Signatures"]
 script = ExtResource( 22 )
