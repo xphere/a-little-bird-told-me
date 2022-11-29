@@ -3,6 +3,8 @@ extends CanvasItem
 export var LetterObject : Script
 export var LetterScene : PackedScene
 
+onready var drop_zone := $Margin/DropZone
+
 
 func on_enter() -> void:
 	$Back.visible = owner.has_stacked_screen()
@@ -24,10 +26,10 @@ func _on_Back_pressed() -> void:
 
 func add_letter(letter: LetterResource) -> void:
 	var instance := LetterScene.instance() as Node2D
-	instance.setup(letter)
-
+	instance.setup(letter, drop_zone.get_rect())
 	add_child(instance)
-	instance.global_position = Vector2(
-		rand_range(40, 256 - 40),
-		rand_range(15, 240 - 15)
-	)
+
+	instance.global_position = (
+		drop_zone.rect_position +
+		drop_zone.rect_size * Vector2(randf(), randf())
+	).round()

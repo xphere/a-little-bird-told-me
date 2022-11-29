@@ -5,13 +5,17 @@ signal opened()
 signal closed()
 
 var _letter : LetterResource
+var _drag_zone_tl : Vector2
+var _drag_zone_br : Vector2
 
 export var neat_texture : Texture
 export var royal_texture : Texture
 export var weathered_texture : Texture
 
 
-func setup(letter: LetterResource) -> void:
+func setup(letter: LetterResource, drag_zone: Rect2) -> void:
+	_drag_zone_tl = drag_zone.position
+	_drag_zone_br = _drag_zone_tl + drag_zone.size
 	_letter = letter
 	id = _letter.letter_id
 	$Sprite.texture = _get_letter_texture(letter.letter_type)
@@ -27,7 +31,10 @@ func is_draggable() -> bool:
 
 
 func drag_to(position: Vector2) -> void:
-	self.global_position = position
+	self.global_position = Vector2(
+		clamp(position.x, _drag_zone_tl.x, _drag_zone_br.x),
+		clamp(position.y, _drag_zone_tl.y, _drag_zone_br.y)
+	)
 
 
 func to_message(message_box: Node) -> void:
