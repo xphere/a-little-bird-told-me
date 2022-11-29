@@ -306,9 +306,6 @@ func _on_Cursor_entered(node: CollisionObject2D) -> void:
 	if _current_screen and _current_screen.has_method("on_select"):
 		_current_screen.on_select(node)
 
-	$Cursor/Select.pitch_scale = rand_range(0.7, 1.3)
-	$Cursor/Select.play()
-
 	yield($Cursor, "exited")
 
 	if node_name:
@@ -347,6 +344,7 @@ func _try_interactions(node: Node, child_name: String, method_name: String) -> v
 		)
 
 	if ref_signal:
+		$Cursor/Select.play()
 		yield(ref_signal, "completed")
 
 	emit_signal(method_name, node)
