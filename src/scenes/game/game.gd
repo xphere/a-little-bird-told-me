@@ -119,41 +119,41 @@ func plan_action(in_steps: int, action: Action) -> void:
 
 
 func get_recipients() -> Array:
-	return $Recipients.get_available()
+	return $Sections/Recipients.get_available()
 
 
 func set_recipient(name: String, unlock: bool = true) -> void:
-	$Recipients.set_availability(name, unlock)
+	$Sections/Recipients.set_availability(name, unlock)
 	if unlock and _is_ready:
 		notice("Unlocked new recipient")
 
 
 func get_topics_for(recipient: String) -> Array:
-	return $Topics.get_available_for(recipient)
+	return $Sections/Topics.get_available_for(recipient)
 
 
 func set_topic(name: String, unlock: bool = true) -> void:
-	$Topics.set_availability(name, unlock)
+	$Sections/Topics.set_availability(name, unlock)
 	if unlock and _is_ready:
 		notice("Unlocked new topic")
 
 
 func get_closings() -> Array:
-	return $Closings.get_available()
+	return $Sections/Closings.get_available()
 
 
 func set_closing(name: String, unlock: bool = true) -> void:
-	$Closings.set_availability(name, unlock)
+	$Sections/Closings.set_availability(name, unlock)
 	if unlock and _is_ready:
 		notice("Unlocked new closing")
 
 
 func get_signatures() -> Array:
-	return $Signatures.get_available()
+	return $Sections/Signatures.get_available()
 
 
 func set_signature(name: String, unlock: bool = true) -> void:
-	$Signatures.set_availability(name, unlock)
+	$Sections/Signatures.set_availability(name, unlock)
 	if unlock and _is_ready:
 		notice("Unlocked new signature")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://src/screens/mailbox/mailbox.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/scenes/game/planned.gd" type="Script" id=21]
 [ext_resource path="res://src/stories/topics.tscn" type="PackedScene" id=22]
-[ext_resource path="res://src/stories/day1.tscn" type="PackedScene" id=23]
 [ext_resource path="res://src/stories/closings.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/stories/signatures.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/scenes/game/notice.tscn" type="PackedScene" id=29]
@@ -32,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 8 )
+current_day = 1
 
 [node name="Tower" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -51,6 +51,8 @@ visible = false
 visible = false
 
 [node name="Notice" parent="." instance=ExtResource( 29 )]
+margin_right = 256.0
+margin_bottom = 240.0
 
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -60,11 +62,21 @@ layers_2d_physics = 1
 stream = ExtResource( 19 )
 volume_db = -15.0
 
+[node name="Planned" type="Node" parent="."]
+script = ExtResource( 21 )
+
 [node name="Context" type="Node" parent="."]
 script = ExtResource( 18 )
 
-[node name="Planned" type="Node" parent="."]
-script = ExtResource( 21 )
+[node name="Sections" type="Node" parent="."]
+
+[node name="Recipients" parent="Sections" instance=ExtResource( 30 )]
+
+[node name="Topics" parent="Sections" instance=ExtResource( 22 )]
+
+[node name="Closings" parent="Sections" instance=ExtResource( 24 )]
+
+[node name="Signatures" parent="Sections" instance=ExtResource( 25 )]
 
 [node name="Story" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -84,17 +96,7 @@ expression_contents = "update_birds()"
 [node name="default#no-action" type="Node" parent="Story"]
 script = ExtResource( 14 )
 
-[node name="Day#0" parent="Story" instance=ExtResource( 5 )]
-
-[node name="Day#1" parent="Story" instance=ExtResource( 23 )]
-
-[node name="Recipients" parent="." instance=ExtResource( 30 )]
-
-[node name="Topics" parent="." instance=ExtResource( 22 )]
-
-[node name="Closings" parent="." instance=ExtResource( 24 )]
-
-[node name="Signatures" parent="." instance=ExtResource( 25 )]
+[node name="Day#1" parent="Story" instance=ExtResource( 5 )]
 
 [node name="Discoveries" parent="." instance=ExtResource( 10 )]
 
