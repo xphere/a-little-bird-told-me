@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/robin-2.ogg-79af8c3533a5a7af4b2f35ec58b0510b.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/robin-2.ogg"
+dest_files=[ "res://.import/robin-2.ogg-79af8c3533a5a7af4b2f35ec58b0510b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

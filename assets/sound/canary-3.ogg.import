@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/canary-3.ogg-b67515da8c26087070efeec47f96febe.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/canary-3.ogg"
+dest_files=[ "res://.import/canary-3.ogg-b67515da8c26087070efeec47f96febe.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
