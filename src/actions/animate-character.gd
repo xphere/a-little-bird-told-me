@@ -1,3 +1,4 @@
+class_name ActionAnimateCharacter
 extends Action
 
 export var character_name := ""
