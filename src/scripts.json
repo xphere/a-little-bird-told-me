@@ -2,8 +2,6 @@
 	[ "intro#studio", "res://src/scenes/intro/studio.tscn" ],
 	[ "intro#submitted", "res://src/scenes/intro/submitted.tscn" ],
 	[ "intro#engine", "res://src/scenes/intro/engine.tscn" ],
-	[ "intro#crunch-free", "res://src/scenes/intro/crunch-free.tscn" ],
-
 	[ "menu", "res://src/scenes/menu/menu.tscn" ],
 	[ "game", "res://src/scenes/game/game.tscn" ],
 ]
