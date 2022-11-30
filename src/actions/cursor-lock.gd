@@ -1,4 +1,5 @@
-extends "res://modules/action/serial.gd"
+class_name ActionCursorLock, "res://src/actions/cursor-lock.icon.png"
+extends ActionSerial
 
 
 func execute() -> void:
