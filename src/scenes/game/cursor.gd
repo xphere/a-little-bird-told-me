@@ -27,7 +27,7 @@ func is_locked() -> bool:
 
 
 func lock(lock: bool) -> void:
-	_locks = max(0, _locks + 1 if lock else -1)
+	_locks = max(0, _locks + (1 if lock else -1))
 	if is_locked():
 		if _dragging:
 			emit_signal("drop", _dragging)
