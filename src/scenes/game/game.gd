@@ -167,6 +167,7 @@ func bird_arrives(bird: BirdResource) -> void:
 	$Tower.bird_arrives(bird)
 
 func bird_pickup(bird: BirdResource) -> void:
+	bird.call_deferred("emit_signal", "picked")
 	if bird.carries is LetterResource:
 		to_maildesk(bird.carries)
 

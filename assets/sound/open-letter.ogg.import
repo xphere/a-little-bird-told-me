@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/open-letter.ogg-8700a9a27f13717e5c901923e4fda0d5.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/open-letter.ogg"
+dest_files=[ "res://.import/open-letter.ogg-8700a9a27f13717e5c901923e4fda0d5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

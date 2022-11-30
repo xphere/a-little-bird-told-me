@@ -1,6 +1,8 @@
 class_name BirdResource
 extends Resource
 
+signal picked()
+
 enum BirdType {
 	CANARY,
 	ROBIN,
