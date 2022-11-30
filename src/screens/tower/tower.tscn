@@ -284,7 +284,6 @@ screen_name = "MailBox"
 [node name="false" type="Node" parent="MailBox/on-interact/if has papers"]
 script = ExtResource( 17 )
 topic = "papers"
-value = "known"
 
 [node name="on-help-request" type="Node" parent="MailBox"]
 script = ExtResource( 21 )
@@ -297,7 +296,6 @@ animation_name = "left"
 [node name="on-help-request" type="Node" parent="MailBox/on-help-request"]
 script = ExtResource( 17 )
 topic = "papers"
-value = "0"
 
 [node name="Window" parent="." instance=ExtResource( 12 )]
 position = Vector2( 52, 114 )

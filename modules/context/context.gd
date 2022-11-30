@@ -38,8 +38,19 @@ func set_value(key: String, value) -> void:
 
 
 func set_if_higher(key: String, value: int) -> void:
-	if not _data.has(key) or str(_data[key]) == "" or _data[key] < value:
+	if _is_higher(key, value):
 		set_value(key, value)
+
+
+func _is_higher(key: String, value: int) -> bool:
+	if not _data.has(key):
+		return true
+
+	var stored = _data[key]
+	if stored is int and stored > value:
+		return true
+
+	return str(stored) == ""
 
 
 func set_flag(key: String, flag: String) -> void:
