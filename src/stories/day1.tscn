@@ -60,10 +60,6 @@ letter_path = NodePath("../letter#their-majesties#1")
 script = ExtResource( 8 )
 screen_name = "MailDesk"
 
-[node name="info#1" type="Node" parent="letter#welcome"]
-script = ExtResource( 13 )
-information = "Left click to interact"
-
 [node name="wait#closed#letter-their-majesties#1" type="Node" parent="letter#welcome"]
 script = ExtResource( 14 )
 path = NodePath("../letter#their-majesties#1")
@@ -199,7 +195,7 @@ animation = "thinking"
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "Sorry, Maester. I'm not allowed to help you during the first days."
-animation = "unamused"
+animation = "thinking"
 
 [node name="dialog#assistant#3,2" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
