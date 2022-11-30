@@ -273,7 +273,7 @@ func move_time_forward() -> void:
 		time_of_day = TimeOfDay.LAUDES
 	else:
 		time_of_day += 1
-	_update_time()
+	yield(_update_time(), "completed")
 
 
 func _update_time() -> void:
