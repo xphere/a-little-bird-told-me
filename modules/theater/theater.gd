@@ -34,3 +34,17 @@ func _change_scene(scene_path: String) -> void:
 	$"%Loading".stop()
 	get_tree().paused = false
 	yield($"%Curtain".up(), "completed")
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_type() and event.is_pressed() and not event.is_echo():
+		if event.is_action("toggle_music"):
+			_toggle_sound_bus("Music")
+		elif event.is_action("toggle_sound"):
+			_toggle_sound_bus("FX")
+
+
+func _toggle_sound_bus(bus_name: String) -> void:
+	var index := AudioServer.get_bus_index(bus_name)
+	var is_muted := AudioServer.is_bus_mute(index)
+	AudioServer.set_bus_mute(index, not is_muted)

@@ -38,20 +38,26 @@ hframes = 4
 
 [node name="Sound#1" type="AudioStreamPlayer" parent="Sounds/Canary" index="0"]
 stream = ExtResource( 6 )
+bus = "FX"
 
 [node name="Sound#2" type="AudioStreamPlayer" parent="Sounds/Canary" index="1"]
 stream = ExtResource( 7 )
+bus = "FX"
 
 [node name="Sound#3" type="AudioStreamPlayer" parent="Sounds/Canary" index="2"]
 stream = ExtResource( 5 )
+bus = "FX"
 
 [node name="Robin" type="Node" parent="Sounds" index="1"]
 
 [node name="Sound#1" type="AudioStreamPlayer" parent="Sounds/Robin" index="0"]
 stream = ExtResource( 8 )
+bus = "FX"
 
 [node name="Sound#2" type="AudioStreamPlayer" parent="Sounds/Robin" index="1"]
 stream = ExtResource( 9 )
+bus = "FX"
 
 [node name="Sound#3" type="AudioStreamPlayer" parent="Sounds/Robin" index="2"]
 stream = ExtResource( 10 )
+bus = "FX"

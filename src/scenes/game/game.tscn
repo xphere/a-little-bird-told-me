@@ -61,6 +61,7 @@ layers_2d_physics = 1
 [node name="Select" type="AudioStreamPlayer" parent="Cursor"]
 stream = ExtResource( 19 )
 volume_db = -15.0
+bus = "FX"
 
 [node name="Planned" type="Node" parent="."]
 script = ExtResource( 21 )
