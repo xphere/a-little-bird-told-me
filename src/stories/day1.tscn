@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/resources/bird.gd" type="Script" id=1]
 [ext_resource path="res://modules/action/stop-interval.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://src/stories/letters/letter.their-majesties.1.tres" type="Resource" id=20]
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=21]
 [ext_resource path="res://src/actions/animate-character.gd" type="Script" id=22]
+[ext_resource path="res://src/stories/letters/letter.inn-waiter.1.tres" type="Resource" id=23]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -29,6 +30,13 @@ name = "WhiteHead"
 energy = 100
 is_known = false
 type = 1
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+name = "Rumbly"
+energy = 100
+is_known = false
+type = 0
 
 [node name="Start" type="Node"]
 script = ExtResource( 5 )
@@ -123,6 +131,20 @@ script = ExtResource( 17 )
 speaker = "maester"
 dialog = "But there are no birds at sight here."
 
+[node name="wait#4" type="Node" parent="talk#intro"]
+script = ExtResource( 18 )
+waiting_time = 0.1
+
+[node name="animate#maester#right#3" type="Node" parent="talk#intro"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "right"
+
+[node name="animate#maester#surprised" type="Node" parent="talk#intro"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "surprised"
+
 [node name="info#1" type="Node" parent="talk#intro"]
 script = ExtResource( 13 )
 information = "KNOCK! KNOCK!"
@@ -136,15 +158,11 @@ script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "Hello there!"
 
-[node name="animate#maester#right#2" type="Node" parent="talk#intro"]
-script = ExtResource( 22 )
-character_name = "maester"
-animation_name = "right"
-
 [node name="dialog#maester#1,4" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
 speaker = "maester"
 dialog = "Oh, sh...!!! You scared me! Who are you?"
+animation = "unamused"
 
 [node name="dialog#assistant#1,2" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
@@ -169,17 +187,19 @@ dialog = "Last Maester was so nice to me! She taught me a lot about the craft!"
 [node name="dialog#assistant#2,2" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
 speaker = "assistant"
-dialog = "And I'm eager to keep learning!"
+dialog = "And I'm eager to keep learning with you!"
 
 [node name="dialog#maester#3" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
 speaker = "maester"
 dialog = "If you like this job that much, why don't you do it for me?"
+animation = "thinking"
 
 [node name="dialog#assistant#3,1" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "Sorry, Maester. I'm not allowed to help you during the first days."
+animation = "unamused"
 
 [node name="dialog#assistant#3,2" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
@@ -190,6 +210,7 @@ dialog = "By... Royal Decree."
 script = ExtResource( 17 )
 speaker = "maester"
 dialog = "What...?"
+animation = "surprised"
 
 [node name="dialog#assistant#4" type="Node" parent="talk#intro"]
 script = ExtResource( 17 )
@@ -229,11 +250,13 @@ dialog = "Try me, Maester!"
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "Don't you trust in my vast knowledge?"
+animation = "surprised"
 
 [node name="dialog#4" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "Now this is boring..."
+animation = "unamused"
 
 [node name="dialog#5" type="Node" parent="learn#on_help_request/interval#remember-help-request/if#unlocked/dialogs"]
 script = ExtResource( 5 )
@@ -246,6 +269,7 @@ information = "Right click to ask for help"
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "What was that?"
+animation = "surprised"
 
 [node name="wait#on_help_request#1" type="Node" parent="learn#on_help_request"]
 script = ExtResource( 14 )
@@ -290,12 +314,17 @@ dialog = "Oh look! One of the birds from the Royal Flock is back!"
 [node name="dialog#maester#1" type="Node" parent="learn#bird"]
 script = ExtResource( 17 )
 speaker = "maester"
-dialog = "Time to work, I supose"
+dialog = "Time to work then!"
 
-[node name="wait#bird-picked" type="Node" parent="learn#bird"]
+[node name="wait#picked#bird#1" type="Node" parent="learn#bird"]
 script = ExtResource( 14 )
 path = NodePath("../bird#1")
 signal_name = "picked"
+
+[node name="animate#maester#right#1" type="Node" parent="learn#bird"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "right"
 
 [node name="dialog#maester#2" type="Node" parent="learn#bird"]
 script = ExtResource( 17 )
@@ -310,13 +339,77 @@ dialog = "With her. Is totally a her."
 [node name="dialog#maester#3" type="Node" parent="learn#bird"]
 script = ExtResource( 17 )
 speaker = "maester"
-dialog = "Yes, whatever. What should I...? Ok, it flew away again."
+dialog = "Yes, whatever. What should I...? Oh, it flew away again."
 
 [node name="dialog#assistant#3" type="Node" parent="learn#bird"]
 script = ExtResource( 17 )
 speaker = "assistant"
 dialog = "They usually do that."
 
-[node name="advance-time" type="Node" parent="learn#bird"]
+[node name="learn#letters" type="Node" parent="."]
+script = ExtResource( 16 )
+
+[node name="letter#inn-waiter#1" type="Node" parent="learn#letters"]
+script = ExtResource( 4 )
+letter_resource = ExtResource( 23 )
+
+[node name="bird#2" type="Node" parent="learn#letters"]
+script = ExtResource( 10 )
+bird_resource = SubResource( 3 )
+
+[node name="bird-arrives#2" type="Node" parent="learn#letters"]
+script = ExtResource( 7 )
+bird_path = NodePath("../bird#2")
+letter_path = NodePath("../letter#inn-waiter#1")
+
+[node name="advance-time" type="Node" parent="learn#letters"]
 script = ExtResource( 19 )
 wait = true
+
+[node name="animate#maester#left#1" type="Node" parent="learn#letters"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "left"
+
+[node name="dialog#assistant#1" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "assistant"
+dialog = "This one's a canary. Be gentle, but don't let him escape!"
+
+[node name="animate#maester#right#1" type="Node" parent="learn#letters"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "right"
+
+[node name="dialog#maester#2" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "Him? Can you see it from there?"
+
+[node name="dialog#assistant#2" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "assistant"
+dialog = "Of course! Don't you?"
+
+[node name="animate#maester#left#2" type="Node" parent="learn#letters"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "left"
+
+[node name="wait#1" type="Node" parent="learn#letters"]
+script = ExtResource( 18 )
+
+[node name="animate#maester#right#2" type="Node" parent="learn#letters"]
+script = ExtResource( 22 )
+character_name = "maester"
+animation_name = "right"
+
+[node name="dialog#maester#3" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "Yes, yes, totally, of course..."
+
+[node name="wait#picked#bird#2" type="Node" parent="."]
+script = ExtResource( 14 )
+path = NodePath("../learn#letters/bird#2")
+signal_name = "picked"

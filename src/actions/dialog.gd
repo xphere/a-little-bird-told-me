@@ -4,6 +4,7 @@ extends Action
 export var speaker := ""
 export(String, MULTILINE) var dialog := ""
 export var characters_per_second := 45
+export var animation := ""
 export var wait := true
 
 const DynamicString := preload("res://modules/expression/dynamic-string.gd")
@@ -18,6 +19,6 @@ func _ready() -> void:
 
 func execute() -> void:
 	var text := _dialog.evaluate(owner) if _dialog else dialog
-	var result = owner.dialog(text, speaker, characters_per_second)
+	var result = owner.dialog(text, speaker, characters_per_second, animation)
 	if wait:
 		yield(result, "completed")

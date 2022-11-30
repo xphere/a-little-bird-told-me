@@ -5,10 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 letter_id = "letter#inn-waiter#1"
-letter_name = "Agreement?"
-letter_contents = "Fine by me, Maester.
+letter_name = "Strangers at the inn"
+letter_contents = "Dear Maester,
 
-Looks like we have an [url=inn-waiter.agreement]agreement[/url], then.
+Lately we're getting more [url=outlanders]visitors from outside[/url] the city. It's good for business, but my nose tells me something's fishy.
 
-[url=bar:description]Burn After Reading[/url]"
+As you see I'm improving a lot my writing skills. And that's thanks to you.
+
+Yours truly,
+Eldelbar, the Inn waiter"
 letter_type = 1

@@ -44,11 +44,16 @@ func wait(wait_time: float) -> void:
 func sound(name: String, pitch := 1.0) -> void:
 	print([ "sound", name, pitch ])
 
-func dialog(text: String, speaker: String, characters_per_sec: int) -> void:
+func dialog(text: String, speaker: String, characters_per_sec: int, animation := "") -> void:
 	$Cursor.lock(true)
-	_casting[speaker].animate("talk")
+	var cast = _casting[speaker]
+	cast.animate("start-speaking")
+	yield(get_tree(), "idle_frame")
+	cast.animate(animation if animation else "talk")
 	yield($DialogBox.dialog(text, speaker, characters_per_sec), "completed")
-	_casting[speaker].animate("idle")
+	cast.animate("stop-speaking")
+	yield(get_tree(), "idle_frame")
+	cast.animate("idle")
 	$Cursor.lock(false)
 
 func info(text: String, wait_input := true) -> void:
