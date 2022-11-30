@@ -8,6 +8,8 @@ onready var _content := $"%Content/Text/Label" as Label
 onready var _speaker := $"%Speaker/Text/Label" as Label
 
 
+var _is_alpha := RegEx.new()
+var _last_visible_character := 0
 var _characters_shown : float
 var _characters_per_sec : float
 var _shown : int = 0
@@ -15,6 +17,7 @@ var _shown : int = 0
 
 func _ready() -> void:
 	set_process(false)
+	_is_alpha.compile("[a-zA-Z]")
 
 
 func show() -> void:
@@ -50,6 +53,7 @@ func dialog(content: String, speaker: String, characters_per_sec: float) -> void
 	$"%Continue".visible = false
 	_content.text = content
 	_content.visible_characters = 0
+	_last_visible_character = -1
 	$"%Content".theme_type_variation = ""
 	show()
 	yield(_wait_input(), "completed")
@@ -72,9 +76,25 @@ func _process(delta: float) -> void:
 	if _is_fully_shown():
 		set_process(false)
 		$"%Continue".visible = true
-	else:
-		_characters_shown += _characters_per_sec * delta
-		_content.visible_characters = round(_characters_shown)
+		return
+
+	_characters_shown += _characters_per_sec * delta# * 0.05
+	_content.visible_characters = round(_characters_shown)
+
+	if $"%Speaker".visible:
+		_ticking_voice()
+
+
+func _ticking_voice() -> void:
+	if _last_visible_character >= _content.visible_characters:
+		return
+
+	if _content.visible_characters >= _content.text.length():
+		return
+
+	_last_visible_character = _content.visible_characters
+	if _is_alpha.search(_content.text[_content.visible_characters]):
+		$Talking.play()
 
 
 func _input(event: InputEvent) -> void:

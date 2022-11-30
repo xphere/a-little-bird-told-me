@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.gd" type="Script" id=2]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Bangalor.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/ui/dialog-box/dialog.stylebox.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/sound/talking.ogg" type="AudioStream" id=6]
 
 [sub_resource type="StyleBoxTexture" id=2]
 content_margin_left = 2.0
@@ -139,3 +140,8 @@ margin_bottom = 12.0
 custom_fonts/font = SubResource( 4 )
 text = "Content"
 autowrap = true
+
+[node name="Talking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -24.0
+pitch_scale = 4.0
