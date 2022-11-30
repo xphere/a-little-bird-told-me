@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://modules/action/action.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/actions/animate-character.gd" type="Script" id=12]
 [ext_resource path="res://src/actions/advance-time.gd" type="Script" id=13]
 [ext_resource path="res://src/actions/cast-character.gd" type="Script" id=14]
+[ext_resource path="res://modules/action/execute.gd" type="Script" id=15]
 
 [node name="Discoveries" type="Node"]
 script = ExtResource( 4 )
@@ -38,7 +39,7 @@ dialog = "A letter?"
 [node name="dialog#3" type="Node" parent="messages/0"]
 script = ExtResource( 2 )
 speaker = "maester"
-dialog = "I'll leave it at the desk"
+dialog = "I'll leave it at the desk."
 
 [node name="1" type="Node" parent="messages"]
 script = ExtResource( 6 )
@@ -47,6 +48,24 @@ script = ExtResource( 6 )
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Another message? Let's see..."
+
+[node name="2" type="Node" parent="messages"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="messages/2"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "The previous maester was popular around here."
+
+[node name="dialog#2" type="Node" parent="messages/2"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I should read these letters more carefully."
+
+[node name="discover" type="Node" parent="messages/2"]
+script = ExtResource( 11 )
+topic = "read-letters"
+value = "known"
 
 [node name="noop" type="Node" parent="messages"]
 script = ExtResource( 1 )
@@ -375,56 +394,57 @@ script = ExtResource( 5 )
 script = ExtResource( 7 )
 expression_contents = "context_flag(\"papers\", \"full\")"
 
-[node name="ActionSequential" type="Node" parent="papers/full"]
+[node name="sequence" type="Node" parent="papers/full"]
 script = ExtResource( 3 )
 loop = false
 
-[node name="get papers" type="Node" parent="papers/full/ActionSequential"]
+[node name="get papers" type="Node" parent="papers/full/sequence"]
 script = ExtResource( 6 )
 
-[node name="maester#right" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="maester#right" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 12 )
 character_name = "maester"
 animation_name = "right"
 
-[node name="dialog#2" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="dialog#2" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Would you KINDLY go get some, please?"
 
-[node name="dialog#3" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="dialog#3" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 2 )
 speaker = "assistant"
 dialog = "Oh, sure! I'll be back ASAP!"
 
-[node name="assistant#leaves" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="assistant#leaves" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 14 )
 character_name = "assistant"
 is_leaving = true
 
-[node name="advance-time" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="advance-time" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 13 )
+wait = true
 
-[node name="dialog#4" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="dialog#4" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "... ASAP?"
 
-[node name="assistant#back" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="assistant#back" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 14 )
 character_name = "assistant"
 
-[node name="dialog#5" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="dialog#5" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 2 )
 speaker = "assistant"
 dialog = "Here you are! The box is now full of blank paper."
 
-[node name="dialog#6" type="Node" parent="papers/full/ActionSequential/get papers"]
+[node name="dialog#6" type="Node" parent="papers/full/sequence/get papers"]
 script = ExtResource( 2 )
 speaker = "assistant"
 dialog = "What would you do without your assistant, eh?"
 
-[node name="is full" type="Node" parent="papers/full/ActionSequential"]
+[node name="is full" type="Node" parent="papers/full/sequence"]
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "There is plenty of blank paper"
@@ -487,9 +507,51 @@ script = ExtResource( 2 )
 speaker = "maester"
 dialog = "We're out of paper..."
 
-[node name="if send" type="Node" parent="papers/empty/dialog#3"]
+[node name="if send-letters" type="Node" parent="papers/empty/dialog#3"]
 script = ExtResource( 7 )
-expression_contents = "context(\"send\") == 1"
+expression_contents = "context(\"send-letters\") == 1"
 
-[node name="discover#papers#full" type="Node" parent="papers/empty/dialog#3/if send"]
+[node name="discover#papers#full" type="Node" parent="papers/empty/dialog#3/if send-letters"]
 script = ExtResource( 11 )
+topic = "papers"
+value = "full"
+
+[node name="no need" type="Node" parent="papers/empty/dialog#3/if send-letters"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Not that I need it now."
+
+[node name="read-letters" type="Node" parent="."]
+script = ExtResource( 3 )
+loop = false
+
+[node name="highlight_topics#activate" type="Node" parent="read-letters"]
+script = ExtResource( 15 )
+expression_contents = "allow_topics(true)"
+
+[node name="notice#extra-attention" type="Node" parent="read-letters"]
+script = ExtResource( 15 )
+expression_contents = "notice(\"Unlocked extra attention\")"
+
+[node name="noop" type="Node" parent="read-letters"]
+script = ExtResource( 1 )
+
+[node name="send-letters" type="Node" parent="."]
+script = ExtResource( 3 )
+loop = false
+
+[node name="discover" type="Node" parent="send-letters"]
+script = ExtResource( 6 )
+
+[node name="dialog#1" type="Node" parent="send-letters/discover"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Looks like this job is more than taking care of the birds."
+
+[node name="dialog#2" type="Node" parent="send-letters/discover"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I need to answer these letters."
+
+[node name="noop" type="Node" parent="send-letters"]
+script = ExtResource( 1 )

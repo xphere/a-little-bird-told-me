@@ -6,8 +6,6 @@ signal opened()
 signal closed()
 signal selected()
 
-const LetterResource := preload("res://src/resources/letter.gd")
-
 export(Resource) var letter_resource
 
 

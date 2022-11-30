@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://modules/action/first-match.gd" type="Script" id=15]
 [ext_resource path="res://modules/action/branch.gd" type="Script" id=16]
 [ext_resource path="res://src/actions/discover.gd" type="Script" id=17]
+[ext_resource path="res://modules/action/action.gd" type="Script" id=18]
 [ext_resource path="res://src/screens/tower/assets/map.png" type="Texture" id=19]
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=20]
 [ext_resource path="res://modules/action/serial.gd" type="Script" id=21]
@@ -264,6 +265,19 @@ script = ExtResource( 16 )
 expression_contents = "context_flag(\"papers\", \"full\")"
 
 [node name="true" type="Node" parent="MailBox/on-interact/if has papers"]
+script = ExtResource( 21 )
+
+[node name="sequence" type="Node" parent="MailBox/on-interact/if has papers/true"]
+script = ExtResource( 8 )
+
+[node name="discover" type="Node" parent="MailBox/on-interact/if has papers/true/sequence"]
+script = ExtResource( 17 )
+topic = "papers"
+
+[node name="noop" type="Node" parent="MailBox/on-interact/if has papers/true/sequence"]
+script = ExtResource( 18 )
+
+[node name="enter mailbox" type="Node" parent="MailBox/on-interact/if has papers/true"]
 script = ExtResource( 9 )
 screen_name = "MailBox"
 
