@@ -10,6 +10,7 @@ func allow_topics(value: bool) -> void:
 
 
 func on_enter() -> void:
+	$Open.play()
 	$Back.visible = owner.has_stacked_screen()
 	letter = owner.consume_context("#letter")
 	letter.to_message($"%MessageBox")
