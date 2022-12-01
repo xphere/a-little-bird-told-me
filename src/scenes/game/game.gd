@@ -44,6 +44,8 @@ func are_characters_in_scene() -> bool:
 func animate(name: String, animation: String) -> void:
 	if _casting.has(name):
 		_casting[name].animate(animation)
+	else:
+		printerr("No character casted with name '%s'" % name)
 
 func wait(wait_time: float) -> void:
 	yield(get_tree().create_timer(wait_time), "timeout")
