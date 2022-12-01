@@ -22,7 +22,7 @@ func execute() -> void:
 
 func connect_to(node: Object) -> void:
 	_connect_to_signal(node, "recieved")
-	_connect_to_signal(node, "openened")
+	_connect_to_signal(node, "opened")
 	_connect_to_signal(node, "closed")
 	_connect_to_signal(node, "selected")
 
