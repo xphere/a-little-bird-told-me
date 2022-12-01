@@ -592,3 +592,35 @@ script = ExtResource( 2 )
 speaker = "assistant"
 dialog = "Gorgeous but useless. One can only wonder..."
 animation = "thinking"
+
+[node name="bird-picking" type="Node" parent="."]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="bird-picking"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Come here, little bird."
+
+[node name="dialog#2" type="Node" parent="bird-picking"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Here, here."
+
+[node name="dialog#3" type="Node" parent="bird-picking"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Got you!"
+
+[node name="dialog#4" type="Node" parent="bird-picking"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Nice bird, come to the maester."
+
+[node name="dialog#5" type="Node" parent="bird-picking"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I think I got it."
+
+[node name="noop" type="Node" parent="bird-picking"]
+script = ExtResource( 1 )

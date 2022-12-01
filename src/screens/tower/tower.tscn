@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://src/actions/animate-character.gd" type="Script" id=30]
 [ext_resource path="res://src/screens/tower/ceiling-bird-cage.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/screens/tower/bird-cage.tscn" type="PackedScene" id=32]
+[ext_resource path="res://src/actions/advance-time.gd" type="Script" id=33]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 13 )
@@ -361,6 +362,10 @@ expression_contents = "get_bird().carries"
 [node name="when true" type="Node" parent="Window/on-interact/dialog/if there\'s a bird with a message"]
 script = ExtResource( 21 )
 
+[node name="discover#bird-picking" type="Node" parent="Window/on-interact/dialog/if there\'s a bird with a message/when true"]
+script = ExtResource( 17 )
+topic = "bird-picking"
+
 [node name="bird#pick" type="Node" parent="Window/on-interact/dialog/if there\'s a bird with a message/when true"]
 script = ExtResource( 20 )
 base_path = NodePath("../../../../..")
@@ -370,6 +375,9 @@ expression_contents = "owner.bird_pickup(pickup_bird())"
 script = ExtResource( 17 )
 topic = "messages"
 
+[node name="advance-time" type="Node" parent="Window/on-interact/dialog/if there\'s a bird with a message/when true"]
+script = ExtResource( 33 )
+
 [node name="if there\'s a bird" type="Node" parent="Window/on-interact/dialog"]
 script = ExtResource( 16 )
 base_path = NodePath("../../..")
@@ -378,15 +386,17 @@ expression_contents = "get_bird()"
 [node name="when true" type="Node" parent="Window/on-interact/dialog/if there\'s a bird"]
 script = ExtResource( 21 )
 
-[node name="dialog#bird" type="Node" parent="Window/on-interact/dialog/if there\'s a bird/when true"]
-script = ExtResource( 6 )
-speaker = "maester"
-dialog = "Come here, little bird"
+[node name="discover#bird-picking" type="Node" parent="Window/on-interact/dialog/if there\'s a bird/when true"]
+script = ExtResource( 17 )
+topic = "bird-picking"
 
 [node name="bird#pick" type="Node" parent="Window/on-interact/dialog/if there\'s a bird/when true"]
 script = ExtResource( 20 )
 base_path = NodePath("../../../../..")
 expression_contents = "owner.bird_pickup(pickup_bird())"
+
+[node name="advance-time" type="Node" parent="Window/on-interact/dialog/if there\'s a bird/when true"]
+script = ExtResource( 33 )
 
 [node name="dialog#default" type="Node" parent="Window/on-interact/dialog"]
 script = ExtResource( 6 )
@@ -427,7 +437,7 @@ dialog = "There's a bird in the window, Maester"
 [node name="dialog#default" type="Node" parent="Window/on-help-request/dialog"]
 script = ExtResource( 6 )
 speaker = "assistant"
-dialog = "Nice views from here"
+dialog = "The main entrance for the birds of the Royal Flock."
 
 [node name="Calendar" type="PanelContainer" parent="."]
 anchor_left = 1.0
