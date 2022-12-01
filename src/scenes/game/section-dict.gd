@@ -17,9 +17,10 @@ func get_available_for(key: String) -> Array:
 
 
 func set_availability(name: String, available: bool) -> void:
-	var split = name.split(".", false, 1)
-	var context = split[0] if split.size() > 1 else COMMON
-	var key = split[1] if split.size() > 1 else split[0]
+	var split := name.split(".", false, 1)
+	var nested := split.size() > 1
+	var context = split[0] if nested else COMMON
+	var key = split[1] if nested else split[0]
 
 	if not has_node(key):
 		return
