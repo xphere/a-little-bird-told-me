@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/screens/tower/mail-desk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/maester/maester.tscn" type="PackedScene" id=2]
@@ -30,6 +30,8 @@
 [ext_resource path="res://assets/fonts/Bangalor.ttf" type="DynamicFontData" id=28]
 [ext_resource path="res://src/screens/tower/mailbox.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/actions/animate-character.gd" type="Script" id=30]
+[ext_resource path="res://src/screens/tower/ceiling-bird-cage.tscn" type="PackedScene" id=31]
+[ext_resource path="res://src/screens/tower/bird-cage.tscn" type="PackedScene" id=32]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 13 )
@@ -67,6 +69,36 @@ frame_offset = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 7 )
+
+[node name="CeilingBirdCage" parent="." instance=ExtResource( 31 )]
+position = Vector2( 87, 47 )
+
+[node name="with-name" type="Node" parent="CeilingBirdCage"]
+script = ExtResource( 23 )
+expression_contents = "\"Bird cage\""
+
+[node name="on-interact" type="Node" parent="CeilingBirdCage"]
+script = ExtResource( 17 )
+topic = "bird-cage"
+
+[node name="on-help-request" type="Node" parent="CeilingBirdCage"]
+script = ExtResource( 17 )
+topic = "bird-cage-help"
+
+[node name="BirdCage" parent="." instance=ExtResource( 32 )]
+position = Vector2( 149, 185 )
+
+[node name="with-name" type="Node" parent="BirdCage"]
+script = ExtResource( 23 )
+expression_contents = "\"Bird cage\""
+
+[node name="on-interact" type="Node" parent="BirdCage"]
+script = ExtResource( 17 )
+topic = "bird-cage"
+
+[node name="on-help-request" type="Node" parent="BirdCage"]
+script = ExtResource( 17 )
+topic = "bird-cage-help"
 
 [node name="MailDesk" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 160 )

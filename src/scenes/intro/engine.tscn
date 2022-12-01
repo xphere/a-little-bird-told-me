@@ -1,19 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://modules/input/on-action/on-action.gd" type="Script" id=1]
 [ext_resource path="res://src/events/on-cue.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/scenes/intro/assets/godot-engine-logo.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/big-font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://modules/input/on-action/on-click.gd" type="Script" id=5]
+[ext_resource path="res://src/screens/mailbox/assets/desk-closeup.png" type="Texture" id=6]
 
 [node name="Engine" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.654902, 0.690196, 0.745098, 1 )
+texture = ExtResource( 6 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

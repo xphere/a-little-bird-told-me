@@ -555,3 +555,40 @@ dialog = "I need to answer these letters."
 
 [node name="noop" type="Node" parent="send-letters"]
 script = ExtResource( 1 )
+
+[node name="bird-cage" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="dialog#1" type="Node" parent="bird-cage"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "No birds at sight."
+
+[node name="dialog#2" type="Node" parent="bird-cage"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "It's empty."
+
+[node name="dialog#3" type="Node" parent="bird-cage"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I can't see any use for it."
+
+[node name="bird-cage-help" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="dialog#1" type="Node" parent="bird-cage-help"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "These were ordered by the King himself to be made by the best smith in the region."
+
+[node name="dialog#2" type="Node" parent="bird-cage-help"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "They're beautiful but the birds are happier in the open, so we kept the cages anyway."
+
+[node name="dialog#3" type="Node" parent="bird-cage-help"]
+script = ExtResource( 2 )
+speaker = "assistant"
+dialog = "Gorgeous but useless. One can only wonder..."
+animation = "thinking"
