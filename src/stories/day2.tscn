@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/cast-character.gd" type="Script" id=2]
@@ -11,6 +11,25 @@
 [ext_resource path="res://src/stories/letters/letter.king.1.tres" type="Resource" id=11]
 [ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=12]
 [ext_resource path="res://src/actions/discover.gd" type="Script" id=13]
+[ext_resource path="res://src/actions/bird.gd" type="Script" id=14]
+[ext_resource path="res://src/resources/bird.gd" type="Script" id=15]
+[ext_resource path="res://src/actions/bird-arrives.gd" type="Script" id=16]
+[ext_resource path="res://src/stories/letters/letter.queen.1.tres" type="Resource" id=17]
+[ext_resource path="res://src/stories/letters/letter.king.2.tres" type="Resource" id=18]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 15 )
+name = "Kaleott"
+energy = 100
+is_known = false
+type = 3
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 15 )
+name = "Gabriel"
+energy = 100
+is_known = false
+type = 2
 
 [node name="Day#2" type="Node"]
 script = ExtResource( 1 )
@@ -93,3 +112,103 @@ dialog = "I should read the other letters carefully, looking for relevant inform
 script = ExtResource( 13 )
 topic = "gather-info"
 value = "known"
+
+[node name="unlock#2" type="Node" parent="kings#letter"]
+script = ExtResource( 1 )
+unlock_parent = true
+
+[node name="wait#on_letter_sent" type="Node" parent="kings#letter/unlock#2"]
+script = ExtResource( 12 )
+signal_name = "on_letter_sent"
+
+[node name="dialog#1" type="Node" parent="kings#letter/unlock#2"]
+script = ExtResource( 4 )
+speaker = "maester"
+dialog = "And here you go!"
+
+[node name="queen#letter" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="letter#queen#1" type="Node" parent="queen#letter"]
+script = ExtResource( 10 )
+letter_resource = ExtResource( 17 )
+
+[node name="bird#1" type="Node" parent="queen#letter"]
+script = ExtResource( 14 )
+bird_resource = SubResource( 1 )
+
+[node name="bird-arrives#1" type="Node" parent="queen#letter"]
+script = ExtResource( 16 )
+bird_path = NodePath("../bird#1")
+letter_path = NodePath("../letter#queen#1")
+
+[node name="dialog#1" type="Node" parent="queen#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "It's the Queen's crow! I love it!"
+
+[node name="dialog#2" type="Node" parent="queen#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "The Queen Herself?"
+
+[node name="unlock#1" type="Node" parent="queen#letter"]
+script = ExtResource( 1 )
+unlock_parent = true
+
+[node name="wait#letter#queen#closed" type="Node" parent="queen#letter/unlock#1"]
+script = ExtResource( 12 )
+path = NodePath("../../letter#queen#1")
+signal_name = "closed"
+
+[node name="to-screen#tower" type="Node" parent="queen#letter"]
+script = ExtResource( 7 )
+
+[node name="dialog#3" type="Node" parent="queen#letter"]
+script = ExtResource( 4 )
+speaker = "maester"
+dialog = "Looks like the Queen wants to visit the tower."
+
+[node name="dialog#4" type="Node" parent="queen#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Is that so? I've never seen Her Majesty!"
+
+[node name="king#last-letter" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="letter#king#2" type="Node" parent="king#last-letter"]
+script = ExtResource( 10 )
+letter_resource = ExtResource( 18 )
+
+[node name="bird#1" type="Node" parent="king#last-letter"]
+script = ExtResource( 14 )
+bird_resource = SubResource( 2 )
+
+[node name="bird-arrives#1" type="Node" parent="king#last-letter"]
+script = ExtResource( 16 )
+bird_path = NodePath("../bird#1")
+letter_path = NodePath("../letter#king#2")
+
+[node name="dialog#1" type="Node" parent="king#last-letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Is the Royal Pigeon!"
+
+[node name="dialog#2" type="Node" parent="king#last-letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "The King has answered your letter!"
+
+[node name="unlock#1" type="Node" parent="king#last-letter"]
+script = ExtResource( 1 )
+unlock_parent = true
+
+[node name="wait#letter#king#2#closed" type="Node" parent="king#last-letter/unlock#1"]
+script = ExtResource( 12 )
+path = NodePath("../../letter#king#2")
+signal_name = "closed"
+
+[node name="ending" type="Node" parent="king#last-letter"]
+script = ExtResource( 7 )
+screen_name = "Ending"

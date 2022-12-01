@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pigeon-1.ogg-8966d2896777970e15a60ccb446a55cf.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/pigeon-1.ogg"
+dest_files=[ "res://.import/pigeon-1.ogg-8966d2896777970e15a60ccb446a55cf.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

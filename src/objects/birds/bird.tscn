@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/objects/selectable/selectable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/screens/tower/assets/bird.png" type="Texture" id=2]
@@ -10,6 +10,12 @@
 [ext_resource path="res://assets/sound/robin-1.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/sound/robin-2.ogg" type="AudioStream" id=9]
 [ext_resource path="res://assets/sound/robin-3.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sound/pigeon-1.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/sound/pigeon-2.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/sound/pigeon-3.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/sound/crow-1.ogg" type="AudioStream" id=14]
+[ext_resource path="res://assets/sound/crow-2.ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/sound/crow-3.ogg" type="AudioStream" id=16]
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -60,4 +66,32 @@ bus = "FX"
 
 [node name="Sound#3" type="AudioStreamPlayer" parent="Sounds/Robin" index="2"]
 stream = ExtResource( 10 )
+bus = "FX"
+
+[node name="Pigeon" type="Node" parent="Sounds" index="2"]
+
+[node name="Sound#1" type="AudioStreamPlayer" parent="Sounds/Pigeon" index="0"]
+stream = ExtResource( 11 )
+bus = "FX"
+
+[node name="Sound#2" type="AudioStreamPlayer" parent="Sounds/Pigeon" index="1"]
+stream = ExtResource( 12 )
+bus = "FX"
+
+[node name="Sound#3" type="AudioStreamPlayer" parent="Sounds/Pigeon" index="2"]
+stream = ExtResource( 13 )
+bus = "FX"
+
+[node name="Crow" type="Node" parent="Sounds" index="3"]
+
+[node name="Sound#1" type="AudioStreamPlayer" parent="Sounds/Crow" index="0"]
+stream = ExtResource( 14 )
+bus = "FX"
+
+[node name="Sound#2" type="AudioStreamPlayer" parent="Sounds/Crow" index="1"]
+stream = ExtResource( 15 )
+bus = "FX"
+
+[node name="Sound#3" type="AudioStreamPlayer" parent="Sounds/Crow" index="2"]
+stream = ExtResource( 16 )
 bus = "FX"

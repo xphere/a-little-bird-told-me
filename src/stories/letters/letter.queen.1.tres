@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#queen#1"
+letter_name = "Queen expectations"
+letter_contents = "To the New Maester,
+
+The Queen herself have shown interest by the health state of the Royal Flock.
+She will be visitin soon The Watchtower and have a talk with you.
+She wants to understand why the King is so fond of our Ministry of Bird Caretaking.
+
+Signed:
+The Queen Lusina of Earauthain"
+letter_type = 2

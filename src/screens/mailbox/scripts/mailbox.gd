@@ -10,6 +10,7 @@ func on_enter() -> void:
 	_clear()
 	$Back.visible = owner.has_stacked_screen()
 	$Center.visible = true
+	$MessageBox/Seal.visible = false
 	show()
 	yield(_write_letter(), "completed")
 	$Center.visible = false
@@ -42,6 +43,13 @@ func _write_letter() -> void:
 		return
 	_add_content(signature.content)
 
+	yield(get_tree().create_timer(1.0), "timeout")
+	$MessageBox/Seal.visible = true
+	$Stamp.play()
+	yield(get_tree().create_timer(1.0), "timeout")
+	owner.send_letter(recipient, topic, closing, signature)
+	$Back.emit_signal("pressed")
+
 
 func on_leave() -> void:
 	hide()
@@ -58,7 +66,10 @@ func _select(title: String, options: Array, skippable := false) -> Node:
 		yield(RefSignal.to_async(), "completed")
 		return null if options.empty() else options[0]
 
-	return yield(_list.select(title, options), "completed")
+	var result = yield(_list.select(title, options), "completed")
+	if result:
+		$Writing/AnimationPlayer.play("write")
+	return result
 
 
 func _clear() -> void:

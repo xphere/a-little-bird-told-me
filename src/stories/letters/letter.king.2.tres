@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#king#2"
+letter_name = "Kings suspicions"
+letter_contents = "To the Maester attention,
+
+I don't know how to say this, but I suspect there's something dark lurking our dear Kingdom.
+
+Lately the Queen's behaviour has been... suspicious. I want you to be careful. Probably she will contact you.
+
+Protect the birds at any cost. With your life if necessary.
+
+King Abulard IV of Earauthain"
+letter_type = 2

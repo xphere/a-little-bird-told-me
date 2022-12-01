@@ -1,7 +1,9 @@
 extends Control
 
+signal on_time_passed()
 signal on_help_request(element)
 signal on_interact(element)
+signal on_letter_sent(recipient, topic)
 signal top_screen(screen)
 
 enum TimeOfDay {
@@ -18,13 +20,11 @@ export(TimeOfDay) var time_of_day := TimeOfDay.LAUDES
 
 var _current_screen : CanvasItem
 var _screens_stack := []
-var _is_ready := false
 
 
 func _ready() -> void:
 	randomize()
 	yield(_update_time(), "completed")
-	_is_ready = true
 
 
 var _casting := {}
@@ -136,9 +136,9 @@ func get_recipients() -> Array:
 	return $Sections/Recipients.get_available()
 
 
-func set_recipient(name: String, unlock: bool = true) -> void:
+func set_recipient(name: String, unlock: bool, notify: bool) -> void:
 	$Sections/Recipients.set_availability(name, unlock)
-	if unlock and _is_ready:
+	if unlock and notify:
 		notice("Unlocked new recipient")
 
 
@@ -146,9 +146,9 @@ func get_topics_for(recipient: String) -> Array:
 	return $Sections/Topics.get_available_for(recipient)
 
 
-func set_topic(name: String, unlock: bool = true) -> void:
+func set_topic(name: String, unlock: bool, notify: bool) -> void:
 	$Sections/Topics.set_availability(name, unlock)
-	if unlock and _is_ready:
+	if unlock and notify:
 		notice("Unlocked new topic")
 
 
@@ -156,9 +156,9 @@ func get_closings() -> Array:
 	return $Sections/Closings.get_available()
 
 
-func set_closing(name: String, unlock: bool = true) -> void:
+func set_closing(name: String, unlock: bool, notify: bool) -> void:
 	$Sections/Closings.set_availability(name, unlock)
-	if unlock and _is_ready:
+	if unlock and notify:
 		notice("Unlocked new closing")
 
 
@@ -166,10 +166,20 @@ func get_signatures() -> Array:
 	return $Sections/Signatures.get_available()
 
 
-func set_signature(name: String, unlock: bool = true) -> void:
+func set_signature(name: String, unlock: bool, notify: bool) -> void:
 	$Sections/Signatures.set_availability(name, unlock)
-	if unlock and _is_ready:
+	if unlock and notify:
 		notice("Unlocked new signature")
+
+
+func send_letter(
+	recipient: LetterSection,
+	topic: Node,
+	closing: Node,
+	signature: Node
+) -> void:
+	emit_signal("on_letter_sent", recipient, topic.name)
+	call_deferred("move_time_forward")
 
 
 var _birds := {}

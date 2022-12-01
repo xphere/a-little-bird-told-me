@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/ui/message-box/message-box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/screens/mailbox/scripts/mailbox.gd" type="Script" id=2]
@@ -8,6 +8,24 @@
 [ext_resource path="res://src/screens/mailbox/button.selected.stylebox.tres" type="StyleBox" id=6]
 [ext_resource path="res://src/screens/mailbox/button.normal.stylebox.tres" type="StyleBox" id=7]
 [ext_resource path="res://src/screens/mailbox/button.pressed.stylebox.tres" type="StyleBox" id=8]
+[ext_resource path="res://src/screens/mailbox/assets/seal.png" type="Texture" id=9]
+[ext_resource path="res://assets/sound/writing.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sound/stamp-seal.ogg" type="AudioStream" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "write"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -80.0 ]
+}
 
 [node name="MailBox" type="TextureRect"]
 anchor_right = 1.0
@@ -21,6 +39,11 @@ id = "back"
 
 [node name="MessageBox" parent="." instance=ExtResource( 1 )]
 
+[node name="Seal" type="Sprite" parent="MessageBox"]
+visible = false
+position = Vector2( 179, 192 )
+texture = ExtResource( 9 )
+
 [node name="Center" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -31,12 +54,12 @@ size_flags_vertical = 9
 
 [node name="Background" type="ColorRect" parent="Center"]
 margin_right = 256.0
-margin_bottom = 19.0
+margin_bottom = 26.0
 color = Color( 0.364706, 0.235294, 0.227451, 0.501961 )
 
 [node name="Margin" type="MarginContainer" parent="Center"]
 margin_right = 256.0
-margin_bottom = 19.0
+margin_bottom = 26.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -46,13 +69,13 @@ custom_constants/margin_bottom = 4
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 252.0
-margin_bottom = 15.0
+margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 script = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="Center/Margin/List"]
 margin_right = 248.0
-margin_bottom = 7.0
+margin_bottom = 14.0
 text = "Recipients"
 
 [node name="Button" type="Button" parent="Center/Margin/List"]
@@ -66,8 +89,21 @@ custom_styles/focus = ExtResource( 6 )
 custom_styles/normal = ExtResource( 7 )
 
 [node name="Buttons" type="HFlowContainer" parent="Center/Margin/List"]
-margin_top = 11.0
+margin_top = 18.0
 margin_right = 248.0
-margin_bottom = 11.0
+margin_bottom = 18.0
+
+[node name="Writing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -80.0
+autoplay = true
+bus = "FX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Writing"]
+anims/write = SubResource( 1 )
+
+[node name="Stamp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "FX"
 
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

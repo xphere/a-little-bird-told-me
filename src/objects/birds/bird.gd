@@ -12,6 +12,8 @@ func setup(bird: BirdResource) -> void:
 	match bird.type:
 		BirdResource.BirdType.CANARY: _sounds_node = $Sounds/Canary
 		BirdResource.BirdType.ROBIN: _sounds_node = $Sounds/Robin
+		BirdResource.BirdType.PIGEON: _sounds_node = $Sounds/Pigeon
+		BirdResource.BirdType.CROW: _sounds_node = $Sounds/Crow
 
 
 func _ready() -> void:

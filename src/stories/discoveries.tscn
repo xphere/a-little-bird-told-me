@@ -195,16 +195,19 @@ expression_contents = "allow_topics(true)"
 [node name="unlock#recipient#king" type="Node" parent="gather-info"]
 script = ExtResource( 10 )
 key = "king"
+notify = false
 
 [node name="unlock#closing#your-humble-servant" type="Node" parent="gather-info"]
 script = ExtResource( 10 )
 type = 2
 key = "your-humble-servant"
+notify = false
 
 [node name="unlock#signature#maester" type="Node" parent="gather-info"]
 script = ExtResource( 10 )
 type = 3
 key = "maester"
+notify = false
 
 [node name="send-letters" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -300,12 +303,12 @@ dialog = "But?"
 [node name="dialog#3" type="Node" parent="papers/empty/dialog#1"]
 script = ExtResource( 2 )
 speaker = "assistant"
-dialog = "But it is empty now, so I must go get some."
+dialog = "But it is empty now."
 
 [node name="dialog#4" type="Node" parent="papers/empty/dialog#1"]
 script = ExtResource( 2 )
 speaker = "maester"
-dialog = "Yes... You do."
+dialog = "Someone should go get some blank papers."
 
 [node name="dialog#2" type="Node" parent="papers/empty"]
 script = ExtResource( 6 )
@@ -329,6 +332,7 @@ dialog = "Don't they?"
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Sigh..."
+animation = "unamused"
 
 [node name="dialog#3" type="Node" parent="papers/empty"]
 script = ExtResource( 6 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
+[ext_resource path="res://src/scenes/ending/ending.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/stories/discoveries.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/objects/letters/letter.gd" type="Script" id=13]
@@ -21,6 +22,14 @@
 [ext_resource path="res://src/stories/signatures.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/scenes/game/notice.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/stories/recipients.tscn" type="PackedScene" id=30]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureRect
+
+
+func on_enter() -> void:
+	show()
+"
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -45,6 +54,10 @@ visible = false
 
 [node name="DialogBox" parent="." instance=ExtResource( 2 )]
 visible = false
+
+[node name="Ending" parent="." instance=ExtResource( 9 )]
+visible = false
+script = SubResource( 1 )
 
 [node name="Notice" parent="." instance=ExtResource( 29 )]
 margin_right = 256.0
