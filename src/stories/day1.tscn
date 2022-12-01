@@ -226,7 +226,7 @@ dialog = "But I'll be your guide in the meantime! Just ask me anything!"
 
 [node name="info#2" type="Node" parent="talk#intro"]
 script = ExtResource( 13 )
-information = "Right click to ask for help"
+information = "Right click over anything to ask for help"
 
 [node name="advance-time#1" type="Node" parent="talk#intro"]
 script = ExtResource( 19 )

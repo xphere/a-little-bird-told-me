@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/actions/cursor-lock.gd" type="Script" id=1]
+[ext_resource path="res://src/actions/cast-character.gd" type="Script" id=2]
+[ext_resource path="res://modules/action/wait.gd" type="Script" id=3]
+[ext_resource path="res://src/actions/dialog.gd" type="Script" id=4]
+[ext_resource path="res://src/actions/to-screen.gd" type="Script" id=7]
+[ext_resource path="res://src/actions/to-maildesk.gd" type="Script" id=8]
+[ext_resource path="res://modules/action/serial.gd" type="Script" id=9]
+[ext_resource path="res://src/actions/letter.gd" type="Script" id=10]
+[ext_resource path="res://src/stories/letters/letter.king.1.tres" type="Resource" id=11]
+[ext_resource path="res://modules/action/wait-signal.gd" type="Script" id=12]
+[ext_resource path="res://src/actions/discover.gd" type="Script" id=13]
+
+[node name="Day#2" type="Node"]
+script = ExtResource( 1 )
+
+[node name="kings#letter" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="letter#king#1" type="Node" parent="kings#letter"]
+script = ExtResource( 10 )
+letter_resource = ExtResource( 11 )
+
+[node name="wait#1" type="Node" parent="kings#letter"]
+script = ExtResource( 3 )
+waiting_time = 2.0
+
+[node name="dialog#1" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Maester! Are you there?"
+
+[node name="introduce#assistant" type="Node" parent="kings#letter"]
+script = ExtResource( 2 )
+character_name = "assistant"
+
+[node name="dialog#2" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Maester? I have a letter from the very King!"
+
+[node name="dialog#3" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Ok, not there... I'll leave it at the desk."
+
+[node name="to-maildesk#king#1" type="Node" parent="kings#letter"]
+script = ExtResource( 8 )
+letter_path = NodePath("../letter#king#1")
+
+[node name="wait#2" type="Node" parent="kings#letter"]
+script = ExtResource( 3 )
+
+[node name="dialog#4" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "assistant"
+dialog = "Can't wait to know what's inside! Maester!!"
+animation = "unamused"
+
+[node name="introduce#maester" type="Node" parent="kings#letter"]
+script = ExtResource( 2 )
+character_name = "maester"
+
+[node name="dialog#5" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "maester"
+dialog = "I'm here... A letter from the King himself? Let me see."
+
+[node name="unlock#1" type="Node" parent="kings#letter"]
+script = ExtResource( 1 )
+unlock_parent = true
+
+[node name="wait#letter#king#closed" type="Node" parent="kings#letter/unlock#1"]
+script = ExtResource( 12 )
+path = NodePath("../../letter#king#1")
+signal_name = "closed"
+
+[node name="to-screen#tower#1" type="Node" parent="kings#letter"]
+script = ExtResource( 7 )
+
+[node name="dialog#6" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "maester"
+dialog = "So... now I understand my role here..."
+
+[node name="dialog#7" type="Node" parent="kings#letter"]
+script = ExtResource( 4 )
+speaker = "maester"
+dialog = "I should read the other letters carefully, looking for relevant information."
+
+[node name="discover#gather-info" type="Node" parent="kings#letter"]
+script = ExtResource( 13 )
+topic = "gather-info"
+value = "known"

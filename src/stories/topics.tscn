@@ -20,3 +20,13 @@ content = "I wonder if you can send some of your best beverages to the soldier c
 script = ExtResource( 2 )
 title = "Soldiers"
 content = "I've heard rumours of enemy movement near the east frontier. Would you send a soldier troop to the zone? Just to make sure."
+
+[node name="suburbs" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "Suburbs"
+content = "A contact from the suburbs warned us about a higher level of unusual movements. It might be useful to send some guards."
+
+[node name="outsiders" type="Node" parent="."]
+script = ExtResource( 2 )
+title = "Outsiders"
+content = "Happy Bagpipe Inn got more foreigner visitors than usual, might be a good idea to send some guards."

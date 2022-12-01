@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://modules/action/action.gd" type="Script" id=1]
 [ext_resource path="res://src/actions/dialog.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/actions/advance-time.gd" type="Script" id=13]
 [ext_resource path="res://src/actions/cast-character.gd" type="Script" id=14]
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=15]
+[ext_resource path="res://modules/action/one-of.gd" type="Script" id=16]
 
 [node name="Discoveries" type="Node"]
 script = ExtResource( 4 )
@@ -49,45 +50,8 @@ script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Another message? Let's see..."
 
-[node name="2" type="Node" parent="messages"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="messages/2"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "The previous maester was popular around here."
-
-[node name="dialog#2" type="Node" parent="messages/2"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I should read these letters more carefully."
-
-[node name="discover" type="Node" parent="messages/2"]
-script = ExtResource( 11 )
-topic = "read-letters"
-value = "known"
-
 [node name="noop" type="Node" parent="messages"]
 script = ExtResource( 1 )
-
-[node name="inn-waiter" type="Node" parent="."]
-
-[node name="agreement" type="Node" parent="inn-waiter"]
-script = ExtResource( 5 )
-
-[node name="0" type="Node" parent="inn-waiter/agreement"]
-script = ExtResource( 3 )
-loop = false
-
-[node name="dialog#1" type="Node" parent="inn-waiter/agreement/0"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Looks like they had an \"agreement\" with the previous maester."
-
-[node name="dialog#2" type="Node" parent="inn-waiter/agreement/0"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I wonder what kind of deal are we talking about."
 
 [node name="bar" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -221,171 +185,38 @@ script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Business Activity Register?"
 
-[node name="innkeeper" type="Node" parent="."]
+[node name="gather-info" type="Node" parent="."]
+script = ExtResource( 6 )
 
-[node name="unlock" type="Node" parent="innkeeper"]
+[node name="allow-topics" type="Node" parent="gather-info"]
+script = ExtResource( 15 )
+expression_contents = "allow_topics(true)"
+
+[node name="unlock#recipient#king" type="Node" parent="gather-info"]
+script = ExtResource( 10 )
+key = "king"
+
+[node name="unlock#closing#your-humble-servant" type="Node" parent="gather-info"]
+script = ExtResource( 10 )
+type = 2
+key = "your-humble-servant"
+
+[node name="unlock#signature#maester" type="Node" parent="gather-info"]
+script = ExtResource( 10 )
+type = 3
+key = "maester"
+
+[node name="send-letters" type="Node" parent="."]
 script = ExtResource( 3 )
+loop = false
 
-[node name="ActionDialog" type="Node" parent="innkeeper/unlock"]
+[node name="known" type="Node" parent="send-letters"]
 script = ExtResource( 2 )
 speaker = "maester"
-dialog = "You have unlocked the innkeeper."
+dialog = "I should write him a letter."
 
-[node name="aristocrats" type="Node" parent="."]
-
-[node name="unlock" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/unlock"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "What is this Order about?"
-
-[node name="dialog#2" type="Node" parent="aristocrats/unlock"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "And why they are giving us money?"
-
-[node name="dialog#3" type="Node" parent="aristocrats/unlock"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I should answer back..."
-
-[node name="JohnMarshal" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/JohnMarshal"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I wonder how long our birds will take to go that far."
-
-[node name="Eldelbar" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/Eldelbar"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Can we send messages to people not related to the interests of the King?"
-
-[node name="dialog#2" type="Node" parent="aristocrats/Eldelbar"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Well... In fact this is an interest of the Queen, so..."
-
-[node name="helpDelivered" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/helpDelivered"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "Your father would be proud of this decision."
-
-[node name="revolution" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/revolution"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "I hope they don't come after us..."
-
-[node name="dialog#2" type="Node" parent="aristocrats/revolution"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Do not be afraid kid, there is nothing to worry about. The nobility will take care of us and our birds."
-
-[node name="newQueen" type="Node" parent="aristocrats"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="aristocrats/newQueen"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Long Live the Queen!"
-
-[node name="witch" type="Node" parent="."]
-
-[node name="foundPrincess" type="Node" parent="witch"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="witch/foundPrincess"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Why the princess is in a tower? That is unfair!"
-
-[node name="dialog#2" type="Node" parent="witch/foundPrincess"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "Are not you thinking about trying to rescue her, right?"
-
-[node name="guardExecution" type="Node" parent="witch"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="witch/guardExecution"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "You did not see anything."
-
-[node name="dialog#2" type="Node" parent="witch/guardExecution"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "What are you talking about maester?"
-
-[node name="executionMaester" type="Node" parent="witch"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="witch/executionMaester"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "No no no!! I did nothing wrong! Noo!!"
-
-[node name="princess" type="Node" parent="."]
-
-[node name="prophecy" type="Node" parent="princess"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="princess/prophecy"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "I thought those  were just stories for when children didn't want to go to bed..."
-
-[node name="father" type="Node" parent="princess"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="princess/father"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I need to help the Princess."
-
-[node name="love" type="Node" parent="princess"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="princess/love"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I will save you me love!"
-
-[node name="dialog#2" type="Node" parent="princess/love"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "That is going to be a disaster..."
-
-[node name="dialog#3" type="Node" parent="princess/love"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "What did you say?!"
-
-[node name="dialog#4" type="Node" parent="princess/love"]
-script = ExtResource( 2 )
-speaker = "assistant"
-dialog = "Nothing maester, nothing..."
-
-[node name="escape" type="Node" parent="princess"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="princess/escape"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Did not you were in love with me? Why do you abandon me in this miserable city? 
-Me Love!!"
+[node name="noop" type="Node" parent="send-letters"]
+script = ExtResource( 1 )
 
 [node name="papers" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -509,7 +340,7 @@ dialog = "We're out of paper..."
 
 [node name="if send-letters" type="Node" parent="papers/empty/dialog#3"]
 script = ExtResource( 7 )
-expression_contents = "context(\"send-letters\") == 1"
+expression_contents = "context(\"send-letters\")"
 
 [node name="discover#papers#full" type="Node" parent="papers/empty/dialog#3/if send-letters"]
 script = ExtResource( 11 )
@@ -520,41 +351,6 @@ value = "full"
 script = ExtResource( 2 )
 speaker = "maester"
 dialog = "Not that I need it now."
-
-[node name="read-letters" type="Node" parent="."]
-script = ExtResource( 3 )
-loop = false
-
-[node name="highlight_topics#activate" type="Node" parent="read-letters"]
-script = ExtResource( 15 )
-expression_contents = "allow_topics(true)"
-
-[node name="notice#extra-attention" type="Node" parent="read-letters"]
-script = ExtResource( 15 )
-expression_contents = "notice(\"Unlocked extra attention\")"
-
-[node name="noop" type="Node" parent="read-letters"]
-script = ExtResource( 1 )
-
-[node name="send-letters" type="Node" parent="."]
-script = ExtResource( 3 )
-loop = false
-
-[node name="discover" type="Node" parent="send-letters"]
-script = ExtResource( 6 )
-
-[node name="dialog#1" type="Node" parent="send-letters/discover"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "Looks like this job is more than taking care of the birds."
-
-[node name="dialog#2" type="Node" parent="send-letters/discover"]
-script = ExtResource( 2 )
-speaker = "maester"
-dialog = "I need to answer these letters."
-
-[node name="noop" type="Node" parent="send-letters"]
-script = ExtResource( 1 )
 
 [node name="bird-cage" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -624,3 +420,84 @@ dialog = "I think I got it."
 
 [node name="noop" type="Node" parent="bird-picking"]
 script = ExtResource( 1 )
+
+[node name="wardly" type="Node" parent="."]
+
+[node name="agreement" type="Node" parent="wardly"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="dialog#1" type="Node" parent="wardly/agreement"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "Looks like they had an \"agreement\" with the previous maester."
+
+[node name="dialog#2" type="Node" parent="wardly/agreement"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "I wonder what kind of deal are we talking about."
+
+[node name="king" type="Node" parent="."]
+
+[node name="interests" type="Node" parent="king"]
+script = ExtResource( 6 )
+
+[node name="one-of" type="Node" parent="king/interests"]
+script = ExtResource( 16 )
+
+[node name="dialog#1" type="Node" parent="king/interests/one-of"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "This might be of interest to the King"
+
+[node name="dialog#2" type="Node" parent="king/interests/one-of"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "The King might be interested"
+
+[node name="discover#send-letters" type="Node" parent="king/interests"]
+script = ExtResource( 11 )
+topic = "send-letters"
+value = "known"
+
+[node name="outsiders" type="Node" parent="king"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="discover" type="Node" parent="king/outsiders"]
+script = ExtResource( 6 )
+
+[node name="discover#king#interests" type="Node" parent="king/outsiders/discover"]
+script = ExtResource( 11 )
+topic = "king.interests"
+
+[node name="unlock#king#outsiders" type="Node" parent="king/outsiders/discover"]
+script = ExtResource( 10 )
+type = 1
+key = "king.outsiders"
+
+[node name="dialog#1" type="Node" parent="king/outsiders"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "These outsiders could just be traveling. Or they may be up to something."
+
+[node name="suburbs" type="Node" parent="king"]
+script = ExtResource( 3 )
+loop = false
+
+[node name="discover" type="Node" parent="king/suburbs"]
+script = ExtResource( 6 )
+
+[node name="discover#king#interests" type="Node" parent="king/suburbs/discover"]
+script = ExtResource( 11 )
+topic = "king.interests"
+
+[node name="unlock#king#suburbs" type="Node" parent="king/suburbs/discover"]
+script = ExtResource( 10 )
+type = 1
+key = "king.suburbs"
+
+[node name="dialog#1" type="Node" parent="king/suburbs"]
+script = ExtResource( 2 )
+speaker = "maester"
+dialog = "What could be scary enough to scare our weasel?"

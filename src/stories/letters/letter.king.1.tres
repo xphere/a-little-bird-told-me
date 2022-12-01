@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#king#1"
+letter_name = "King expectations"
+letter_contents = "To the Maester attention,
+
+You might have seen by now this job is not a mere bird care center.
+
+Those birds were trained by the previous Maester to be messengers across our Kingdom.
+
+I expect you to gather and filter these messages, and report important news back to me.
+
+King Abulard IV of Earauthain"
+letter_type = 2
