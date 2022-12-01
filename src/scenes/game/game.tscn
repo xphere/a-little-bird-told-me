@@ -1,20 +1,16 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/themes/game.theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui/dialog-box/dialog-box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/screens/tower/tower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/screens/mail-desk/mail-desk.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stories/day1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stories/story.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/screens/letter/letter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/scenes/game/cursor.gd" type="Script" id=7]
 [ext_resource path="res://src/scenes/game/game.gd" type="Script" id=8]
-[ext_resource path="res://src/scenes/game/story.gd" type="Script" id=9]
 [ext_resource path="res://src/stories/discoveries.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/objects/letters/letter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/objects/letters/letter.gd" type="Script" id=13]
-[ext_resource path="res://src/actions/advance-time.gd" type="Script" id=14]
-[ext_resource path="res://modules/action/execute.gd" type="Script" id=15]
-[ext_resource path="res://modules/action/serial.gd" type="Script" id=16]
 [ext_resource path="res://assets/sound/monk_tune_extended.ogg" type="AudioStream" id=17]
 [ext_resource path="res://modules/context/context.gd" type="Script" id=18]
 [ext_resource path="res://assets/sound/select.ogg" type="AudioStream" id=19]
@@ -79,25 +75,7 @@ script = ExtResource( 18 )
 
 [node name="Signatures" parent="Sections" instance=ExtResource( 25 )]
 
-[node name="Story" type="Node" parent="."]
-script = ExtResource( 9 )
-first = "laudes"
-default_mapping = {
-"laudes": "no-action",
-"visperas": "no-action"
-}
-
-[node name="default" type="Node" parent="Story"]
-script = ExtResource( 16 )
-
-[node name="update-birds" type="Node" parent="Story/default"]
-script = ExtResource( 15 )
-expression_contents = "update_birds()"
-
-[node name="default#no-action" type="Node" parent="Story"]
-script = ExtResource( 14 )
-
-[node name="Day#1" parent="Story" instance=ExtResource( 5 )]
+[node name="Story" parent="." instance=ExtResource( 5 )]
 
 [node name="Discoveries" parent="." instance=ExtResource( 10 )]
 

@@ -8,10 +8,10 @@ letter_id = "letter#inn-waiter#1"
 letter_name = "Strangers at the inn"
 letter_contents = "Dear Maester,
 
-Lately we're getting more [url=outlanders]visitors from outside[/url] the city. It's good for business, but my nose tells me something's fishy.
+Lately we're getting more [url=king.outlanders]visitors from outside[/url] the city. It's good for business, but my nose tells me something's fishy.
 
 As you see I'm improving a lot my writing skills. And that's thanks to you.
 
 Yours truly,
 Eldelbar, the Inn waiter"
-letter_type = 1
+letter_type = 0

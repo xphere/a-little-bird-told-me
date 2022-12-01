@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/resources/bird.gd" type="Script" id=1]
 [ext_resource path="res://modules/action/stop-interval.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://src/stories/letters/letter.inn-waiter.1.tres" type="Resource" id=23]
 [ext_resource path="res://src/actions/sound.gd" type="Script" id=24]
 [ext_resource path="res://assets/sound/knock-knock.ogg" type="AudioStream" id=25]
+[ext_resource path="res://src/stories/letters/letter.weasel.1.tres" type="Resource" id=27]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -227,6 +228,9 @@ dialog = "But I'll be your guide in the meantime! Just ask me anything!"
 script = ExtResource( 13 )
 information = "Right click to ask for help"
 
+[node name="advance-time#1" type="Node" parent="talk#intro"]
+script = ExtResource( 19 )
+
 [node name="learn#on_help_request" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -368,10 +372,6 @@ script = ExtResource( 7 )
 bird_path = NodePath("../bird#2")
 letter_path = NodePath("../letter#inn-waiter#1")
 
-[node name="advance-time" type="Node" parent="learn#letters"]
-script = ExtResource( 19 )
-wait = true
-
 [node name="animate#maester#left#1" type="Node" parent="learn#letters"]
 script = ExtResource( 22 )
 character_name = "maester"
@@ -415,7 +415,79 @@ script = ExtResource( 17 )
 speaker = "maester"
 dialog = "Yes, yes, totally, of course..."
 
-[node name="wait#picked#bird#2" type="Node" parent="."]
+[node name="unlock#1" type="Node" parent="learn#letters"]
+script = ExtResource( 16 )
+unlock_parent = true
+
+[node name="wait#letter#inn-waiter#opened" type="Node" parent="learn#letters/unlock#1"]
 script = ExtResource( 14 )
-path = NodePath("../learn#letters/bird#2")
-signal_name = "picked"
+path = NodePath("../../letter#inn-waiter#1")
+signal_name = "opened"
+
+[node name="dialog#maester#4" type="Node" parent="learn#letters/unlock#1"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "Looks like the previous maester was helping the inn-waiter with his writing."
+
+[node name="wait#top" type="Node" parent="learn#letters/unlock#1"]
+script = ExtResource( 14 )
+signal_name = "top_screen"
+
+[node name="letter#weasel#1" type="Node" parent="learn#letters"]
+script = ExtResource( 4 )
+letter_resource = ExtResource( 27 )
+
+[node name="bird#3" type="Node" parent="learn#letters"]
+script = ExtResource( 10 )
+bird_resource = SubResource( 2 )
+
+[node name="bird-arrives#3" type="Node" parent="learn#letters"]
+script = ExtResource( 7 )
+bird_path = NodePath("../bird#3")
+letter_path = NodePath("../letter#weasel#1")
+
+[node name="dialog#assistant#3" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "assistant"
+dialog = "The robin is back again!"
+
+[node name="dialog#maester#4" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "I won't let him escape this time."
+
+[node name="dialog#assistant#4" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "assistant"
+dialog = "Her."
+
+[node name="dialog#maester#5" type="Node" parent="learn#letters"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "I won't let HER escape this time."
+
+[node name="unlock#2" type="Node" parent="learn#letters"]
+script = ExtResource( 16 )
+unlock_parent = true
+
+[node name="wait#letter#weasel#closed" type="Node" parent="learn#letters/unlock#2"]
+script = ExtResource( 14 )
+path = NodePath("../../letter#weasel#1")
+signal_name = "opened"
+
+[node name="wait#top" type="Node" parent="learn#letters/unlock#2"]
+script = ExtResource( 14 )
+signal_name = "top_screen"
+
+[node name="dialog#maester#1" type="Node" parent="learn#letters/unlock#2"]
+script = ExtResource( 17 )
+speaker = "maester"
+dialog = "I wonder why the previous maester kept correspondence with this... weasel?"
+
+[node name="dialog#assistant#1" type="Node" parent="learn#letters/unlock#2"]
+script = ExtResource( 17 )
+speaker = "assistant"
+dialog = "I think it's a nickname. Weasel... he's a snitch."
+
+[node name="advance-time#1" type="Node" parent="."]
+script = ExtResource( 19 )

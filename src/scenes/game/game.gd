@@ -35,6 +35,12 @@ func cast(name: String, node: Node2D) -> void:
 func character(name: String) -> Node2D:
 	return _casting[name]
 
+func are_characters_in_scene() -> bool:
+	for cast in _casting.values():
+		if cast as Node2D and cast.visible:
+			return true
+	return false
+
 func animate(name: String, animation: String) -> void:
 	if _casting.has(name):
 		_casting[name].animate(animation)
@@ -173,9 +179,9 @@ func bird_arrives(bird: BirdResource) -> void:
 	$Tower.bird_arrives(bird)
 
 func bird_pickup(bird: BirdResource) -> void:
-	bird.call_deferred("emit_signal", "picked")
 	if bird.carries is LetterResource:
 		to_maildesk(bird.carries)
+	bird.emit_signal("picked")
 
 func update_birds() -> void:
 	$Tower.update_birds()
@@ -301,6 +307,9 @@ func _update_time() -> void:
 
 
 func _on_Cursor_entered(node: CollisionObject2D) -> void:
+	if not are_characters_in_scene():
+		return
+
 	if node.has_method("select"):
 		node.select(true)
 

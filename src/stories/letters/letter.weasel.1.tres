@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/letter.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_id = "letter#inn-waiter#1"
+letter_name = "Revolt at the suburbs"
+letter_contents = "Fine by me, Maester.
+
+Looks like we have an [url=wardly.agreement]agreement[/url], then.
+
+Things are getting weird here in the suburbs, lots of [url=king.suburbs]strange movements[/url] these days.
+I'm not the one to love guards but a visit of the crowned army will make our lifes better, if you know what I mean.
+
+Yours truly,
+Wardley the Weasel"
+letter_type = 1
