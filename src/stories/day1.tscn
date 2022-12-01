@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/resources/bird.gd" type="Script" id=1]
 [ext_resource path="res://modules/action/stop-interval.gd" type="Script" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://modules/action/execute.gd" type="Script" id=21]
 [ext_resource path="res://src/actions/animate-character.gd" type="Script" id=22]
 [ext_resource path="res://src/stories/letters/letter.inn-waiter.1.tres" type="Resource" id=23]
+[ext_resource path="res://src/actions/sound.gd" type="Script" id=24]
+[ext_resource path="res://assets/sound/knock-knock.ogg" type="AudioStream" id=25]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -140,6 +142,14 @@ animation_name = "right"
 script = ExtResource( 22 )
 character_name = "maester"
 animation_name = "surprised"
+
+[node name="sound" type="Node" parent="talk#intro"]
+script = ExtResource( 24 )
+sound_path = NodePath("knock-knock")
+
+[node name="knock-knock" type="AudioStreamPlayer" parent="talk#intro/sound"]
+stream = ExtResource( 25 )
+bus = "FX"
 
 [node name="info#1" type="Node" parent="talk#intro"]
 script = ExtResource( 13 )
