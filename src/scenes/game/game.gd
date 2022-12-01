@@ -2,6 +2,7 @@ extends Control
 
 signal on_help_request(element)
 signal on_interact(element)
+signal top_screen(screen)
 
 enum TimeOfDay {
 	LAUDES,
@@ -252,6 +253,9 @@ func pop_screen(context: Dictionary = {}) -> void:
 
 	if _current_screen.has_method("on_resume"):
 		_current_screen.on_resume()
+
+	if _screens_stack.empty():
+		emit_signal("top_screen", _current_screen)
 
 
 func to_screen(name: String, context: Dictionary = {}) -> void:
