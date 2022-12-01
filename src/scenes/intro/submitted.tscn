@@ -1,19 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://modules/input/on-action/on-action.gd" type="Script" id=1]
 [ext_resource path="res://src/events/on-cue.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/scenes/intro/assets/gameoff-logo.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/big-font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://modules/input/on-action/on-click.gd" type="Script" id=5]
+[ext_resource path="res://src/screens/mailbox/assets/desk-closeup-writing.png" type="Texture" id=6]
 
 [node name="Submitted" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.654902, 0.690196, 0.745098, 1 )
+texture = ExtResource( 6 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -32,15 +33,25 @@ valign = 2
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 256.0
-margin_bottom = 240.0
+margin_bottom = 204.0
 size_flags_vertical = 3
 
 [node name="Jam Logo" type="TextureRect" parent="VBoxContainer/CenterContainer"]
 margin_left = 32.0
-margin_top = 49.0
+margin_top = 31.0
 margin_right = 224.0
-margin_bottom = 154.0
+margin_bottom = 136.0
 texture = ExtResource( 3 )
+
+[node name="Year" type="Label" parent="VBoxContainer"]
+margin_top = 208.0
+margin_right = 256.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 0, 32 )
+custom_colors/font_color = Color( 1, 0.988235, 0.945098, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "GameJam 2022"
+align = 1
 
 [node name="Next" parent="." instance=ExtResource( 2 )]
 
