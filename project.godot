@@ -125,11 +125,6 @@ _global_script_classes=[ {
 "path": "res://src/resources/bird.gd"
 }, {
 "base": "Resource",
-"class": "DynamicString",
-"language": "GDScript",
-"path": "res://modules/expression/dynamic-string.gd"
-}, {
-"base": "Resource",
 "class": "LetterResource",
 "language": "GDScript",
 "path": "res://src/resources/letter.gd"
@@ -193,7 +188,6 @@ _global_script_class_icons={
 "BirdArriveAction": "res://src/actions/bird.icon.png",
 "BirdRegisterAction": "res://src/actions/bird.icon.png",
 "BirdResource": "",
-"DynamicString": "",
 "LetterResource": "",
 "LetterSection": "",
 "NodeUtils": "",
